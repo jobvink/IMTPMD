@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">IMTPMD</string>
     <string name="title_activity_hoofdscherm">Studievolg informatica</string>
-    <string name="title_activity_propedeuse">Propedeuse</string>
-    <string name="title_activity_hoofdfase1">Hoofdfase1</string>
-    <string name="title_activity_hoofdfase2_3">Hoofdfase2_3</string>
-    <string name="title_activity_punten_overzicht">PuntenOverzicht</string>
+    <string name="title_activity_propedeuse">Studievolg informatica</string>
+    <string name="title_activity_hoofdfase1">Studievolg informatica</string>
+    <string name="title_activity_hoofdfase2_3">Studievolg informatica</string>
+    <string name="title_activity_punten_overzicht">Studievolg informatica</string>
 </resources>
