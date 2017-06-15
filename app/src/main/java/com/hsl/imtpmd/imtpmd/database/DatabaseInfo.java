@@ -20,5 +20,14 @@ public class DatabaseInfo {
         public static final String PERIODE = "periode";
     }
 
+    public class UserTables {
+        public static final String USER = "user";
+    }
+
+    public class UserColumn {
+        public static final String GEBRUIKERSNAAM = "gebruikersnaam";
+        public static final String WACHTWOORD = "wachtwoord";
+    }
+
 }
 

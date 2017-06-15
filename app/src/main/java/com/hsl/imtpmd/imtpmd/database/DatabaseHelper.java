@@ -19,7 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static SQLiteDatabase mSQLDB;
     private static DatabaseHelper mInstance;
     public static final String dbName = "imtpmd.db";
-    public static final int dbVersion = 3;        // Versie nr van je db.
+    public static final int dbVersion = 4;        // Versie nr van je db.
 
     public DatabaseHelper(Context ctx) {
         super(ctx, dbName, null, dbVersion);    // gebruik de super constructor.
@@ -46,11 +46,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             DatabaseInfo.VerplichtvakColumn.JAAR_ID + " TEXT, " +
             DatabaseInfo.VerplichtvakColumn.PERIODE + " TEXT);"
         );
+        db.execSQL("CREATE TABLE " + DatabaseInfo.UserTables.USER + " (" +
+                BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                DatabaseInfo.UserColumn.GEBRUIKERSNAAM + " TEXT, " +
+                DatabaseInfo.UserColumn.WACHTWOORD + " TEXT);"
+        );
     }
     // CREATE TABLE course (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, ects TEXT, grade TEXT);
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS "+ DatabaseInfo.VerplichtvakTables.VERPLICHTVAK);
+        db.execSQL("DROP TABLE IF EXISTS "+ DatabaseInfo.UserTables.USER);
         onCreate(db);
     }
 
