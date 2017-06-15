@@ -50,7 +50,7 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="0dp"
+        android:layout_width="148dp"
         android:layout_height="199dp"
         android:layout_marginBottom="29dp"
         android:adjustViewBounds="false"
@@ -63,5 +63,6 @@
         android:layout_marginRight="118dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="118dp"
-        app:layout_constraintLeft_toLeftOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.0" />
 </android.support.constraint.ConstraintLayout>
