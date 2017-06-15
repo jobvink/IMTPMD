@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-public class Hoofdfase3_4 extends AppCompatActivity {
+public class Hoofdfase34 extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

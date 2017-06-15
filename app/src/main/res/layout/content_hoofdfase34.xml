@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.hsl.imtpmd.imtpmd.Hoofdfase3_4"
-    tools:showIn="@layout/activity_hoofdfase2_3">
+    tools:context="com.hsl.imtpmd.imtpmd.Hoofdfase34"
+    tools:showIn="@layout/activity_hoofdfase34">
 
 </android.support.constraint.ConstraintLayout>
