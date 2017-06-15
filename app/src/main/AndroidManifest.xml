@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".hoofdscherm"
+            android:name=".HoofdschermActivity"
             android:label="@string/title_activity_hoofdscherm"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -30,16 +30,12 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Hoofdfase34"
-            android:label="@string/title_activity_hoofdfase2_3"
+            android:label="@string/title_activity_hoofdfase34"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PuntenOverzicht"
             android:label="@string/title_activity_punten_overzicht"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".HoofdschermActivity"
-            android:label="@string/title_activity_hoofdscherm"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

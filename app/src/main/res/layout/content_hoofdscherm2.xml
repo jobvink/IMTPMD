@@ -15,7 +15,7 @@
         android:layout_marginBottom="29dp"
         android:adjustViewBounds="false"
         android:cropToPadding="false"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintBottom_toTopOf="@+id/gebruikersnaam"
         app:srcCompat="@drawable/hsleiden"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="16dp"

@@ -7,21 +7,21 @@
     tools:context="com.hsl.imtpmd.imtpmd.MainActivity">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/gebruikersnaam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Studienummer"
         android:layout_marginBottom="28dp"
-        app:layout_constraintBottom_toTopOf="@+id/editText2"
+        app:layout_constraintBottom_toTopOf="@+id/wachtwoord"
         android:layout_marginLeft="85dp"
         app:layout_constraintLeft_toLeftOf="parent"
         android:layout_marginRight="85dp"
         app:layout_constraintRight_toRightOf="parent" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/wachtwoord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="20dp"
@@ -30,12 +30,12 @@
         android:ems="10"
         android:inputType="textPassword"
         android:text="Wachtwoord"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/inloggen"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/inloggen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="#3f51b5"
@@ -55,7 +55,7 @@
         android:layout_marginBottom="29dp"
         android:adjustViewBounds="false"
         android:cropToPadding="false"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintBottom_toTopOf="@+id/gebruikersnaam"
         app:srcCompat="@drawable/hsleiden"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="8dp"

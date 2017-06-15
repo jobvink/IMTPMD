@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if(inloggen.getText().toString().equals(wachtwoord)){
-                    Intent intent = new Intent(MainActivity.this, hoofdscherm.class);
+                    Intent intent = new Intent(MainActivity.this, HoofdschermActivity.class);
                     Toast.makeText(getApplicationContext(), "Inloggen succesvol", Toast.LENGTH_SHORT);
                     startActivity(intent);
                 } else {
