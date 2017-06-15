@@ -12,7 +12,7 @@ public class Hoofdfase34 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hoofdfase2_3);
+        setContentView(R.layout.activity_hoofdfase34);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 

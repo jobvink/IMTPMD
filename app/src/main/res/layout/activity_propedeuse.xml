@@ -23,17 +23,6 @@
     <include layout="@layout/content_propedeuse"
         android:id="@+id/include3" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/floatingActionButton4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|left"
-        android:clickable="true"
-        app:backgroundTint="#757de8"
-        app:fabSize="mini"
-        app:layout_anchor="@+id/include3"
-        app:layout_anchorGravity="bottom|right"
-        app:srcCompat="?android:attr/floatingToolbarOpenDrawable" />
 
 
 </android.support.design.widget.CoordinatorLayout>
