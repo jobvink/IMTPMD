@@ -8,8 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 import android.util.Log;
 
-import com.example.gebruiker.courseoefening.model.VerplichtvakModel;
-
+import com.hsl.imtpmd.imtpmd.model.VerplichtvakModel;
 import java.util.ArrayList;
 
 /**
