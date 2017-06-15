@@ -2,6 +2,7 @@ package com.hsl.imtpmd.imtpmd;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,14 +24,14 @@ public class MainActivity extends AppCompatActivity {
         final DatabaseHelper databaseHelper = DatabaseHelper.getHelper(this);
 
         final Button inloggen = (Button) findViewById(R.id.inloggen);
-        final EditText gebruikersnaam = (EditText) findViewById(R.id.gebruikersnaam);
-        final EditText wachtwoord = (EditText) findViewById(R.id.wachtwoord);
+        final EditText gebruikersnaam_veld = (EditText) findViewById(R.id.gebruikersnaam);
+        final EditText wachtwoord_veld = (EditText) findViewById(R.id.wachtwoord);
 
         inloggen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String [] where = new String[]{
-                        gebruikersnaam.getText().toString()
+                        gebruikersnaam_veld.getText().toString()
                 };
 
                 Cursor rs = databaseHelper.query(
@@ -41,6 +42,8 @@ public class MainActivity extends AppCompatActivity {
                         null, null, null
                 );
                 rs.moveToFirst();
+                DatabaseUtils.dumpCursor(rs);
+
 
                 String wachtwoord = "";
 
@@ -50,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.e("Error: ", e.toString());
                 }
 
-                if(inloggen.getText().toString().equals(wachtwoord)){
+                if(wachtwoord_veld.getText().toString().equals(wachtwoord)){
                     Intent intent = new Intent(MainActivity.this, HoofdschermActivity.class);
                     Toast.makeText(getApplicationContext(), "Inloggen succesvol", Toast.LENGTH_SHORT);
                     startActivity(intent);

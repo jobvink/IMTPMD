@@ -19,7 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static SQLiteDatabase mSQLDB;
     private static DatabaseHelper mInstance;
     public static final String dbName = "imtpmd.db";
-    public static final int dbVersion = 4;        // Versie nr van je db.
+    public static final int dbVersion = 7;        // Versie nr van je db.
 
     public DatabaseHelper(Context ctx) {
         super(ctx, dbName, null, dbVersion);    // gebruik de super constructor.
@@ -51,6 +51,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DatabaseInfo.UserColumn.GEBRUIKERSNAAM + " TEXT, " +
                 DatabaseInfo.UserColumn.WACHTWOORD + " TEXT);"
         );
+        db.execSQL(String.format("INSERT INTO %s (%s, %s) VALUES ('%s', '%s');", DatabaseInfo.UserTables.USER, DatabaseInfo.UserColumn.GEBRUIKERSNAAM, DatabaseInfo.UserColumn.WACHTWOORD, "test" , "test"));
     }
     // CREATE TABLE course (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, ects TEXT, grade TEXT);
 
