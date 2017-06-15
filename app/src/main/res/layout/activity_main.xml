@@ -59,10 +59,10 @@
         app:srcCompat="@drawable/hsleiden"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_marginTop="8dp"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.363"
         android:layout_marginRight="118dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginLeft="118dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintHorizontal_bias="1.0" />
 </android.support.constraint.ConstraintLayout>
