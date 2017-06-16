@@ -10,7 +10,7 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="148dp"
+        android:layout_width="0dp"
         android:layout_height="199dp"
         android:layout_marginBottom="29dp"
         android:adjustViewBounds="false"
@@ -61,7 +61,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="8dp"
         android:backgroundTint="#3f51b5"
-        android:text="hoofdfase 3/4"
+        android:text="hoofdfase 2/3"
         android:textColor="#ffffff"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

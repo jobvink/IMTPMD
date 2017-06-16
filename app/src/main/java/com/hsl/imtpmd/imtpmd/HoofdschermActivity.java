@@ -1,11 +1,13 @@
 package com.hsl.imtpmd.imtpmd;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 
 public class HoofdschermActivity extends AppCompatActivity {
 
@@ -16,14 +18,38 @@ public class HoofdschermActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        Button propedeuseButton = (Button) findViewById(R.id.propedeuseButton);
+        Button hoofdfase1Button = (Button) findViewById(R.id.hoofdfase1Button);
+        Button hoofdfase34Button = (Button) findViewById(R.id.hoofdfase34Button);
+        Button puntenOverzichtbutton = (Button) findViewById(R.id.puntenOverzichtbutton);
+
+        propedeuseButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+            public void onClick(View v) {
+                startActivity(new Intent(HoofdschermActivity.this, Propedeuse.class));
             }
         });
-    }
 
+        hoofdfase1Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HoofdschermActivity.this, Hoofdfase1.class));
+            }
+        });
+
+        hoofdfase34Button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HoofdschermActivity.this, Hoofdfase34.class));
+            }
+        });
+
+        puntenOverzichtbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HoofdschermActivity.this, PuntenOverzicht.class));
+            }
+        });
+
+    }
 }

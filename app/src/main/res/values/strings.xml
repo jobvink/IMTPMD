@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">IMTPMD</string>
-    <string name="title_activity_propedeuse">propedeuse</string>
-    <string name="title_activity_hoofdfase1">hoofdfase1</string>
-    <string name="title_activity_hoofdfase34">hoofdfase34</string>
-    <string name="title_activity_punten_overzicht">punten overzicht</string>
-    <string name="title_activity_hoofdscherm">hoofdscherm</string>
+    <string name="title_activity_propedeuse">Propedeuse</string>
+    <string name="title_activity_hoofdfase1">Hoofdfase jaar 1</string>
+    <string name="title_activity_hoofdfase34">Hoofdfase jaar 2/3</string>
+    <string name="title_activity_punten_overzicht">Punten overzicht</string>
+    <string name="title_activity_hoofdscherm">Studievolg informatica</string>
 </resources>
