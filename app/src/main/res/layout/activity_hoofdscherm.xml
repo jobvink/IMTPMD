@@ -20,6 +20,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_hoofdscherm2" />
+    <include layout="@layout/content_hoofdscherm2"
+        android:layout_height="match_parent" />
 
 </android.support.design.widget.CoordinatorLayout>
