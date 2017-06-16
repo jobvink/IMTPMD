@@ -10,21 +10,20 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="199dp"
+        android:layout_width="216dp"
+        android:layout_height="236dp"
         android:layout_marginBottom="29dp"
+        android:layout_marginLeft="118dp"
+        android:layout_marginRight="118dp"
+        android:layout_marginTop="7dp"
         android:adjustViewBounds="false"
         android:cropToPadding="false"
         app:layout_constraintBottom_toTopOf="@+id/gebruikersnaam"
-        app:srcCompat="@drawable/hsleiden"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp"
-        app:layout_constraintVertical_bias="0.363"
-        android:layout_marginRight="118dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginLeft="118dp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintHorizontal_bias="0.0" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.363"
+        app:srcCompat="@drawable/hsleiden" />
 
     <Button
         android:id="@+id/propedeuseButton"
