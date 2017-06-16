@@ -19,7 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static SQLiteDatabase mSQLDB;
     private static DatabaseHelper mInstance;
     public static final String dbName = "imtpmd.db";
-    public static final int dbVersion = 7;        // Versie nr van je db.
+    public static final int dbVersion = 8;        // Versie nr van je db.
 
     public DatabaseHelper(Context ctx) {
         super(ctx, dbName, null, dbVersion);    // gebruik de super constructor.
@@ -45,6 +45,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             DatabaseInfo.VerplichtvakColumn.EC + " TEXT, " +
             DatabaseInfo.VerplichtvakColumn.JAAR_ID + " TEXT, " +
             DatabaseInfo.VerplichtvakColumn.PERIODE + " TEXT);"
+        );
+        db.execSQL("CREATE TABLE " + DatabaseInfo.KeuzevakTables.KEUZEVAK + " (" +
+                BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                DatabaseInfo.KeuzevakColumn.ID + " TEXT, " +
+                DatabaseInfo.KeuzevakColumn.CODE + " TEXT, " +
+                DatabaseInfo.KeuzevakColumn.NAAM + " TEXT, " +
+                DatabaseInfo.KeuzevakColumn.EC + " TEXT);"
+        );
+        db.execSQL("CREATE TABLE " + DatabaseInfo.SpecialisatievakTables.SPECIALISATIEVAK + " (" +
+                BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                DatabaseInfo.SpecialisatievakColumn.ID + " TEXT, " +
+                DatabaseInfo.SpecialisatievakColumn.CODE + " TEXT, " +
+                DatabaseInfo.SpecialisatievakColumn.NAAM + " TEXT, " +
+                DatabaseInfo.SpecialisatievakColumn.EC + " TEXT, " +
+                DatabaseInfo.SpecialisatievakColumn.SPECIALISATIE_ID + " TEXT);"
         );
         db.execSQL("CREATE TABLE " + DatabaseInfo.UserTables.USER + " (" +
                 BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
