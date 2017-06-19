@@ -36,6 +36,7 @@
             android:name=".PuntenOverzicht"
             android:label="@string/title_activity_punten_overzicht"
             android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".specialisatiekeuze"></activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
