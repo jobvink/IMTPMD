@@ -113,6 +113,44 @@ public class VerplichtvakModel extends Vak implements Model {
         return all;
     }
 
+    public static VerplichtvakModel get(Context context, String verplichtvak_id){
+        DatabaseHelper databaseHelper = DatabaseHelper.getHelper(context);
+
+        String [] where = new String[]{
+                verplichtvak_id
+        };
+
+        Cursor rs = databaseHelper.query(
+                DatabaseInfo.VerplichtvakTables.VERPLICHTVAK,
+                new String[]{"*"},
+                DatabaseInfo.VerplichtvakColumn.ID + "=?",
+                where,
+                null, null, null
+        );
+        rs.moveToFirst();
+
+        String id = "";
+        String code = "";
+        String naam = "";
+        String ec = "";
+        String jaar_id = "";
+        String periode = "";
+        VerplichtvakModel verplichtvakModel = null;
+        try {
+            id = rs.getString(rs.getColumnIndex(DatabaseInfo.VerplichtvakColumn.ID));
+            code = rs.getString(rs.getColumnIndex(DatabaseInfo.VerplichtvakColumn.CODE));
+            naam = rs.getString(rs.getColumnIndex(DatabaseInfo.VerplichtvakColumn.NAAM));
+            ec = rs.getString(rs.getColumnIndex(DatabaseInfo.VerplichtvakColumn.EC));
+            jaar_id = rs.getString(rs.getColumnIndex(DatabaseInfo.VerplichtvakColumn.JAAR_ID));
+            periode = rs.getString(rs.getColumnIndex(DatabaseInfo.VerplichtvakColumn.PERIODE));
+            verplichtvakModel = new VerplichtvakModel(id, code, naam, ec, jaar_id, periode);
+        } catch (Exception e) {
+            Log.e("Error: ", e.toString());
+        }
+
+        return verplichtvakModel;
+    }
+
     public ContentValues createContentValues() {
         ContentValues cv = new ContentValues();
         cv.put(DatabaseInfo.VerplichtvakColumn.ID, this.id);

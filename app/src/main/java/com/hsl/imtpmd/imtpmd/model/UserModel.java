@@ -2,6 +2,7 @@ package com.hsl.imtpmd.imtpmd.model;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.util.Log;
@@ -33,8 +34,40 @@ public class UserModel implements Model {
 
         Cursor rs = dbHelper.query(
                 DatabaseInfo.UserTables.USER,
-                new String[]{DatabaseInfo.UserColumn.GEBRUIKERSNAAM, DatabaseInfo.UserColumn.WACHTWOORD},
+                new String[]{"*"},
                 DatabaseInfo.UserColumn.GEBRUIKERSNAAM + "=?",
+                where,
+                null, null, null
+        );
+        rs.moveToFirst();
+
+        DatabaseUtils.dumpCursor(rs);
+
+        String id = "";
+        String dbgebruikersnaam = "";
+        String wachtwoord = "";
+
+        try {
+            id = rs.getString(rs.getColumnIndex(DatabaseInfo.UserColumn.ID));
+            dbgebruikersnaam = rs.getString(rs.getColumnIndex(DatabaseInfo.UserColumn.GEBRUIKERSNAAM));
+            wachtwoord = rs.getString(rs.getColumnIndex(DatabaseInfo.UserColumn.WACHTWOORD));
+        } catch (Exception e) {
+            Log.e("Error: ", e.toString());
+        }
+
+        return new UserModel(id, dbgebruikersnaam, wachtwoord);
+    }
+    public static UserModel getUser(Context context, int user_id) {
+        DatabaseHelper dbHelper = DatabaseHelper.getHelper(context);
+
+        String [] where = new String[]{
+                Integer.toString(user_id)
+        };
+
+        Cursor rs = dbHelper.query(
+                DatabaseInfo.UserTables.USER,
+                new String[]{"*"},
+                DatabaseInfo.UserColumn.ID + "=?",
                 where,
                 null, null, null
         );
@@ -54,7 +87,6 @@ public class UserModel implements Model {
 
         return new UserModel(id, dbgebruikersnaam, wachtwoord);
     }
-
     @Override
     public ContentValues createContentValues() {
         return null;

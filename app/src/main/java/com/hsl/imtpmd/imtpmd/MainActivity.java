@@ -15,6 +15,10 @@ import com.hsl.imtpmd.imtpmd.api.VakkenApi;
 import com.hsl.imtpmd.imtpmd.database.DatabaseHelper;
 import com.hsl.imtpmd.imtpmd.database.DatabaseInfo;
 import com.hsl.imtpmd.imtpmd.model.UserModel;
+import com.hsl.imtpmd.imtpmd.model.UserVerplichtvakModel;
+import com.hsl.imtpmd.imtpmd.model.VerplichtvakModel;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -29,8 +33,8 @@ public class MainActivity extends AppCompatActivity {
         final EditText gebruikersnaam_veld = (EditText) findViewById(R.id.gebruikersnaam);
         final EditText wachtwoord_veld = (EditText) findViewById(R.id.wachtwoord);
 
-        Log.d("Main: ", " verplichtevakken ophalen");
-        VakkenApi.getApi(getApplicationContext()).requestVerplichtenVakken(getApplicationContext());
+//        Log.d("Main: ", " verplichtevakken ophalen");
+//        VakkenApi.getApi(getApplicationContext()).requestVerplichtenVakken(getApplicationContext());
 
         inloggen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,8 +70,17 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, HoofdschermActivity.class);
                     Toast.makeText(getApplicationContext(), "Inloggen succesvol", Toast.LENGTH_SHORT);
 
-                    Log.d("Main: ", " Seeding user");
-                    api.seedUser(getApplicationContext(), gebruikersnaam_veld.getText().toString());
+//                    Log.d("Main: ", " Seeding user");
+//                    api.seedUser(getApplicationContext(), gebruikersnaam_veld.getText().toString());
+                    Log.d("getting User: ", gebruikersnaam_veld.getText().toString());
+                    UserModel user = UserModel.getUser(getApplicationContext(), gebruikersnaam_veld.getText().toString());
+                    Log.d("Main user: ", user.getId());
+                    ArrayList<UserVerplichtvakModel> all = UserVerplichtvakModel.all(getApplicationContext(), user);
+                    VerplichtvakModel verplichtvakModel = VerplichtvakModel.get(getApplicationContext(),"4");
+                    UserVerplichtvakModel.setBehaald(getApplicationContext(), user, verplichtvakModel);
+                    for (UserVerplichtvakModel uv: all) {
+                        Log.d("Main uv: ", uv.getVerplichtvak().getId() + ": " + Integer.toString(uv.getBehaald()));
+                    }
 
                     startActivity(intent);
                 } else {

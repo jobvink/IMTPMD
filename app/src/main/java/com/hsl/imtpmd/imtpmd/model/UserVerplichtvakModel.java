@@ -11,6 +11,8 @@ import com.hsl.imtpmd.imtpmd.database.DatabaseInfo;
 
 import java.util.ArrayList;
 
+import static com.hsl.imtpmd.imtpmd.database.DatabaseHelper.mSQLDB;
+
 /**
  * Created by Job Vink on 19-6-2017.
  */
@@ -33,38 +35,47 @@ public class UserVerplichtvakModel implements Model {
         Log.d("Opslaan van: ", this.verplichtvak.getNaam());
     }
 
-    public static ArrayList<VerplichtvakModel> all(Context context, UserModel user) {
+    public static ArrayList<UserVerplichtvakModel> all(Context context, UserModel user) {
         DatabaseHelper dbHelper = DatabaseHelper.getHelper(context);
 
-        ArrayList<VerplichtvakModel> all = new ArrayList<VerplichtvakModel>();
+        ArrayList<UserVerplichtvakModel> all = new ArrayList<UserVerplichtvakModel>();
+
+        String [] where = new String[]{
+                user.getId()
+        };
 
         Cursor rs = dbHelper.query(
-                DatabaseInfo.VerplichtvakTables.VERPLICHTVAK,
+                DatabaseInfo.User_VerplichtvakTables.User_Verplichtvak,
                 new String[]{"*"},
-                null, null, null, null, null
+                DatabaseInfo.User_verplichtvakColumn.USER_ID + "=?",
+                where,
+                null, null, null
         );
         rs.moveToFirst();
 
+        DatabaseUtils.dumpCursor(rs);
+
         do {
-            String id = "";
-            String code = "";
-            String naam = "";
-            String ec = "";
-            String jaar_id = "";
-            String periode = "";
+            String user_id = "";
+            String verplichtevak_id = "";
+            int behaald = 0;
             try {
-                id = rs.getString(rs.getColumnIndex(DatabaseInfo.VerplichtvakColumn.ID));
-                code = rs.getString(rs.getColumnIndex(DatabaseInfo.VerplichtvakColumn.CODE));
-                naam = rs.getString(rs.getColumnIndex(DatabaseInfo.VerplichtvakColumn.NAAM));
-                ec = rs.getString(rs.getColumnIndex(DatabaseInfo.VerplichtvakColumn.EC));
-                jaar_id = rs.getString(rs.getColumnIndex(DatabaseInfo.VerplichtvakColumn.JAAR_ID));
-                periode = rs.getString(rs.getColumnIndex(DatabaseInfo.VerplichtvakColumn.PERIODE));
-                all.add(new VerplichtvakModel(id, code, naam, ec, jaar_id, periode));
+                user_id = rs.getString(rs.getColumnIndex(DatabaseInfo.User_verplichtvakColumn.USER_ID));
+                verplichtevak_id = rs.getString(rs.getColumnIndex(DatabaseInfo.User_verplichtvakColumn.VERPLICHTVAK_ID));
+                behaald = rs.getInt(rs.getColumnIndex(DatabaseInfo.User_verplichtvakColumn.BEHAALD));
+                all.add(new UserVerplichtvakModel(UserModel.getUser(context, Integer.parseInt(user_id)),VerplichtvakModel.get(context, verplichtevak_id),behaald));
             } catch (Exception e) {
-                Log.e("Error: ", e.toString());
+                Log.e("VerplichtvakError: ", e.toString());
             }
         } while (rs.moveToNext());
+
         return all;
+    }
+
+    public static void setBehaald(Context context, UserModel user, VerplichtvakModel verplichtvak) {
+        ContentValues cv = new ContentValues();
+        cv.put(DatabaseInfo.User_verplichtvakColumn.BEHAALD, 1);
+        mSQLDB.update(DatabaseInfo.User_VerplichtvakTables.User_Verplichtvak, cv,"user_id=? AND verplichtvak_id=?", new String[]{user.getId(), verplichtvak.getId()});
     }
 
     @Override
@@ -76,5 +87,23 @@ public class UserVerplichtvakModel implements Model {
         return cv;
     }
 
+    public UserModel getUser() {
+        return user;
+    }
 
+    public void setUser(UserModel user) {
+        this.user = user;
+    }
+
+    public VerplichtvakModel getVerplichtvak() {
+        return verplichtvak;
+    }
+
+    public void setVerplichtvak(VerplichtvakModel verplichtvak) {
+        this.verplichtvak = verplichtvak;
+    }
+
+    public int getBehaald() {
+        return behaald;
+    }
 }

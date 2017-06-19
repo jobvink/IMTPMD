@@ -19,7 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static SQLiteDatabase mSQLDB;
     private static DatabaseHelper mInstance;
     public static final String dbName = "imtpmd.db";
-    public static final int dbVersion = 15;        // Versie nr van je db.
+    public static final int dbVersion = 22;        // Versie nr van je db.
 
     public DatabaseHelper(Context ctx) {
         super(ctx, dbName, null, dbVersion);    // gebruik de super constructor.
@@ -73,7 +73,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DatabaseInfo.User_verplichtvakColumn.VERPLICHTVAK_ID + " TEXT, " +
                 DatabaseInfo.User_verplichtvakColumn.BEHAALD + " INTEGER);"
         );
-        db.execSQL(String.format("INSERT INTO %s (%s, %s) VALUES ('%s', '%s');", DatabaseInfo.UserTables.USER, DatabaseInfo.UserColumn.GEBRUIKERSNAAM, DatabaseInfo.UserColumn.WACHTWOORD, "test" , "test"));
+        db.execSQL(String.format("INSERT INTO %s (%s, %s, %s) VALUES ('%s', '%s', '%s');", DatabaseInfo.UserTables.USER, DatabaseInfo.UserColumn.ID, DatabaseInfo.UserColumn.GEBRUIKERSNAAM, DatabaseInfo.UserColumn.WACHTWOORD, "1", "test" , "test"));
     }
     // CREATE TABLE course (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, ects TEXT, grade TEXT);
 
@@ -92,6 +92,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void insert(String table, String nullColumnHack, ContentValues values){
         mSQLDB.insert(table, nullColumnHack, values);
+    }
+
+    public void update(String table, ContentValues cv, String id){
+        mSQLDB.update(table, cv, "id=?",new String[]{id});
     }
 
     public Cursor query(String table, String[] columns, String selection, String[] selectArgs, String groupBy, String having, String orderBy){
