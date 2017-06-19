@@ -19,7 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static SQLiteDatabase mSQLDB;
     private static DatabaseHelper mInstance;
     public static final String dbName = "imtpmd.db";
-    public static final int dbVersion = 8;        // Versie nr van je db.
+    public static final int dbVersion = 15;        // Versie nr van je db.
 
     public DatabaseHelper(Context ctx) {
         super(ctx, dbName, null, dbVersion);    // gebruik de super constructor.
@@ -63,8 +63,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         );
         db.execSQL("CREATE TABLE " + DatabaseInfo.UserTables.USER + " (" +
                 BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                DatabaseInfo.UserColumn.ID + " TEXT, " +
                 DatabaseInfo.UserColumn.GEBRUIKERSNAAM + " TEXT, " +
                 DatabaseInfo.UserColumn.WACHTWOORD + " TEXT);"
+        );
+        db.execSQL("CREATE TABLE " + DatabaseInfo.User_VerplichtvakTables.User_Verplichtvak + " (" +
+                BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                DatabaseInfo.User_verplichtvakColumn.USER_ID + " TEXT, " +
+                DatabaseInfo.User_verplichtvakColumn.VERPLICHTVAK_ID + " TEXT, " +
+                DatabaseInfo.User_verplichtvakColumn.BEHAALD + " INTEGER);"
         );
         db.execSQL(String.format("INSERT INTO %s (%s, %s) VALUES ('%s', '%s');", DatabaseInfo.UserTables.USER, DatabaseInfo.UserColumn.GEBRUIKERSNAAM, DatabaseInfo.UserColumn.WACHTWOORD, "test" , "test"));
     }
@@ -72,7 +79,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS "+ DatabaseInfo.VerplichtvakTables.VERPLICHTVAK);
+        db.execSQL("DROP TABLE IF EXISTS "+ DatabaseInfo.KeuzevakTables.KEUZEVAK);
+        db.execSQL("DROP TABLE IF EXISTS "+ DatabaseInfo.SpecialisatievakTables.SPECIALISATIEVAK);
         db.execSQL("DROP TABLE IF EXISTS "+ DatabaseInfo.UserTables.USER);
+        db.execSQL("DROP TABLE IF EXISTS "+ DatabaseInfo.User_VerplichtvakTables.User_Verplichtvak);
         onCreate(db);
     }
 

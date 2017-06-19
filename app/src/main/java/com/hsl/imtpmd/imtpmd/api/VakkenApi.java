@@ -13,10 +13,13 @@ import com.hsl.imtpmd.imtpmd.database.DatabaseHelper;
 import com.hsl.imtpmd.imtpmd.database.DatabaseInfo;
 import com.hsl.imtpmd.imtpmd.model.KeuzevakModel;
 import com.hsl.imtpmd.imtpmd.model.SpecialisatievakModel;
+import com.hsl.imtpmd.imtpmd.model.UserModel;
+import com.hsl.imtpmd.imtpmd.model.UserVerplichtvakModel;
 import com.hsl.imtpmd.imtpmd.model.Vak;
 import com.hsl.imtpmd.imtpmd.model.VerplichtvakModel;
 
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,7 +28,7 @@ import java.util.List;
  */
 
 public class VakkenApi {
-    private String baseUrl = "http://192.168.178.116/";
+    private String baseUrl = "http://jmcvink.nl/school/imtpmd/";
     private static VakkenApi api;
 
     private VakkenApi() {}
@@ -39,7 +42,7 @@ public class VakkenApi {
 
     public void requestVerplichtenVakken(final Context context){
         Type type = new TypeToken<List<VerplichtvakModel>>(){}.getType();
-        GsonRequest<List<VerplichtvakModel>> request = new GsonRequest<List<VerplichtvakModel>>(baseUrl + "verplichtvaken",
+        GsonRequest<List<VerplichtvakModel>> request = new GsonRequest<List<VerplichtvakModel>>(baseUrl + "verplichtevakken.json",
                 type, null, new Response.Listener<List<VerplichtvakModel>>() {
             @Override
             public void onResponse(List<VerplichtvakModel> response) {
@@ -66,7 +69,7 @@ public class VakkenApi {
 
     public void requestKeuzevakken(final Context context){
         Type type = new TypeToken<List<KeuzevakModel>>(){}.getType();
-        GsonRequest<List<KeuzevakModel>> request = new GsonRequest<List<KeuzevakModel>>(baseUrl + "keuzevakken",
+        GsonRequest<List<KeuzevakModel>> request = new GsonRequest<List<KeuzevakModel>>(baseUrl + "keuzevakken.json",
                 type, null, new Response.Listener<List<KeuzevakModel>>() {
             @Override
             public void onResponse(List<KeuzevakModel> response) {
@@ -93,7 +96,7 @@ public class VakkenApi {
 
     public void requestSpecialisatievakken(final Context context){
         Type type = new TypeToken<List<SpecialisatievakModel>>(){}.getType();
-        GsonRequest<List<SpecialisatievakModel>> request = new GsonRequest<List<SpecialisatievakModel>>(baseUrl + "specialisatievakken",
+        GsonRequest<List<SpecialisatievakModel>> request = new GsonRequest<List<SpecialisatievakModel>>(baseUrl + "specialisatievakken.json",
                 type, null, new Response.Listener<List<SpecialisatievakModel>>() {
             @Override
             public void onResponse(List<SpecialisatievakModel> response) {
@@ -120,5 +123,20 @@ public class VakkenApi {
 
     private void processRequestError(VolleyError error){
         Log.d("Error: " , error.toString());
+    }
+
+    public void seedUser (Context context, String gebruikersnaam) {
+        DatabaseHelper dbHelper = DatabaseHelper.getHelper(context);
+
+        UserModel user = UserModel.getUser(context, gebruikersnaam);
+
+        ArrayList<VerplichtvakModel> verplichtvakModels = VerplichtvakModel.all(context);
+
+        for (VerplichtvakModel v : verplichtvakModels) {
+            Log.d("Nieuwe Verplichtvak: ", v.getNaam());
+            new UserVerplichtvakModel(user, v, 0).store(context);
+        }
+
+
     }
 }

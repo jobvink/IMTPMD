@@ -50,8 +50,19 @@ public class DatabaseInfo {
     }
 
     public class UserColumn {
+        public static final String ID = "id";
         public static final String GEBRUIKERSNAAM = "gebruikersnaam";
         public static final String WACHTWOORD = "wachtwoord";
+    }
+
+    public class User_VerplichtvakTables {
+        public static final String User_Verplichtvak = "user_verplichtvak";
+    }
+
+    public class User_verplichtvakColumn {
+        public static final String USER_ID = "user_id";
+        public static final String VERPLICHTVAK_ID = "verplichtvak_id";
+        public static final String BEHAALD = "behaald";
     }
 
 }

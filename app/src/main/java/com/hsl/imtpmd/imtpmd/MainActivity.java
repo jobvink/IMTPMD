@@ -11,8 +11,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.hsl.imtpmd.imtpmd.api.VakkenApi;
 import com.hsl.imtpmd.imtpmd.database.DatabaseHelper;
 import com.hsl.imtpmd.imtpmd.database.DatabaseInfo;
+import com.hsl.imtpmd.imtpmd.model.UserModel;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,12 +29,19 @@ public class MainActivity extends AppCompatActivity {
         final EditText gebruikersnaam_veld = (EditText) findViewById(R.id.gebruikersnaam);
         final EditText wachtwoord_veld = (EditText) findViewById(R.id.wachtwoord);
 
+        Log.d("Main: ", " verplichtevakken ophalen");
+        VakkenApi.getApi(getApplicationContext()).requestVerplichtenVakken(getApplicationContext());
+
         inloggen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String [] where = new String[]{
                         gebruikersnaam_veld.getText().toString()
                 };
+
+                VakkenApi api = VakkenApi.getApi(getApplicationContext());
+
+
 
                 Cursor rs = databaseHelper.query(
                         DatabaseInfo.UserTables.USER,
@@ -56,6 +65,10 @@ public class MainActivity extends AppCompatActivity {
                 if(wachtwoord_veld.getText().toString().equals(wachtwoord)){
                     Intent intent = new Intent(MainActivity.this, HoofdschermActivity.class);
                     Toast.makeText(getApplicationContext(), "Inloggen succesvol", Toast.LENGTH_SHORT);
+
+                    Log.d("Main: ", " Seeding user");
+                    api.seedUser(getApplicationContext(), gebruikersnaam_veld.getText().toString());
+
                     startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Wachtwoord en gebruikersnaam komen niet overeen" ,Toast.LENGTH_SHORT).show();
