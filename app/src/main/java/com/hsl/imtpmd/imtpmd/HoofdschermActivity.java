@@ -22,6 +22,7 @@ public class HoofdschermActivity extends AppCompatActivity {
         Button hoofdfase1Button = (Button) findViewById(R.id.hoofdfase1Button);
         Button hoofdfase34Button = (Button) findViewById(R.id.hoofdfase34Button);
         Button puntenOverzichtbutton = (Button) findViewById(R.id.puntenOverzichtbutton);
+        Button Instellingenbutton = (Button) findViewById(R.id.Instellingenbutton);
 
         propedeuseButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,6 +49,13 @@ public class HoofdschermActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(HoofdschermActivity.this, PuntenOverzicht.class));
+            }
+        });
+
+        Instellingenbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HoofdschermActivity.this, specialisatiekeuze.class));
             }
         });
 
