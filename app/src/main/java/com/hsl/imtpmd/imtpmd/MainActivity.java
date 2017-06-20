@@ -72,15 +72,14 @@ public class MainActivity extends AppCompatActivity {
 
 //                    Log.d("Main: ", " Seeding user");
 //                    api.seedUser(getApplicationContext(), gebruikersnaam_veld.getText().toString());
-                    Log.d("getting User: ", gebruikersnaam_veld.getText().toString());
-                    UserModel user = UserModel.getUser(getApplicationContext(), gebruikersnaam_veld.getText().toString());
-                    Log.d("Main user: ", user.getId());
-                    ArrayList<UserVerplichtvakModel> all = UserVerplichtvakModel.all(getApplicationContext(), user);
-                    VerplichtvakModel verplichtvakModel = VerplichtvakModel.get(getApplicationContext(),"4");
-                    UserVerplichtvakModel.setBehaald(getApplicationContext(), user, verplichtvakModel);
-                    for (UserVerplichtvakModel uv: all) {
-                        Log.d("Main uv: ", uv.getVerplichtvak().getId() + ": " + Integer.toString(uv.getBehaald()));
-                    }
+//                    Log.d("getting User: ", gebruikersnaam_veld.getText().toString());
+//                    UserModel user = UserModel.getUser(getApplicationContext(), gebruikersnaam_veld.getText().toString());
+//                    Log.d("Main user: ", user.getId());
+//                    ArrayList<UserVerplichtvakModel> all = UserVerplichtvakModel.all(getApplicationContext(), user);
+//                    VerplichtvakModel verplichtvakModel = VerplichtvakModel.get(getApplicationContext(),"4");
+//                    for (UserVerplichtvakModel uv: all) {
+//                        Log.d("Main uv: ", uv.getVerplichtvak().getId() + ": " + Integer.toString(uv.getBehaald()));
+//                    }
 
                     startActivity(intent);
                 } else {
