@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,4 +8,57 @@
     tools:context="com.hsl.imtpmd.imtpmd.Hoofdfase34"
     tools:showIn="@layout/activity_hoofdfase34">
 
-</android.support.constraint.ConstraintLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/HoofdH23Text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Hoofdvakken hoofdfase 2 3"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="22sp" />
+
+            <ListView
+                android:id="@+id/hoofdvakkenh23"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/KeuzeH23Text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Specialisatie hoofdfase 2 3"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="22sp" />
+
+            <ListView
+                android:id="@+id/KeuzeH23"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+            <TextView
+                android:id="@+id/SpecialisatieH23Text"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="Keuze hoofdfase 2 3"
+                android:textAlignment="center"
+                android:textColor="#000000"
+                android:textSize="22sp" />
+
+            <ListView
+                android:id="@+id/SpecialisatieH23"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
