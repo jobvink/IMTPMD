@@ -23,19 +23,18 @@
             android:id="@+id/mtradiobutton"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
+            android:gravity="center"
             android:onClick="onRadioButtonClicked"
             android:text="Media technologie"
-            android:textSize="25sp"
-            android:gravity="center"/>
+            android:textSize="20sp" />
 
         <RadioButton
             android:id="@+id/seradiobutton"
             android:layout_width="wrap_content"
             android:layout_height="55dp"
             android:onClick="onRadioButtonClicked"
-            android:text="software engineering"
-            android:textSize="25sp"
-            />
+            android:text="Sofware engeneering"
+            android:textSize="20sp" />
 
         <RadioButton
             android:id="@+id/bdamradiobutton"
@@ -43,9 +42,8 @@
             android:layout_height="55dp"
             android:layout_weight="0.13"
             android:onClick="onRadioButtonClicked"
-            android:text="big data management"
-            android:textSize="25sp"
-            />
+            android:text="big data Big data managment"
+            android:textSize="20sp" />
 
         <RadioButton
             android:id="@+id/fictradiobutton"
@@ -53,9 +51,8 @@
             android:layout_height="55dp"
             android:layout_weight="0.17"
             android:onClick="onRadioButtonClicked"
-            android:text="forensische ict"
-            android:textSize="25sp"
-            />
+            android:text="Forensische ict"
+            android:textSize="20sp" />
     </RadioGroup>
 
     <TextView

@@ -1,5 +1,6 @@
 package com.hsl.imtpmd.imtpmd;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -7,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 public class Hoofdfase34 extends AppCompatActivity {
 
@@ -22,7 +24,14 @@ public class Hoofdfase34 extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
+        Button puntenButton = (Button) findViewById(R.id.puntenButton34);
 
+        puntenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Hoofdfase34.this, PuntenOverzicht.class));
+            }
+        });
     }
 
     @Override
