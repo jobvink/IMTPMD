@@ -108,6 +108,14 @@ public class UserSpecialisatievakModel implements Model {
         return hooftfase1vakken;
     }
 
+    public static ArrayList<UserSpecialisatievakModel> specialisatieFilter(ArrayList<UserSpecialisatievakModel> userSpecialisatievakModels, String specialisatie_id) {
+        for (UserSpecialisatievakModel vak : userSpecialisatievakModels) {
+            if (vak.getSpecialisatievakModel().getSpecialisatie_id().equals(specialisatie_id))
+                userSpecialisatievakModels.remove(vak);
+        }
+        return userSpecialisatievakModels;
+    }
+
     @Override
     public ContentValues createContentValues() {
         ContentValues cv = new ContentValues();

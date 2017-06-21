@@ -66,6 +66,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 DatabaseInfo.UserColumn.ID + " TEXT, " +
                 DatabaseInfo.UserColumn.GEBRUIKERSNAAM + " TEXT, " +
+                DatabaseInfo.UserColumn.SPECIALISATIE + " TEXT, " +
                 DatabaseInfo.UserColumn.WACHTWOORD + " TEXT);"
         );
         db.execSQL("CREATE TABLE " + DatabaseInfo.User_VerplichtvakTables.USER_VERPLICHTVAK + " (" +

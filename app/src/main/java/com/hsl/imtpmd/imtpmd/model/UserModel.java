@@ -18,6 +18,7 @@ public class UserModel implements Model {
     private String id;
     private String gebruikersnaam;
     private String wachtwoord;
+    private String specialisatie;
 
     public UserModel(String id, String gebruikersnaam, String wachtwoord) {
         this.id = id;
@@ -106,5 +107,13 @@ public class UserModel implements Model {
 
     public void setGebruikersnaam(String gebruikersnaam) {
         this.gebruikersnaam = gebruikersnaam;
+    }
+
+    public String getSpecialisatie() {
+        return specialisatie;
+    }
+
+    public void setSpecialisatie(String specialisatie) {
+        this.specialisatie = specialisatie;
     }
 }
