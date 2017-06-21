@@ -44,7 +44,7 @@ public class Propedeuse extends AppCompatActivity  {
             Log.d("Propedeuze", vak.getVerplichtvak().getNaam());
         }
 
-        ListAdapter la = new ArrayAdapter<UserVerplichtvakModel>(this,
+        ListAdapter la = new ArrayAdapter<>(this,
                 android.R.layout.simple_list_item_1,
                 verplichtvakModels);
 
