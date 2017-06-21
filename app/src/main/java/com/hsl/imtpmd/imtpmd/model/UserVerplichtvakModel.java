@@ -102,6 +102,8 @@ public class UserVerplichtvakModel implements Model {
                 hoofdfase1vakken.add(vak);
             }
         }
+
+        return hoofdfase1vakken;
     }
 
     @Override
