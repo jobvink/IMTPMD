@@ -86,11 +86,16 @@ public class MainActivity extends AppCompatActivity {
                     Cursor mCursor = db.query(DatabaseInfo.User_VerplichtvakTables.User_Verplichtvak,new String[]{"*"},null,null,null,null,null);
                     Boolean userSeeded = mCursor.moveToFirst();
 
+                    UserModel user = UserModel.getUser(getApplicationContext(), gebruikersnaam_veld.getText().toString());
+
                     if (!userSeeded) {
                         Log.d("Main: ", " Seeding user");
                         api.seedUser(getApplicationContext(), gebruikersnaam_veld.getText().toString());
                     }
 
+                    Bundle bundle = new Bundle();
+                    bundle.putString("user", user.getGebruikersnaam());
+                    intent.putExtras(bundle);
                     startActivity(intent);
                 } else {
                     Toast.makeText(getApplicationContext(), "Wachtwoord en gebruikersnaam komen niet overeen" ,Toast.LENGTH_SHORT).show();

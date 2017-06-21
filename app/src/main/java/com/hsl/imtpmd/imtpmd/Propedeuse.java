@@ -5,8 +5,15 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.hsl.imtpmd.imtpmd.model.UserModel;
+import com.hsl.imtpmd.imtpmd.model.UserVerplichtvakModel;
+import com.hsl.imtpmd.imtpmd.model.VerplichtvakModel;
+
+import java.util.ArrayList;
 
 public class Propedeuse extends AppCompatActivity {
 
@@ -16,6 +23,18 @@ public class Propedeuse extends AppCompatActivity {
         setContentView(R.layout.activity_propedeuse);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Bundle bundle = getIntent().getExtras();
+        UserModel user = null;
+        if(bundle != null)
+            user = UserModel.getUser(getApplicationContext(), bundle.getString("user"));
+
+
+        ArrayList<UserVerplichtvakModel> verplichtvakModels = UserVerplichtvakModel.all(getApplicationContext(), user);
+
+        for (UserVerplichtvakModel vak : verplichtvakModels) {
+            Log.d("Propedeuze", vak.getVerplichtvak().getNaam());
+        }
 
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
