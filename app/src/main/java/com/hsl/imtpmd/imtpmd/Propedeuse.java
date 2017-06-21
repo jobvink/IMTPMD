@@ -29,9 +29,10 @@ public class Propedeuse extends AppCompatActivity {
         if(bundle != null)
             user = UserModel.getUser(getApplicationContext(), bundle.getString("user"));
 
+        Log.d("Propedeuze: ", "ophalen van vakken");
+        ArrayList<UserVerplichtvakModel> verplichtvakModels = UserVerplichtvakModel.propedeuze(getApplicationContext(), user);
 
-        ArrayList<UserVerplichtvakModel> verplichtvakModels = UserVerplichtvakModel.all(getApplicationContext(), user);
-
+        Log.d("propedeuze: ", "Printen van vakken");
         for (UserVerplichtvakModel vak : verplichtvakModels) {
             Log.d("Propedeuze", vak.getVerplichtvak().getNaam());
         }

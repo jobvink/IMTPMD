@@ -78,6 +78,32 @@ public class UserVerplichtvakModel implements Model {
         mSQLDB.update(DatabaseInfo.User_VerplichtvakTables.User_Verplichtvak, cv,"user_id=? AND verplichtvak_id=?", new String[]{user.getId(), verplichtvak.getId()});
     }
 
+    public static ArrayList<UserVerplichtvakModel> propedeuze(Context context, UserModel user) {
+
+        ArrayList<UserVerplichtvakModel> verplichtvakModels = all(context, user);
+
+        ArrayList<UserVerplichtvakModel> propedeuzevakken = new ArrayList<UserVerplichtvakModel>();
+
+        for (UserVerplichtvakModel vak : verplichtvakModels) {
+            if (vak.getVerplichtvak().getJaar_id().equals("1")){
+                propedeuzevakken.add(vak);
+            }
+        }
+
+        return propedeuzevakken;
+    }
+
+    public static ArrayList<UserVerplichtvakModel> hoofdfase1(Context context, UserModel user) {
+        ArrayList<UserVerplichtvakModel> verplichtvakModels = all(context, user);
+        ArrayList<UserVerplichtvakModel> hoofdfase1vakken = new ArrayList<UserVerplichtvakModel>();
+
+        for (UserVerplichtvakModel vak : verplichtvakModels) {
+            if (vak.getVerplichtvak().getJaar_id().equals("2")){
+                hoofdfase1vakken.add(vak);
+            }
+        }
+    }
+
     @Override
     public ContentValues createContentValues() {
         ContentValues cv = new ContentValues();
