@@ -1,5 +1,6 @@
 package com.hsl.imtpmd.imtpmd;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
@@ -18,6 +19,11 @@ import com.hsl.imtpmd.imtpmd.model.UserModel;
 import com.hsl.imtpmd.imtpmd.model.UserVerplichtvakModel;
 import com.hsl.imtpmd.imtpmd.model.VerplichtvakModel;
 
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,8 +39,14 @@ public class MainActivity extends AppCompatActivity {
         final EditText gebruikersnaam_veld = (EditText) findViewById(R.id.gebruikersnaam);
         final EditText wachtwoord_veld = (EditText) findViewById(R.id.wachtwoord);
 
-//        Log.d("Main: ", " verplichtevakken ophalen");
-//        VakkenApi.getApi(getApplicationContext()).requestVerplichtenVakken(getApplicationContext());
+        DatabaseHelper db = DatabaseHelper.getHelper(getApplicationContext());
+        Cursor mCursor = db.query(DatabaseInfo.VerplichtvakTables.VERPLICHTVAK,new String[]{"*"},null,null,null,null,null);
+        Boolean rowExists = mCursor.moveToFirst();
+
+        if (!rowExists) {
+            VakkenApi.getApi(getApplicationContext()).requestVerplichtenVakken(getApplicationContext());
+        }
+
 
         inloggen.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,16 +82,14 @@ public class MainActivity extends AppCompatActivity {
                     Intent intent = new Intent(MainActivity.this, HoofdschermActivity.class);
                     Toast.makeText(getApplicationContext(), "Inloggen succesvol", Toast.LENGTH_SHORT);
 
-//                    Log.d("Main: ", " Seeding user");
-//                    api.seedUser(getApplicationContext(), gebruikersnaam_veld.getText().toString());
-//                    Log.d("getting User: ", gebruikersnaam_veld.getText().toString());
-//                    UserModel user = UserModel.getUser(getApplicationContext(), gebruikersnaam_veld.getText().toString());
-//                    Log.d("Main user: ", user.getId());
-//                    ArrayList<UserVerplichtvakModel> all = UserVerplichtvakModel.all(getApplicationContext(), user);
-//                    VerplichtvakModel verplichtvakModel = VerplichtvakModel.get(getApplicationContext(),"4");
-//                    for (UserVerplichtvakModel uv: all) {
-//                        Log.d("Main uv: ", uv.getVerplichtvak().getId() + ": " + Integer.toString(uv.getBehaald()));
-//                    }
+                    DatabaseHelper db = DatabaseHelper.getHelper(getApplicationContext());
+                    Cursor mCursor = db.query(DatabaseInfo.User_VerplichtvakTables.User_Verplichtvak,new String[]{"*"},null,null,null,null,null);
+                    Boolean userSeeded = mCursor.moveToFirst();
+
+                    if (!userSeeded) {
+                        Log.d("Main: ", " Seeding user");
+                        api.seedUser(getApplicationContext(), gebruikersnaam_veld.getText().toString());
+                    }
 
                     startActivity(intent);
                 } else {
