@@ -1,11 +1,14 @@
 package com.hsl.imtpmd.imtpmd;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import com.hsl.imtpmd.imtpmd.model.UserModel;
@@ -46,6 +49,15 @@ public class Propedeuse extends AppCompatActivity  {
                 verplichtvakModels);
 
         pHoofdListview.setAdapter(la);
+
+        Button puntenButton = (Button) findViewById(R.id.puntenButtonP);
+
+        puntenButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Propedeuse.this, PuntenOverzicht.class));
+            }
+        });
 
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
