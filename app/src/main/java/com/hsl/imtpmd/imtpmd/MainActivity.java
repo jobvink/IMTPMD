@@ -1,6 +1,5 @@
 package com.hsl.imtpmd.imtpmd;
 
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
@@ -16,14 +15,8 @@ import com.hsl.imtpmd.imtpmd.api.VakkenApi;
 import com.hsl.imtpmd.imtpmd.database.DatabaseHelper;
 import com.hsl.imtpmd.imtpmd.database.DatabaseInfo;
 import com.hsl.imtpmd.imtpmd.model.UserModel;
-import com.hsl.imtpmd.imtpmd.model.UserVerplichtvakModel;
-import com.hsl.imtpmd.imtpmd.model.VerplichtvakModel;
+import com.hsl.imtpmd.imtpmd.model.UserSpecialisatievakModel;
 
-import java.io.DataOutputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -44,7 +37,10 @@ public class MainActivity extends AppCompatActivity {
         Boolean rowExists = mCursor.moveToFirst();
 
         if (!rowExists) {
-            VakkenApi.getApi(getApplicationContext()).requestVerplichtenVakken(getApplicationContext());
+            VakkenApi api = VakkenApi.getApi(getApplicationContext());
+            api.requestVerplichtenVakken(getApplicationContext());
+            api.requestSpecialisatievakken(getApplicationContext());
+
         }
 
 
@@ -83,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Inloggen succesvol", Toast.LENGTH_SHORT);
 
                     DatabaseHelper db = DatabaseHelper.getHelper(getApplicationContext());
-                    Cursor mCursor = db.query(DatabaseInfo.User_VerplichtvakTables.User_Verplichtvak,new String[]{"*"},null,null,null,null,null);
+                    Cursor mCursor = db.query(DatabaseInfo.User_VerplichtvakTables.USER_VERPLICHTVAK,new String[]{"*"},null,null,null,null,null);
                     Boolean userSeeded = mCursor.moveToFirst();
 
                     UserModel user = UserModel.getUser(getApplicationContext(), gebruikersnaam_veld.getText().toString());
@@ -91,6 +87,12 @@ public class MainActivity extends AppCompatActivity {
                     if (!userSeeded) {
                         Log.d("Main: ", " Seeding user");
                         api.seedUser(getApplicationContext(), gebruikersnaam_veld.getText().toString());
+                    }
+
+                    ArrayList<UserSpecialisatievakModel> userSpecialisatievakModels = UserSpecialisatievakModel.propedeuze(getApplicationContext(), user);
+
+                    for(UserSpecialisatievakModel vak : userSpecialisatievakModels) {
+                        Log.d("Main: ",vak.getSpecialisatievakModel().getNaam());
                     }
 
                     Bundle bundle = new Bundle();

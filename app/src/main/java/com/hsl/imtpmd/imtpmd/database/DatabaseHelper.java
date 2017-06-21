@@ -19,7 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static SQLiteDatabase mSQLDB;
     private static DatabaseHelper mInstance;
     public static final String dbName = "imtpmd.db";
-    public static final int dbVersion = 25;        // Versie nr van je db.
+    public static final int dbVersion = 31;        // Versie nr van je db.
 
     public DatabaseHelper(Context ctx) {
         super(ctx, dbName, null, dbVersion);    // gebruik de super constructor.
@@ -59,6 +59,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DatabaseInfo.SpecialisatievakColumn.CODE + " TEXT, " +
                 DatabaseInfo.SpecialisatievakColumn.NAAM + " TEXT, " +
                 DatabaseInfo.SpecialisatievakColumn.EC + " TEXT, " +
+                DatabaseInfo.SpecialisatievakColumn.JAAR_ID + " TEXT, " +
                 DatabaseInfo.SpecialisatievakColumn.SPECIALISATIE_ID + " TEXT);"
         );
         db.execSQL("CREATE TABLE " + DatabaseInfo.UserTables.USER + " (" +
@@ -67,11 +68,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DatabaseInfo.UserColumn.GEBRUIKERSNAAM + " TEXT, " +
                 DatabaseInfo.UserColumn.WACHTWOORD + " TEXT);"
         );
-        db.execSQL("CREATE TABLE " + DatabaseInfo.User_VerplichtvakTables.User_Verplichtvak + " (" +
+        db.execSQL("CREATE TABLE " + DatabaseInfo.User_VerplichtvakTables.USER_VERPLICHTVAK + " (" +
                 BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 DatabaseInfo.User_verplichtvakColumn.USER_ID + " TEXT, " +
                 DatabaseInfo.User_verplichtvakColumn.VERPLICHTVAK_ID + " TEXT, " +
                 DatabaseInfo.User_verplichtvakColumn.BEHAALD + " INTEGER);"
+        );
+        db.execSQL("CREATE TABLE " + DatabaseInfo.User_specialisatievakTables.USER_SPECIALISATIEVAK + " (" +
+                BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                DatabaseInfo.User_specialisateivakColumn.USER_ID + " TEXT, " +
+                DatabaseInfo.User_specialisateivakColumn.SPECIALISATIEVAK_ID + " TEXT, " +
+                DatabaseInfo.User_specialisateivakColumn.BEHAALD + " INTEGER);"
         );
         db.execSQL(String.format("INSERT INTO %s (%s, %s, %s) VALUES ('%s', '%s', '%s');", DatabaseInfo.UserTables.USER, DatabaseInfo.UserColumn.ID, DatabaseInfo.UserColumn.GEBRUIKERSNAAM, DatabaseInfo.UserColumn.WACHTWOORD, "1", "test" , "test"));
     }
@@ -82,7 +89,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+ DatabaseInfo.KeuzevakTables.KEUZEVAK);
         db.execSQL("DROP TABLE IF EXISTS "+ DatabaseInfo.SpecialisatievakTables.SPECIALISATIEVAK);
         db.execSQL("DROP TABLE IF EXISTS "+ DatabaseInfo.UserTables.USER);
-        db.execSQL("DROP TABLE IF EXISTS "+ DatabaseInfo.User_VerplichtvakTables.User_Verplichtvak);
+        db.execSQL("DROP TABLE IF EXISTS "+ DatabaseInfo.User_VerplichtvakTables.USER_VERPLICHTVAK);
+        db.execSQL("DROP TABLE IF EXISTS "+ DatabaseInfo.User_specialisatievakTables.USER_SPECIALISATIEVAK);
         onCreate(db);
     }
 
@@ -100,34 +108,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor query(String table, String[] columns, String selection, String[] selectArgs, String groupBy, String having, String orderBy){
         return mSQLDB.query(table, columns, selection, selectArgs, groupBy, having, orderBy);
-    }
-
-    public ArrayList<VerplichtvakModel> verplichtevakkenVanJaar(int jaar){
-
-        Cursor rs = this.query(DatabaseInfo.VerplichtvakTables.VERPLICHTVAK, new String[]{"*"}, DatabaseInfo.VerplichtvakColumn.JAAR_ID + " = " + jaar, null, null, null, null);
-
-        rs.moveToFirst();
-
-        Log.d("DatabaseHelper: " , "Beginnen met ophalen uit de database" );
-
-        ArrayList<VerplichtvakModel> verplichtvakModelArrayList = new ArrayList<VerplichtvakModel>();
-
-        do {
-            try {
-                verplichtvakModelArrayList.add(new VerplichtvakModel(
-                        rs.getString(rs.getColumnIndex(DatabaseInfo.VerplichtvakColumn.ID)),
-                        rs.getString(rs.getColumnIndex(DatabaseInfo.VerplichtvakColumn.CODE)),
-                        rs.getString(rs.getColumnIndex(DatabaseInfo.VerplichtvakColumn.NAAM)),
-                        rs.getString(rs.getColumnIndex(DatabaseInfo.VerplichtvakColumn.EC)),
-                        rs.getString(rs.getColumnIndex(DatabaseInfo.VerplichtvakColumn.JAAR_ID)),
-                        rs.getString(rs.getColumnIndex(DatabaseInfo.VerplichtvakColumn.PERIODE))
-                ));
-            } catch (Exception e) {
-                Log.e("error: " , e.toString());
-            }
-        } while (rs.moveToNext());
-
-        return verplichtvakModelArrayList;
     }
 
 }

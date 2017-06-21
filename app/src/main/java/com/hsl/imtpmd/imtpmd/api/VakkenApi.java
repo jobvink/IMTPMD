@@ -14,6 +14,7 @@ import com.hsl.imtpmd.imtpmd.database.DatabaseInfo;
 import com.hsl.imtpmd.imtpmd.model.KeuzevakModel;
 import com.hsl.imtpmd.imtpmd.model.SpecialisatievakModel;
 import com.hsl.imtpmd.imtpmd.model.UserModel;
+import com.hsl.imtpmd.imtpmd.model.UserSpecialisatievakModel;
 import com.hsl.imtpmd.imtpmd.model.UserVerplichtvakModel;
 import com.hsl.imtpmd.imtpmd.model.Vak;
 import com.hsl.imtpmd.imtpmd.model.VerplichtvakModel;
@@ -90,7 +91,7 @@ public class VakkenApi {
         // putting all received classes in my database.
         for (KeuzevakModel cm : subjects) {
             ContentValues cv = cm.createContentValues();
-            dbHelper.insert(DatabaseInfo.VerplichtvakTables.VERPLICHTVAK, null, cv);
+            dbHelper.insert(DatabaseInfo.KeuzevakTables.KEUZEVAK, null, cv);
         }
     }
 
@@ -117,7 +118,7 @@ public class VakkenApi {
         // putting all received classes in my database.
         for (SpecialisatievakModel cm : subjects) {
             ContentValues cv = cm.createContentValues();
-            dbHelper.insert(DatabaseInfo.VerplichtvakTables.VERPLICHTVAK, null, cv);
+            dbHelper.insert(DatabaseInfo.SpecialisatievakTables.SPECIALISATIEVAK, null, cv);
         }
     }
 
@@ -137,6 +138,11 @@ public class VakkenApi {
             new UserVerplichtvakModel(user, v, 0).store(context);
         }
 
+        ArrayList<SpecialisatievakModel> specialisatievakModels = SpecialisatievakModel.all(context);
+
+        for (SpecialisatievakModel v : specialisatievakModels) {
+            new UserSpecialisatievakModel(user, v, 0).store(context);
+        }
 
     }
 }

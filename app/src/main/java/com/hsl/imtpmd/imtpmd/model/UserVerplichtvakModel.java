@@ -31,7 +31,7 @@ public class UserVerplichtvakModel implements Model {
     public void store(Context context) {
         ContentValues cv = this.createContentValues();
         DatabaseHelper databaseHelper = DatabaseHelper.getHelper(context);
-        databaseHelper.insert(DatabaseInfo.User_VerplichtvakTables.User_Verplichtvak, null, cv);
+        databaseHelper.insert(DatabaseInfo.User_VerplichtvakTables.USER_VERPLICHTVAK, null, cv);
         Log.d("Opslaan van: ", this.verplichtvak.getNaam());
     }
 
@@ -45,7 +45,7 @@ public class UserVerplichtvakModel implements Model {
         };
 
         Cursor rs = dbHelper.query(
-                DatabaseInfo.User_VerplichtvakTables.User_Verplichtvak,
+                DatabaseInfo.User_VerplichtvakTables.USER_VERPLICHTVAK,
                 new String[]{"*"},
                 DatabaseInfo.User_verplichtvakColumn.USER_ID + "=?",
                 where,
@@ -75,7 +75,7 @@ public class UserVerplichtvakModel implements Model {
     public static void setBehaald(Context context, UserModel user, VerplichtvakModel verplichtvak) {
         ContentValues cv = new ContentValues();
         cv.put(DatabaseInfo.User_verplichtvakColumn.BEHAALD, 1);
-        mSQLDB.update(DatabaseInfo.User_VerplichtvakTables.User_Verplichtvak, cv,"user_id=? AND verplichtvak_id=?", new String[]{user.getId(), verplichtvak.getId()});
+        mSQLDB.update(DatabaseInfo.User_VerplichtvakTables.USER_VERPLICHTVAK, cv,"user_id=? AND verplichtvak_id=?", new String[]{user.getId(), verplichtvak.getId()});
     }
 
     public static ArrayList<UserVerplichtvakModel> propedeuze(Context context, UserModel user) {
