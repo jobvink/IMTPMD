@@ -1,21 +1,23 @@
 package com.hsl.imtpmd.imtpmd;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import com.hsl.imtpmd.imtpmd.model.UserModel;
 import com.hsl.imtpmd.imtpmd.model.UserVerplichtvakModel;
 import com.hsl.imtpmd.imtpmd.model.VerplichtvakModel;
 
+
 import java.util.ArrayList;
 
-public class Propedeuse extends AppCompatActivity {
+public class Propedeuse extends AppCompatActivity  {
+
+    private ListView pHoofdListview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,8 @@ public class Propedeuse extends AppCompatActivity {
         setContentView(R.layout.activity_propedeuse);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        pHoofdListview = (ListView) findViewById(R.id.hoofdvakkenP);
 
         Bundle bundle = getIntent().getExtras();
         UserModel user = null;
@@ -36,6 +40,12 @@ public class Propedeuse extends AppCompatActivity {
         for (UserVerplichtvakModel vak : verplichtvakModels) {
             Log.d("Propedeuze", vak.getVerplichtvak().getNaam());
         }
+
+        ListAdapter la = new ArrayAdapter<UserVerplichtvakModel>(this,
+                android.R.layout.simple_list_item_1,
+                verplichtvakModels);
+
+        pHoofdListview.setAdapter(la);
 
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
