@@ -20,10 +20,11 @@ public class UserModel implements Model {
     private String wachtwoord;
     private String specialisatie;
 
-    public UserModel(String id, String gebruikersnaam, String wachtwoord) {
+    public UserModel(String id, String gebruikersnaam, String wachtwoord, String specialisatie) {
         this.id = id;
         this.gebruikersnaam = gebruikersnaam;
         this.wachtwoord = wachtwoord;
+        this.specialisatie = specialisatie;
     }
 
     public static UserModel getUser(Context context, String gebruikersnaam) {
@@ -47,16 +48,19 @@ public class UserModel implements Model {
         String id = "";
         String dbgebruikersnaam = "";
         String wachtwoord = "";
+        String specialisatie = null;
 
         try {
             id = rs.getString(rs.getColumnIndex(DatabaseInfo.UserColumn.ID));
             dbgebruikersnaam = rs.getString(rs.getColumnIndex(DatabaseInfo.UserColumn.GEBRUIKERSNAAM));
             wachtwoord = rs.getString(rs.getColumnIndex(DatabaseInfo.UserColumn.WACHTWOORD));
+            specialisatie = rs.getString(rs.getColumnIndex(DatabaseInfo.UserColumn.SPECIALISATIE));
+            if (specialisatie.equals("null")) specialisatie = null;
         } catch (Exception e) {
             Log.e("Error: ", e.toString());
         }
 
-        return new UserModel(id, dbgebruikersnaam, wachtwoord);
+        return new UserModel(id, dbgebruikersnaam, wachtwoord, specialisatie);
     }
     public static UserModel getUser(Context context, int user_id) {
         DatabaseHelper dbHelper = DatabaseHelper.getHelper(context);
@@ -77,20 +81,28 @@ public class UserModel implements Model {
         String id = "";
         String dbgebruikersnaam = "";
         String wachtwoord = "";
+        String specialisatie = null;
 
         try {
             id = rs.getString(rs.getColumnIndex(DatabaseInfo.UserColumn.ID));
             dbgebruikersnaam = rs.getString(rs.getColumnIndex(DatabaseInfo.UserColumn.GEBRUIKERSNAAM));
             wachtwoord = rs.getString(rs.getColumnIndex(DatabaseInfo.UserColumn.WACHTWOORD));
+            specialisatie = rs.getString(rs.getColumnIndex(DatabaseInfo.UserColumn.SPECIALISATIE));
+            if (specialisatie.equals("null")) specialisatie = null;
         } catch (Exception e) {
             Log.e("Error: ", e.toString());
         }
 
-        return new UserModel(id, dbgebruikersnaam, wachtwoord);
+        return new UserModel(id, dbgebruikersnaam, wachtwoord, specialisatie);
     }
     @Override
     public ContentValues createContentValues() {
-        return null;
+        ContentValues cv = new ContentValues();
+        cv.put(DatabaseInfo.UserColumn.ID, this.id);
+        cv.put(DatabaseInfo.UserColumn.GEBRUIKERSNAAM, this.gebruikersnaam);
+        cv.put(DatabaseInfo.UserColumn.WACHTWOORD, this.wachtwoord);
+        cv.put(DatabaseInfo.UserColumn.SPECIALISATIE, this.specialisatie);
+        return cv;
     }
 
     public String getId() {
@@ -113,7 +125,9 @@ public class UserModel implements Model {
         return specialisatie;
     }
 
-    public void setSpecialisatie(String specialisatie) {
+    public void setSpecialisatie(Context context, String specialisatie) {
         this.specialisatie = specialisatie;
+        DatabaseHelper dbHelper = DatabaseHelper.getHelper(context);
+        dbHelper.update(DatabaseInfo.UserTables.USER,createContentValues(),getId());
     }
 }
