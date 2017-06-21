@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+<<<<<<< HEAD
       <module fileurl="file://$PROJECT_DIR$/IMTPMD.iml" filepath="$PROJECT_DIR$/IMTPMD.iml" />
+=======
+>>>>>>> 9bfef25b0d22c2940d8dbca17610f7d819601a05
       <module fileurl="file://$PROJECT_DIR$/IMTPMD2.iml" filepath="$PROJECT_DIR$/IMTPMD2.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
