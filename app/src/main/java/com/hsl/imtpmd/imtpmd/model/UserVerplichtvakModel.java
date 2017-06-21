@@ -94,16 +94,18 @@ public class UserVerplichtvakModel implements Model {
     }
 
     public static ArrayList<UserVerplichtvakModel> hoofdfase1(Context context, UserModel user) {
+
         ArrayList<UserVerplichtvakModel> verplichtvakModels = all(context, user);
-        ArrayList<UserVerplichtvakModel> hoofdfase1vakken = new ArrayList<UserVerplichtvakModel>();
+
+        ArrayList<UserVerplichtvakModel> hooftfase1vakken = new ArrayList<UserVerplichtvakModel>();
 
         for (UserVerplichtvakModel vak : verplichtvakModels) {
-            if (vak.getVerplichtvak().getJaar_id().equals("2")){
-                hoofdfase1vakken.add(vak);
+            if (vak.getVerplichtvak().getJaar_id().equals("1")){
+                hooftfase1vakken.add(vak);
             }
         }
 
-        return hoofdfase1vakken;
+        return hooftfase1vakken;
     }
 
     @Override
