@@ -38,12 +38,12 @@ public class Hoofdfase1 extends AppCompatActivity {
 
         H1HoofdListview = (ListView) findViewById(R.id.hoofdvakkenh1);
 
-        Log.d("Propedeuze: ", "ophalen van vakken");
-        ArrayList<UserVerplichtvakModel> verplichtvakModels = UserVerplichtvakModel.propedeuze(getApplicationContext(), user);
+        Log.d("hoofdfase1: ", "ophalen van vakken");
+        ArrayList<UserVerplichtvakModel> verplichtvakModels = UserVerplichtvakModel.hoofdfase1(getApplicationContext(), user);
 
-        Log.d("propedeuze: ", "Printen van vakken");
+        Log.d("hoofdfase1: ", "Printen van vakken");
         for (UserVerplichtvakModel vak : verplichtvakModels) {
-            Log.d("Propedeuze", vak.getVerplichtvak().getNaam());
+            Log.d("hoofdfase1", vak.getVerplichtvak().getNaam());
         }
 
         ListAdapter la = new ArrayAdapter<>(this,
