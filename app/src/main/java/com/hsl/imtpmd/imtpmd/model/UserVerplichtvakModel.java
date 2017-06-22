@@ -72,9 +72,9 @@ public class UserVerplichtvakModel implements Model {
         return all;
     }
 
-    public static void setBehaald(Context context, UserModel user, VerplichtvakModel verplichtvak) {
+    public static void setBehaald(Context context, UserModel user, VerplichtvakModel verplichtvak, boolean behaald) {
         ContentValues cv = new ContentValues();
-        cv.put(DatabaseInfo.User_verplichtvakColumn.BEHAALD, 1);
+        cv.put(DatabaseInfo.User_verplichtvakColumn.BEHAALD, behaald ? 1 : 0);
         mSQLDB.update(DatabaseInfo.User_VerplichtvakTables.USER_VERPLICHTVAK, cv,"user_id=? AND verplichtvak_id=?", new String[]{user.getId(), verplichtvak.getId()});
     }
 

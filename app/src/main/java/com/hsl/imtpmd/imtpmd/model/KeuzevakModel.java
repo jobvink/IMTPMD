@@ -15,6 +15,7 @@ import java.util.ArrayList;
  */
 
 public class KeuzevakModel extends Vak implements Model{
+
     public KeuzevakModel(String id, String code, String naam, String ec) {
         super(id, code, naam, ec);
     }
@@ -25,7 +26,7 @@ public class KeuzevakModel extends Vak implements Model{
         ArrayList<KeuzevakModel> all = new ArrayList<KeuzevakModel>();
 
         Cursor rs = dbHelper.query(
-                DatabaseInfo.UserTables.USER,
+                DatabaseInfo.SpecialisatievakTables.SPECIALISATIEVAK,
                 new String[]{"*"},
                 null, null, null, null, null
         );
@@ -47,9 +48,43 @@ public class KeuzevakModel extends Vak implements Model{
             }
         } while (rs.moveToNext());
 
-
         return all;
     }
+
+    public static KeuzevakModel get(Context context, String specialisatievak_id){
+        DatabaseHelper databaseHelper = DatabaseHelper.getHelper(context);
+
+        String [] where = new String[]{
+                specialisatievak_id
+        };
+
+        Cursor rs = databaseHelper.query(
+                DatabaseInfo.SpecialisatievakTables.SPECIALISATIEVAK,
+                new String[]{"*"},
+                DatabaseInfo.KeuzevakColumn.ID + "=?",
+                where,
+                null, null, null
+        );
+        rs.moveToFirst();
+
+        String id = "";
+        String code = "";
+        String naam = "";
+        String ec = "";
+        KeuzevakModel specialisatievakModel = null;
+        try {
+            id = rs.getString(rs.getColumnIndex(DatabaseInfo.KeuzevakColumn.ID));
+            code = rs.getString(rs.getColumnIndex(DatabaseInfo.KeuzevakColumn.CODE));
+            naam = rs.getString(rs.getColumnIndex(DatabaseInfo.KeuzevakColumn.NAAM));
+            ec = rs.getString(rs.getColumnIndex(DatabaseInfo.KeuzevakColumn.EC));
+            specialisatievakModel = new KeuzevakModel(id, code, naam, ec);
+        } catch (Exception e) {
+            Log.e("Error: ", e.toString());
+        }
+
+        return specialisatievakModel;
+    }
+
 
     @Override
     public ContentValues createContentValues() {

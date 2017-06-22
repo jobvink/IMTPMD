@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.hsl.imtpmd.imtpmd.api.VakkenApi;
 import com.hsl.imtpmd.imtpmd.database.DatabaseHelper;
 import com.hsl.imtpmd.imtpmd.database.DatabaseInfo;
+import com.hsl.imtpmd.imtpmd.model.KeuzevakModel;
+import com.hsl.imtpmd.imtpmd.model.UserKeuzevakModel;
 import com.hsl.imtpmd.imtpmd.model.UserModel;
 import com.hsl.imtpmd.imtpmd.model.UserSpecialisatievakModel;
 
@@ -89,10 +91,9 @@ public class MainActivity extends AppCompatActivity {
                         api.seedUser(getApplicationContext(), gebruikersnaam_veld.getText().toString());
                     }
 
-                    ArrayList<UserSpecialisatievakModel> userSpecialisatievakModels = UserSpecialisatievakModel.propedeuze(getApplicationContext(), user);
-
-                    for(UserSpecialisatievakModel vak : userSpecialisatievakModels) {
-                        Log.d("Main: ",vak.getSpecialisatievakModel().getNaam());
+                    ArrayList<UserKeuzevakModel> userKeuzevakModels = UserKeuzevakModel.all(getApplicationContext(), user);
+                    for(UserKeuzevakModel vak : userKeuzevakModels) {
+                        Log.d("Main: ",vak.getKeuzevak().getNaam());
                     }
 
                     Bundle bundle = new Bundle();

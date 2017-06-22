@@ -19,7 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static SQLiteDatabase mSQLDB;
     private static DatabaseHelper mInstance;
     public static final String dbName = "imtpmd.db";
-    public static final int dbVersion = 33;        // Versie nr van je db.
+    public static final int dbVersion = 36;        // Versie nr van je db.
 
     public DatabaseHelper(Context ctx) {
         super(ctx, dbName, null, dbVersion);    // gebruik de super constructor.
@@ -81,6 +81,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DatabaseInfo.User_specialisateivakColumn.SPECIALISATIEVAK_ID + " TEXT, " +
                 DatabaseInfo.User_specialisateivakColumn.BEHAALD + " INTEGER);"
         );
+        db.execSQL("CREATE TABLE " + DatabaseInfo.User_keuzevakTables.USER_KEUZEVAK + " (" +
+                BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                DatabaseInfo.User_keuzevakColumn.USER_ID + " TEXT, " +
+                DatabaseInfo.User_keuzevakColumn.KEUZEVAK_ID + " TEXT, " +
+                DatabaseInfo.User_keuzevakColumn.BEHAALD + " INTEGER);"
+        );
         db.execSQL(String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES ('%s', '%s', '%s', '%s');",
                 DatabaseInfo.UserTables.USER,
                 DatabaseInfo.UserColumn.ID, DatabaseInfo.UserColumn.SPECIALISATIE, DatabaseInfo.UserColumn.GEBRUIKERSNAAM, DatabaseInfo.UserColumn.WACHTWOORD,
@@ -95,6 +101,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+ DatabaseInfo.UserTables.USER);
         db.execSQL("DROP TABLE IF EXISTS "+ DatabaseInfo.User_VerplichtvakTables.USER_VERPLICHTVAK);
         db.execSQL("DROP TABLE IF EXISTS "+ DatabaseInfo.User_specialisatievakTables.USER_SPECIALISATIEVAK);
+        db.execSQL("DROP TABLE IF EXISTS "+ DatabaseInfo.User_keuzevakTables.USER_KEUZEVAK);
         onCreate(db);
     }
 

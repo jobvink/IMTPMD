@@ -13,6 +13,7 @@ import com.hsl.imtpmd.imtpmd.database.DatabaseHelper;
 import com.hsl.imtpmd.imtpmd.database.DatabaseInfo;
 import com.hsl.imtpmd.imtpmd.model.KeuzevakModel;
 import com.hsl.imtpmd.imtpmd.model.SpecialisatievakModel;
+import com.hsl.imtpmd.imtpmd.model.UserKeuzevakModel;
 import com.hsl.imtpmd.imtpmd.model.UserModel;
 import com.hsl.imtpmd.imtpmd.model.UserSpecialisatievakModel;
 import com.hsl.imtpmd.imtpmd.model.UserVerplichtvakModel;
@@ -127,14 +128,11 @@ public class VakkenApi {
     }
 
     public void seedUser (Context context, String gebruikersnaam) {
-        DatabaseHelper dbHelper = DatabaseHelper.getHelper(context);
-
         UserModel user = UserModel.getUser(context, gebruikersnaam);
 
         ArrayList<VerplichtvakModel> verplichtvakModels = VerplichtvakModel.all(context);
 
         for (VerplichtvakModel v : verplichtvakModels) {
-            Log.d("Nieuwe Verplichtvak: ", v.getNaam());
             new UserVerplichtvakModel(user, v, 0).store(context);
         }
 
@@ -142,6 +140,12 @@ public class VakkenApi {
 
         for (SpecialisatievakModel v : specialisatievakModels) {
             new UserSpecialisatievakModel(user, v, 0).store(context);
+        }
+
+        ArrayList<KeuzevakModel> keuzevakModels = KeuzevakModel.all(context);
+
+        for (KeuzevakModel v : keuzevakModels) {
+            new UserKeuzevakModel(user, v, 0).store(context);
         }
 
     }

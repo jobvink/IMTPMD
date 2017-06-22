@@ -72,10 +72,10 @@ public class UserSpecialisatievakModel implements Model {
         return all;
     }
 
-    public static void setBehaald(Context context, UserModel user, VerplichtvakModel verplichtvak) {
+    public static void setBehaald(Context context, UserModel user, SpecialisatievakModel specialisatievak, boolean behaald) {
         ContentValues cv = new ContentValues();
-        cv.put(DatabaseInfo.User_specialisateivakColumn.BEHAALD, 1);
-        mSQLDB.update(DatabaseInfo.User_specialisatievakTables.USER_SPECIALISATIEVAK, cv,"user_id=? AND verplichtvak_id=?", new String[]{user.getId(), verplichtvak.getId()});
+        cv.put(DatabaseInfo.User_specialisateivakColumn.BEHAALD, behaald ? 1 : 0);
+        mSQLDB.update(DatabaseInfo.User_specialisatievakTables.USER_SPECIALISATIEVAK, cv,"user_id=? AND " + DatabaseInfo.User_specialisateivakColumn.SPECIALISATIEVAK_ID + "=?", new String[]{user.getId(), specialisatievak.getId()});
     }
 
     public static ArrayList<UserSpecialisatievakModel> propedeuze(Context context, UserModel user) {

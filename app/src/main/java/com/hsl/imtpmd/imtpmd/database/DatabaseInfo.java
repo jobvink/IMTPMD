@@ -77,5 +77,15 @@ public class DatabaseInfo {
         public static final String BEHAALD = "behaald";
     }
 
+    public class User_keuzevakTables {
+        public static final String USER_KEUZEVAK = "user_keuzevak";
+    }
+
+    public class User_keuzevakColumn {
+        public static final String USER_ID = "user_id";
+        public static final String KEUZEVAK_ID = "keuzevak_id";
+        public static final String BEHAALD = "behaald";
+    }
+
 }
 
