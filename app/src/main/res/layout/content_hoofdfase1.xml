@@ -6,69 +6,58 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.hsl.imtpmd.imtpmd.Hoofdfase1"
-    tools:showIn="@layout/activity_hoofdfase1">
+    tools:showIn="@layout/activity_hoofdfase1"
+    android:orientation="vertical">
 
-    <ScrollView
+    <Button
+        android:id="@+id/puntenButton1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="#3f51b5"
+        android:text="Punten overzicht"
+        android:textColor="#ffffff" />
+
+    <TextView
+        android:id="@+id/HoofdPText"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:text="Hoofdvakken hoofdfase 1"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="22sp" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <ListView
+        android:id="@+id/hoofdvakkenh1"
+        android:layout_width="match_parent"
+        android:layout_height="125dp" />
 
-            <Button
-                android:id="@+id/puntenButton1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:backgroundTint="#3f51b5"
-                android:text="Punten overzicht"
-                android:textColor="#ffffff" />
+    <TextView
+        android:id="@+id/KeuzeH1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Specialisatie hoofdfase 1"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="22sp" />
 
-            <TextView
-                android:id="@+id/HoofdPText"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Hoofdvakken hoofdfase 1"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="22sp" />
+    <ListView
+        android:id="@+id/KeuzeH1"
+        android:layout_width="match_parent"
+        android:layout_height="129dp" />
 
-            <ListView
-                android:id="@+id/hoofdvakkenh1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+    <TextView
+        android:id="@+id/SpecialisatieH1Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Keuze hoofdfase 1"
+        android:textAlignment="center"
+        android:textColor="#000000"
+        android:textSize="22sp" />
 
-            <TextView
-                android:id="@+id/KeuzeH1Text"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Specialisatie hoofdfase 1"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="22sp" />
-
-            <ListView
-                android:id="@+id/KeuzeH1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <TextView
-                android:id="@+id/SpecialisatieH1Text"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="Keuze hoofdfase 1"
-                android:textAlignment="center"
-                android:textColor="#000000"
-                android:textSize="22sp" />
-
-            <ListView
-                android:id="@+id/SpecialisatieH1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </LinearLayout>
-    </ScrollView>
+    <ListView
+        android:id="@+id/SpecialisatieH1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>
