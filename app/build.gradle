@@ -28,6 +28,7 @@ dependencies {
     // zet JSON in goede classes
     // Volley library 4 HTTP req.
     compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:design:26.+'
     compile 'com.google.code.gson:gson:2.3.1'
