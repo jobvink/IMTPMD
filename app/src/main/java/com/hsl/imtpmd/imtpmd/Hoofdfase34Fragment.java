@@ -90,7 +90,7 @@ public class Hoofdfase34Fragment extends Fragment {
                 UserVerplichtvakModel vak = verplichtvakModels.get(position);
                 b.putString("code", vak.getVerplichtvak().getCode());
                 b.putString("naam", vak.getVerplichtvak().getNaam());
-                b.putInt("cijfer", vak.getCijfer());
+                b.putDouble("cijfer", vak.getCijfer());
                 b.putBoolean("behaald", vak.getBehaald());
                 i.putExtras(b);
                 startActivity(i);
@@ -111,7 +111,7 @@ public class Hoofdfase34Fragment extends Fragment {
                 UserKeuzevakModel vak = keuzevakModels.get(position);
                 b.putString("code", vak.getKeuzevak().getCode());
                 b.putString("naam", vak.getKeuzevak().getNaam());
-                b.putInt("cijfer", vak.getCijfer());
+                b.putDouble("cijfer", vak.getCijfer());
                 b.putBoolean("behaald", vak.getBehaald());
                 i.putExtras(b);
                 startActivity(i);
@@ -133,7 +133,7 @@ public class Hoofdfase34Fragment extends Fragment {
                 UserSpecialisatievakModel vak = specialisatievakModels.get(position);
                 b.putString("code", vak.getSpecialisatievakModel().getCode());
                 b.putString("naam", vak.getSpecialisatievakModel().getNaam());
-                b.putInt("cijfer", vak.getCijfer());
+                b.putDouble("cijfer", vak.getCijfer());
                 b.putBoolean("behaald", vak.getBehaald());
                 i.putExtras(b);
                 startActivity(i);

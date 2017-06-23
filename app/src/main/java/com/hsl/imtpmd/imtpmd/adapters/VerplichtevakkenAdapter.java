@@ -38,18 +38,23 @@ public class VerplichtevakkenAdapter extends ArrayAdapter<UserVerplichtvakModel>
             convertView = li.inflate(R.layout.vakken_list, parent, false);
             vh.name = (TextView) convertView.findViewById(R.id.subject_name);
             vh.code = (TextView) convertView.findViewById(R.id.subject_code);
+            vh.cijfer = (TextView) convertView.findViewById(R.id.subject_cijfer);
             convertView.setTag(vh);
         } else {
             vh = (ViewHolder) convertView.getTag();
         }
         UserVerplichtvakModel cm = getItem(position);
-        vh.name.setText((CharSequence) cm.getVerplichtvak().getEc());
-        vh.code.setText((CharSequence) cm.getVerplichtvak().getCode());
+        if (cm != null) {
+            vh.name.setText((CharSequence) cm.getVerplichtvak().getEc());
+            vh.code.setText((CharSequence) cm.getVerplichtvak().getCode());
+            vh.cijfer.setText(String.format("%s%s", "cijfer: ", Double.toString(cm.getCijfer())));
+        }
         return convertView;
     }
 
     private static class ViewHolder {
         TextView name;
         TextView code;
+        TextView cijfer;
     }
 }

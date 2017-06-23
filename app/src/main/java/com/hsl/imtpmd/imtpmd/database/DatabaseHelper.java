@@ -73,21 +73,21 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 DatabaseInfo.User_verplichtvakColumn.USER_ID + " TEXT, " +
                 DatabaseInfo.User_verplichtvakColumn.VERPLICHTVAK_ID + " TEXT, " +
-                DatabaseInfo.User_verplichtvakColumn.CIJFER + " INTEGER, " +
+                DatabaseInfo.User_verplichtvakColumn.CIJFER + " REAL, " +
                 DatabaseInfo.User_verplichtvakColumn.BEHAALD + " INTEGER);"
         );
         db.execSQL("CREATE TABLE " + DatabaseInfo.User_specialisatievakTables.USER_SPECIALISATIEVAK + " (" +
                 BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 DatabaseInfo.User_specialisateivakColumn.USER_ID + " TEXT, " +
                 DatabaseInfo.User_specialisateivakColumn.SPECIALISATIEVAK_ID + " TEXT, " +
-                DatabaseInfo.User_verplichtvakColumn.CIJFER + " INTEGER, " +
+                DatabaseInfo.User_verplichtvakColumn.CIJFER + " REAL, " +
                 DatabaseInfo.User_specialisateivakColumn.BEHAALD + " INTEGER);"
         );
         db.execSQL("CREATE TABLE " + DatabaseInfo.User_keuzevakTables.USER_KEUZEVAK + " (" +
                 BaseColumns._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 DatabaseInfo.User_keuzevakColumn.USER_ID + " TEXT, " +
                 DatabaseInfo.User_keuzevakColumn.KEUZEVAK_ID + " TEXT, " +
-                DatabaseInfo.User_verplichtvakColumn.CIJFER + " INTEGER, " +
+                DatabaseInfo.User_verplichtvakColumn.CIJFER + " REAL, " +
                 DatabaseInfo.User_keuzevakColumn.BEHAALD + " INTEGER);"
         );
         db.execSQL(String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES ('%s', '%s', '%s', '%s');",

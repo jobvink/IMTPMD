@@ -21,9 +21,9 @@ public class UserKeuzevakModel implements Model {
     public UserModel user;
     public KeuzevakModel keuzevak;
     public int behaald;
-    public int cijfer;
+    public double cijfer;
 
-    public UserKeuzevakModel(UserModel user, KeuzevakModel keuzevak, int behaald, int cijfer) {
+    public UserKeuzevakModel(UserModel user, KeuzevakModel keuzevak, int behaald, double cijfer) {
         this.user = user;
         this.keuzevak = keuzevak;
         this.behaald = behaald;
@@ -63,12 +63,12 @@ public class UserKeuzevakModel implements Model {
             String user_id = "";
             String verplichtevak_id = "";
             int behaald = 0;
-            int cijfer = 0;
+            double cijfer = 0;
             try {
                 user_id = rs.getString(rs.getColumnIndex(DatabaseInfo.User_keuzevakColumn.USER_ID));
                 verplichtevak_id = rs.getString(rs.getColumnIndex(DatabaseInfo.User_keuzevakColumn.KEUZEVAK_ID));
                 behaald = rs.getInt(rs.getColumnIndex(DatabaseInfo.User_keuzevakColumn.BEHAALD));
-                cijfer = rs.getInt(rs.getColumnIndex(DatabaseInfo.User_keuzevakColumn.CIJFER));
+                cijfer = rs.getDouble(rs.getColumnIndex(DatabaseInfo.User_keuzevakColumn.CIJFER));
                 all.add(new UserKeuzevakModel(
                         UserModel.getUser(context,
                                 Integer.parseInt(user_id)),
@@ -89,7 +89,7 @@ public class UserKeuzevakModel implements Model {
         mSQLDB.update(DatabaseInfo.User_keuzevakTables.USER_KEUZEVAK, cv,"user_id=? AND "+DatabaseInfo.User_keuzevakColumn.KEUZEVAK_ID+"=?", new String[]{user.getId(), id});
     }
 
-    public static void setCijfer(Context context, UserModel user, String id, int cijfer){
+    public static void setCijfer(Context context, UserModel user, String id, double cijfer){
         ContentValues cv = new ContentValues();
         cv.put(DatabaseInfo.User_keuzevakColumn.CIJFER, cijfer);
         mSQLDB.update(DatabaseInfo.User_keuzevakTables.USER_KEUZEVAK, cv,"user_id=? AND "+DatabaseInfo.User_keuzevakColumn.KEUZEVAK_ID+"=?", new String[]{user.getId(), id});
@@ -125,7 +125,7 @@ public class UserKeuzevakModel implements Model {
         return this.behaald == 1;
     }
 
-    public int getCijfer() {
+    public double getCijfer() {
         return cijfer;
     }
 

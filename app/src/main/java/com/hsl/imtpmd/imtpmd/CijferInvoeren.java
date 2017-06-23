@@ -2,7 +2,9 @@ package com.hsl.imtpmd.imtpmd;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -30,14 +32,14 @@ public class CijferInvoeren extends AppCompatActivity {
         String naam = null;
         String id = null;
         String type = null;
-        int cijfer;
+        double cijfer;
         Boolean behaald;
         if(bundle != null){
             code    = bundle.getString("code");
             naam    = bundle.getString("naam");
             id      = bundle.getString("id");
             type    = bundle.getString("type");
-            cijfer  = bundle.getInt("cijfer");
+            cijfer  = bundle.getDouble("cijfer");
             behaald = bundle.getBoolean("behaald");
         }
         if (code!=null) {
@@ -50,40 +52,56 @@ public class CijferInvoeren extends AppCompatActivity {
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
 
-        EditText invoer_cijfer = (EditText) findViewById(R.id.invoer_cijfer);
+        final EditText invoer_cijfer = (EditText) findViewById(R.id.invoer_cijfer);
+        Button opslaanbutton = (Button) findViewById(R.id.opslaanbutton);
 
-        int behaalde_cijfer = Integer.parseInt(invoer_cijfer.getText().toString());
+        final double[] behaalde_cijfer = {0};
+        final UserModel user = UserModel.getUser(getApplicationContext(), getIntent().getExtras().getString("user"));
 
-        UserModel user = UserModel.getUser(getApplicationContext(), getIntent().getExtras().getString("user"));
-
-        if (type != null) {
-            switch (type) {
-                case "v":
-                    UserVerplichtvakModel.setCijfer(getApplicationContext(), user, id, behaalde_cijfer);
-                    if (behaalde_cijfer >= 5.5) {
-                        UserVerplichtvakModel.setBehaald(getApplicationContext(), user, id, true);
-                    } else {
-                        UserVerplichtvakModel.setBehaald(getApplicationContext(), user, id, false);
+        final String finalType = type;
+        final String finalId = id;
+        opslaanbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String cijfer_txt = invoer_cijfer.getText().toString();
+                if (!cijfer_txt.equals("")){
+                    behaalde_cijfer[0] = Double.parseDouble(cijfer_txt);
+                }
+                Log.d("type: ", finalType);
+                if (finalType != null && behaalde_cijfer[0] != 0) {
+                    switch (finalType) {
+                        case "v":
+                            Log.d("het cijfer: ", Double.toString(behaalde_cijfer[0]));
+                            UserVerplichtvakModel.setCijfer(getApplicationContext(), user, finalId, behaalde_cijfer[0]);
+                            if (behaalde_cijfer[0] >= 5.5) {
+                                UserVerplichtvakModel.setBehaald(getApplicationContext(), user, finalId, true);
+                            } else {
+                                UserVerplichtvakModel.setBehaald(getApplicationContext(), user, finalId, false);
+                            }
+                            break;
+                        case "s":
+                            UserSpecialisatievakModel.setCijfer(getApplicationContext(), user, finalId, behaalde_cijfer[0]);
+                            if (behaalde_cijfer[0] >= 5.5) {
+                                UserSpecialisatievakModel.setBehaald(getApplicationContext(), user, finalId, true);
+                            } else {
+                                UserSpecialisatievakModel.setBehaald(getApplicationContext(), user, finalId, false);
+                            }
+                            break;
+                        default:
+                            UserKeuzevakModel.setCijfer(getApplicationContext(), user, finalId, behaalde_cijfer[0]);
+                            if (behaalde_cijfer[0] >= 5.5) {
+                                UserKeuzevakModel.setBehaald(getApplicationContext(), user, finalId, true);
+                            } else {
+                                UserKeuzevakModel.setBehaald(getApplicationContext(), user, finalId, false);
+                            }
+                            break;
                     }
-                    break;
-                case "s":
-                    UserSpecialisatievakModel.setCijfer(getApplicationContext(), user, id, behaalde_cijfer);
-                    if (behaalde_cijfer >= 5.5) {
-                        UserSpecialisatievakModel.setBehaald(getApplicationContext(), user, id, true);
-                    } else {
-                        UserSpecialisatievakModel.setBehaald(getApplicationContext(), user, id, false);
-                    }
-                    break;
-                default:
-                    UserKeuzevakModel.setCijfer(getApplicationContext(), user, id, behaalde_cijfer);
-                    if (behaalde_cijfer >= 5.5) {
-                        UserKeuzevakModel.setBehaald(getApplicationContext(), user, id, true);
-                    } else {
-                        UserKeuzevakModel.setBehaald(getApplicationContext(), user, id, false);
-                    }
-                    break;
+                }
             }
-        }
+        });
+
+
+
 
     }
 

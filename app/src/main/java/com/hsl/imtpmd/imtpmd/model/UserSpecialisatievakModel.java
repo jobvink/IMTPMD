@@ -21,9 +21,9 @@ public class UserSpecialisatievakModel implements Model {
     public UserModel user;
     public SpecialisatievakModel specialisatievakModel;
     public int behaald;
-    public int cijfer;
+    public double cijfer;
 
-    public UserSpecialisatievakModel(UserModel user, SpecialisatievakModel specialisatievakModel, int behaald, int cijfer) {
+    public UserSpecialisatievakModel(UserModel user, SpecialisatievakModel specialisatievakModel, int behaald, double cijfer) {
         this.user = user;
         this.specialisatievakModel = specialisatievakModel;
         this.behaald = behaald;
@@ -61,12 +61,12 @@ public class UserSpecialisatievakModel implements Model {
             String user_id = "";
             String specialisatievak_id = "";
             int behaald = 0;
-            int cijfer = 0;
+            double cijfer = 0;
             try {
                 user_id = rs.getString(rs.getColumnIndex(DatabaseInfo.User_specialisateivakColumn.USER_ID));
                 specialisatievak_id = rs.getString(rs.getColumnIndex(DatabaseInfo.User_specialisateivakColumn.SPECIALISATIEVAK_ID));
                 behaald = rs.getInt(rs.getColumnIndex(DatabaseInfo.User_specialisateivakColumn.BEHAALD));
-                cijfer = rs.getInt(rs.getColumnIndex(DatabaseInfo.User_specialisateivakColumn.CIJFER));
+                cijfer = rs.getDouble(rs.getColumnIndex(DatabaseInfo.User_specialisateivakColumn.CIJFER));
                 all.add(new UserSpecialisatievakModel(
                         UserModel.getUser(context, Integer.parseInt(user_id)),
                         SpecialisatievakModel.get(context, specialisatievak_id),
@@ -86,7 +86,7 @@ public class UserSpecialisatievakModel implements Model {
         mSQLDB.update(DatabaseInfo.User_specialisatievakTables.USER_SPECIALISATIEVAK, cv,"user_id=? AND " + DatabaseInfo.User_specialisateivakColumn.SPECIALISATIEVAK_ID + "=?", new String[]{user.getId(), id});
     }
 
-    public static void setCijfer(Context context, UserModel user, String id, int cijfer) {
+    public static void setCijfer(Context context, UserModel user, String id, double cijfer) {
         ContentValues cv = new ContentValues();
         cv.put(DatabaseInfo.User_specialisateivakColumn.CIJFER, cijfer);
         mSQLDB.update(DatabaseInfo.User_specialisatievakTables.USER_SPECIALISATIEVAK, cv,"user_id=? AND " + DatabaseInfo.User_specialisateivakColumn.SPECIALISATIEVAK_ID + "=?", new String[]{user.getId(), id});
@@ -175,7 +175,7 @@ public class UserSpecialisatievakModel implements Model {
         return this.behaald == 1;
     }
 
-    public int getCijfer() {
+    public double getCijfer() {
         return cijfer;
     }
 

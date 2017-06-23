@@ -21,9 +21,9 @@ public class UserVerplichtvakModel implements Model {
     public UserModel user;
     public VerplichtvakModel verplichtvak;
     public int behaald;
-    public int cijfer;
+    public double cijfer;
 
-    public UserVerplichtvakModel(UserModel user, VerplichtvakModel verplichtvak, int behaald, int cijfer) {
+    public UserVerplichtvakModel(UserModel user, VerplichtvakModel verplichtvak, int behaald, double cijfer) {
         this.user = user;
         this.verplichtvak = verplichtvak;
         this.behaald = behaald;
@@ -61,12 +61,12 @@ public class UserVerplichtvakModel implements Model {
             String user_id = "";
             String verplichtevak_id = "";
             int behaald = 0;
-            int cijfer = 0;
+            double cijfer = 0;
             try {
                 user_id = rs.getString(rs.getColumnIndex(DatabaseInfo.User_verplichtvakColumn.USER_ID));
                 verplichtevak_id = rs.getString(rs.getColumnIndex(DatabaseInfo.User_verplichtvakColumn.VERPLICHTVAK_ID));
                 behaald = rs.getInt(rs.getColumnIndex(DatabaseInfo.User_verplichtvakColumn.BEHAALD));
-                cijfer = rs.getInt(rs.getColumnIndex(DatabaseInfo.User_verplichtvakColumn.CIJFER));
+                cijfer = rs.getDouble(rs.getColumnIndex(DatabaseInfo.User_verplichtvakColumn.CIJFER));
                 all.add(new UserVerplichtvakModel(
                         UserModel.getUser(context, Integer.parseInt(user_id)),
                         VerplichtvakModel.get(context, verplichtevak_id),
@@ -86,11 +86,11 @@ public class UserVerplichtvakModel implements Model {
         mSQLDB.update(DatabaseInfo.User_VerplichtvakTables.USER_VERPLICHTVAK, cv,"user_id=? AND verplichtvak_id=?", new String[]{user.getId(), id});
     }
 
-    public static void setCijfer(Context context, UserModel user, String id, int cijfer) {
+    public static void setCijfer(Context context, UserModel user, String id, double cijfer) {
         ContentValues cv = new ContentValues();
         cv.put(DatabaseInfo.User_verplichtvakColumn.CIJFER, cijfer);
         mSQLDB.update(DatabaseInfo.User_VerplichtvakTables.USER_VERPLICHTVAK, cv,"user_id=? AND verplichtvak_id=?", new String[]{user.getId(), id});
-
+        Log.d("Cijfer opslaan: ", Double.toString(cijfer));
     }
 
     public static ArrayList<UserVerplichtvakModel> propedeuze(Context context, UserModel user) {
@@ -167,7 +167,7 @@ public class UserVerplichtvakModel implements Model {
         return this.behaald == 1;
     }
 
-    public int getCijfer() {
+    public double getCijfer() {
         return cijfer;
     }
 
