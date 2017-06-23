@@ -79,11 +79,14 @@ public class MainActivity extends AppCompatActivity {
                 if(wachtwoord_veld.getText().toString().equals(wachtwoord)){
                     Intent intent = new Intent(MainActivity.this, OverzichtActivity.class);
 
+                    UserModel user = UserModel.getUser(getApplicationContext(), gebruikersnaam_veld.getText().toString());
+
                     DatabaseHelper db = DatabaseHelper.getHelper(getApplicationContext());
-                    Cursor mCursor = db.query(DatabaseInfo.User_VerplichtvakTables.USER_VERPLICHTVAK,new String[]{"*"},null,null,null,null,null);
+                    Cursor mCursor = db.query(DatabaseInfo.User_VerplichtvakTables.USER_VERPLICHTVAK,new String[]{"*"},
+                            DatabaseInfo.UserColumn.ID + "=?",
+                            new String[]{user.getId()},null,null,null);
                     Boolean userSeeded = mCursor.moveToFirst();
 
-                    UserModel user = UserModel.getUser(getApplicationContext(), gebruikersnaam_veld.getText().toString());
 
                     if (!userSeeded) {
                         Log.d("Main: ", " Seeding user");

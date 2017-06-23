@@ -129,8 +129,15 @@ public class Hoofdfase1Fragment extends Fragment {
         });
 
         SpecialisatieH1 = view.findViewById(R.id.SpecialisatieH1);
-        final ArrayList<UserSpecialisatievakModel> specialisatievakModels = UserSpecialisatievakModel.hoofdfase1(this.getContext(), user);
-        ListAdapter ls = new SpecialisatievakkenAdapter(this.getContext(),
+        ArrayList<UserSpecialisatievakModel> temp = UserSpecialisatievakModel.hoofdfase1(this.getContext(), user);
+
+        if (user.getSpecialisatie() != null) {
+            if (!user.getSpecialisatie().equals("null")) {
+                temp = UserSpecialisatievakModel.specialisatieFilter(temp, user.getSpecialisatie());
+            }
+        }
+
+        final ArrayList<UserSpecialisatievakModel> specialisatievakModels = temp;        ListAdapter ls = new SpecialisatievakkenAdapter(this.getContext(),
                 android.R.layout.simple_list_item_1,
                 specialisatievakModels);
         SpecialisatieH1.setAdapter(ls);
@@ -245,8 +252,15 @@ public class Hoofdfase1Fragment extends Fragment {
             }
         });
 
-        final ArrayList<UserSpecialisatievakModel> specialisatievakModels = UserSpecialisatievakModel.hoofdfase1(this.getContext(), user);
-        ListAdapter ls = new SpecialisatievakkenAdapter(this.getContext(),
+        ArrayList<UserSpecialisatievakModel> temp = UserSpecialisatievakModel.hoofdfase1(this.getContext(), user);
+
+        if (user.getSpecialisatie() != null) {
+            if (!user.getSpecialisatie().equals("null")) {
+                temp = UserSpecialisatievakModel.specialisatieFilter(temp, user.getSpecialisatie());
+            }
+        }
+
+        final ArrayList<UserSpecialisatievakModel> specialisatievakModels = temp;        ListAdapter ls = new SpecialisatievakkenAdapter(this.getContext(),
                 android.R.layout.simple_list_item_1,
                 specialisatievakModels);
         SpecialisatieH1.setAdapter(ls);
