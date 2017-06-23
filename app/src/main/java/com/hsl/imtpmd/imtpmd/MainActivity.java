@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 if(wachtwoord_veld.getText().toString().equals(wachtwoord)){
-                    Intent intent = new Intent(MainActivity.this, HoofdschermActivity.class);
+                    Intent intent = new Intent(MainActivity.this, OverzichtActivity.class);
                     Toast.makeText(getApplicationContext(), "Inloggen succesvol", Toast.LENGTH_SHORT);
 
                     DatabaseHelper db = DatabaseHelper.getHelper(getApplicationContext());

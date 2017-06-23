@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hsl.imtpmd.imtpmd">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -36,9 +38,11 @@
             android:name=".PuntenOverzicht"
             android:label="@string/title_activity_punten_overzicht"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".specialisatiekeuze"></activity>
+        <activity android:name=".specialisatiekeuze" />
+        <activity
+            android:name=".OverzichtActivity"
+            android:label="@string/title_activity_overzicht"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
-
-    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
