@@ -9,16 +9,6 @@
     tools:showIn="@layout/activity_hoofdfase34"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/puntenButton34"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:backgroundTint="#3f51b5"
-        android:text="Punten overzicht"
-        android:textAlignment="center"
-        android:textColor="#ffffff" />
-
     <TextView
         android:id="@+id/HoofdH23Text"
         android:layout_width="match_parent"

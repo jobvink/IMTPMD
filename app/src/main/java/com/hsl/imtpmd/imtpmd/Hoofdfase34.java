@@ -55,15 +55,6 @@ public class Hoofdfase34 extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
         }
-
-        Button puntenButton = (Button) findViewById(R.id.puntenButton34);
-
-        puntenButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Hoofdfase34.this, PuntenOverzicht.class));
-            }
-        });
     }
 
     @Override
