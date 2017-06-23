@@ -10,6 +10,8 @@ import android.util.Log;
 import com.hsl.imtpmd.imtpmd.database.DatabaseHelper;
 import com.hsl.imtpmd.imtpmd.database.DatabaseInfo;
 
+import java.util.ArrayList;
+
 /**
  * Created by jobvink on 15-06-17.
  */
@@ -59,7 +61,7 @@ public class UserModel implements Model {
         } catch (Exception e) {
             Log.e("Error: ", e.toString());
         }
-
+        rs.close();
         return new UserModel(id, dbgebruikersnaam, wachtwoord, specialisatie);
     }
     public static UserModel getUser(Context context, int user_id) {
@@ -129,5 +131,69 @@ public class UserModel implements Model {
         this.specialisatie = specialisatie;
         DatabaseHelper dbHelper = DatabaseHelper.getHelper(context);
         dbHelper.update(DatabaseInfo.UserTables.USER,createContentValues(),getId());
+    }
+
+    public int getPropedeuzePunten(Context context){
+        int ec = 0;
+
+        ArrayList<UserVerplichtvakModel> userVerplichtvakModels = UserVerplichtvakModel.propedeuze(context, this);
+        ArrayList<UserSpecialisatievakModel> userSpecialisatievakModels = UserSpecialisatievakModel.propedeuze(context, this);
+
+        for (UserVerplichtvakModel vak : userVerplichtvakModels){
+            if(vak.getBehaald()){
+                ec += Integer.parseInt(vak.getVerplichtvak().getEc());
+            }
+        }
+
+        for (UserSpecialisatievakModel vak : userSpecialisatievakModels){
+            if(vak.getBehaald()){
+                ec += Integer.parseInt(vak.getSpecialisatievakModel().getEc());
+            }
+        }
+
+        return ec;
+    }
+
+    public int getBachalorPunten(Context context){
+
+        int ec = 0;
+
+        ArrayList<UserKeuzevakModel> keuzevakModels = UserKeuzevakModel.all(context, this);
+        ArrayList<UserVerplichtvakModel> verplichtvakModels1 = UserVerplichtvakModel.hoofdfase1(context, this);
+        ArrayList<UserVerplichtvakModel> verplichtvakModels2 = UserVerplichtvakModel.hoofdfase34(context, this);
+        ArrayList<UserSpecialisatievakModel> specialisatievakModels1 = UserSpecialisatievakModel.hoofdfase1(context, this);
+        ArrayList<UserSpecialisatievakModel> specialisatievakModels2 = UserSpecialisatievakModel.hoofdfase34(context, this);
+
+        for (UserKeuzevakModel vak : keuzevakModels){
+            if(vak.getBehaald()){
+                ec += Integer.parseInt(vak.getKeuzevak().getEc());
+            }
+        }
+
+        for (UserVerplichtvakModel vak : verplichtvakModels1){
+            if(vak.getBehaald()){
+                ec += Integer.parseInt(vak.getVerplichtvak().getEc());
+            }
+        }
+
+        for (UserVerplichtvakModel vak : verplichtvakModels2){
+            if(vak.getBehaald()){
+                ec += Integer.parseInt(vak.getVerplichtvak().getEc());
+            }
+        }
+
+        for (UserSpecialisatievakModel vak : specialisatievakModels1){
+            if(vak.getBehaald()){
+                ec += Integer.parseInt(vak.getSpecialisatievakModel().getEc());
+            }
+        }
+
+        for (UserSpecialisatievakModel vak : specialisatievakModels1){
+            if(vak.getBehaald()){
+                ec += Integer.parseInt(vak.getSpecialisatievakModel().getEc());
+            }
+        }
+
+        return ec;
     }
 }

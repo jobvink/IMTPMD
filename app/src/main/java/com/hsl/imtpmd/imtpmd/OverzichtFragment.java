@@ -1,12 +1,23 @@
 package com.hsl.imtpmd.imtpmd;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.LargeValueFormatter;
+import com.hsl.imtpmd.imtpmd.model.UserModel;
+
+import java.util.ArrayList;
 
 
 /**
@@ -18,16 +29,21 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class OverzichtFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String USER = "user";
+
+    private UserModel user;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private BarChart chart;
+    float barWidth;
+    float barSpace;
+    float groupSpace;
 
     public OverzichtFragment() {
         // Required empty public constructor
@@ -37,16 +53,14 @@ public class OverzichtFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param user Parameter 1.
      * @return A new instance of fragment OverzichtFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static OverzichtFragment newInstance(String param1, String param2) {
+    public static OverzichtFragment newInstance(String user) {
         OverzichtFragment fragment = new OverzichtFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(USER, user);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,8 +69,7 @@ public class OverzichtFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            user = UserModel.getUser(getContext(), getArguments().getString(USER));
         }
     }
 
@@ -64,7 +77,65 @@ public class OverzichtFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.content_punten_overzicht, container, false);
+        View view = inflater.inflate(R.layout.content_punten_overzicht, container, false);
+
+        barWidth = 0.5f;
+        barSpace = 0f;
+        groupSpace = 0.6f;
+
+        chart = (BarChart) view.findViewById(R.id.barChart);
+        chart.setDescription(null);
+        chart.setPinchZoom(true);
+        chart.setScaleEnabled(true);
+        chart.setDrawBarShadow(false);
+        chart.setDrawGridBackground(false);
+
+        int groupCount = 2;
+
+        ArrayList xVals = new ArrayList();
+
+        xVals.add("Propedeuse");
+        xVals.add("Hoofdfase 1");
+
+        ArrayList yVals1 = new ArrayList();
+        ArrayList yVals2 = new ArrayList();
+
+        int propedeuze = user.getPropedeuzePunten(this.getContext());
+        int bachalor = user.getBachalorPunten(this.getContext());
+
+        yVals1.add(new BarEntry(1, (float) 60));
+        yVals2.add(new BarEntry(1, (float) propedeuze));
+        yVals1.add(new BarEntry(2, (float) 180));
+        yVals2.add(new BarEntry(2, (float) bachalor));
+
+
+
+        BarDataSet set1, set2;
+        set1 = new BarDataSet(yVals1, "Punten totaal");
+        set1.setColor(Color.GRAY);
+        set2 = new BarDataSet(yVals2, "Punten behaald");
+        set2.setColor(Color.BLUE);
+        BarData data = new BarData(set1, set2);
+        data.setValueFormatter(new LargeValueFormatter());
+        chart.setData(data);
+        chart.getBarData().setBarWidth(barWidth);
+        chart.getXAxis().setAxisMinimum(0);
+        chart.getXAxis().setAxisMaximum(0 + chart.getBarData().getGroupWidth(groupSpace, barSpace) * groupCount);
+        chart.groupBars(0, groupSpace, barSpace);
+        chart.getData().setHighlightEnabled(false);
+        chart.invalidate();
+
+        Legend l = chart.getLegend();
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+        l.setDrawInside(true);
+        l.setYOffset(20f);
+        l.setXOffset(0f);
+        l.setYEntrySpace(0f);
+        l.setTextSize(8f);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

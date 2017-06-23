@@ -63,7 +63,7 @@ public class SpecialisatievakModel extends Vak implements Model {
                 Log.e("Error: ", e.toString());
             }
         } while (rs.moveToNext());
-
+        rs.close();
         return all;
     }
 
@@ -101,7 +101,7 @@ public class SpecialisatievakModel extends Vak implements Model {
         } catch (Exception e) {
             Log.e("Error: ", e.toString());
         }
-
+        rs.close();
         return specialisatievakModel;
     }
 

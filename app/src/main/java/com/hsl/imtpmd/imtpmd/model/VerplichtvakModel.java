@@ -106,7 +106,7 @@ public class VerplichtvakModel extends Vak implements Model {
             }
         } while (rs.moveToNext());
 
-
+        rs.close();
         return all;
     }
 

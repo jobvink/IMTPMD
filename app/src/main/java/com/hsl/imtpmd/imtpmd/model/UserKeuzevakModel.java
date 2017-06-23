@@ -79,7 +79,7 @@ public class UserKeuzevakModel implements Model {
                 Log.e("Keuzevakerror: ", e.toString());
             }
         } while (rs.moveToNext());
-
+        rs.close();
         return all;
     }
 
