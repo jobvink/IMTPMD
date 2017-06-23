@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
@@ -17,6 +18,7 @@ import android.widget.ListView;
 import com.hsl.imtpmd.imtpmd.model.UserModel;
 import com.hsl.imtpmd.imtpmd.model.UserSpecialisatievakModel;
 import com.hsl.imtpmd.imtpmd.model.UserVerplichtvakModel;
+import com.hsl.imtpmd.imtpmd.model.VerplichtvakModel;
 
 import java.util.ArrayList;
 
@@ -73,17 +75,47 @@ public class PropedeuzeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.content_propedeuse, container, false);
         pHoofdListview = view.findViewById(R.id.hoofdvakkenP);
-        ArrayList<UserVerplichtvakModel> verplichtvakModels = UserVerplichtvakModel.propedeuze(this.getContext(), user);
+        final ArrayList<UserVerplichtvakModel> verplichtvakModels = UserVerplichtvakModel.propedeuze(this.getContext(), user);
         ListAdapter la = new ArrayAdapter<>(this.getContext(),
                 android.R.layout.simple_list_item_1,
                 verplichtvakModels);
         pHoofdListview.setAdapter(la);
+        pHoofdListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(PropedeuzeFragment.this.getContext(), CijferInvoeren.class);
+                Bundle b = new Bundle();
+                UserVerplichtvakModel vak = verplichtvakModels.get(position);
+                b.putString("code", vak.getVerplichtvak().getCode());
+                b.putString("naam", vak.getVerplichtvak().getNaam());
+                b.putInt("cijfer", vak.getCijfer());
+                b.putBoolean("behaald", vak.getBehaald());
+                i.putExtras(b);
+                startActivity(i);
+            }
+        });
         pSpecListView = view.findViewById(R.id.KeuzeP);
-        ArrayList<UserSpecialisatievakModel> specialisatievakModels = UserSpecialisatievakModel.propedeuze(this.getContext(), user);
+        final ArrayList<UserSpecialisatievakModel> specialisatievakModels = UserSpecialisatievakModel.propedeuze(this.getContext(), user);
         ListAdapter ls = new ArrayAdapter<>(this.getContext(),
                 android.R.layout.simple_list_item_1,
                 specialisatievakModels);
         pSpecListView.setAdapter(ls);
+        pSpecListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(PropedeuzeFragment.this.getContext(), CijferInvoeren.class);
+                Bundle b = new Bundle();
+                UserSpecialisatievakModel vak = specialisatievakModels.get(position);
+                b.putString("code", vak.getSpecialisatievakModel().getCode());
+                b.putString("naam", vak.getSpecialisatievakModel().getNaam());
+                b.putInt("cijfer", vak.getCijfer());
+                b.putBoolean("behaald", vak.getBehaald());
+                i.putExtras(b);
+                startActivity(i);
+            }
+        });
         return view;
     }
 

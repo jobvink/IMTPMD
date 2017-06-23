@@ -73,9 +73,6 @@ public class VerplichtvakModel extends Vak implements Model {
         this.periode = periode;
     }
 
-    public String toString() {
-        return "dit is een verplicht vak: " + this.naam + " uit jaar: " + this.jaar_id;
-    }
 
     public static ArrayList<VerplichtvakModel> all(Context context) {
         DatabaseHelper dbHelper = DatabaseHelper.getHelper(context);
@@ -162,4 +159,7 @@ public class VerplichtvakModel extends Vak implements Model {
         return cv;
     }
 
+    public String toString(){
+        return this.code;
+    }
 }

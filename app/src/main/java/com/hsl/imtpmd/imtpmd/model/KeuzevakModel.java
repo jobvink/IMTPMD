@@ -95,4 +95,8 @@ public class KeuzevakModel extends Vak implements Model{
         cv.put(DatabaseInfo.KeuzevakColumn.EC, this.ec);
         return cv;
     }
+
+    public String toString(){
+        return this.code;
+    }
 }

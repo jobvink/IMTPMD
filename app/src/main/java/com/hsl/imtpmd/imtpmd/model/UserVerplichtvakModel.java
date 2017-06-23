@@ -142,8 +142,8 @@ public class UserVerplichtvakModel implements Model {
         this.verplichtvak = verplichtvak;
     }
 
-    public int getBehaald() {
-        return behaald;
+    public Boolean getBehaald() {
+        return this.behaald == 1;
     }
 
     public int getCijfer() {

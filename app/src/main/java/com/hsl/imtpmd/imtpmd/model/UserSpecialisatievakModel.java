@@ -156,8 +156,8 @@ public class UserSpecialisatievakModel implements Model {
         this.specialisatievakModel = specialisatievakModel;
     }
 
-    public int getBehaald() {
-        return behaald;
+    public boolean getBehaald() {
+        return this.behaald == 1;
     }
 
     public int getCijfer() {

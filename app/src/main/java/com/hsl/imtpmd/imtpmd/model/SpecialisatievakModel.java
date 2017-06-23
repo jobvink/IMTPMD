@@ -125,4 +125,8 @@ public class SpecialisatievakModel extends Vak implements Model {
     public void setJaar_id(String jaar_id) {
         this.jaar_id = jaar_id;
     }
+
+    public String toString(){
+        return this.code;
+    }
 }
