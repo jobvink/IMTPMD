@@ -34,7 +34,7 @@ public class CijferInvoeren extends AppCompatActivity {
         String id = null;
         String type = null;
         double cijfer;
-        Boolean behaald;
+        final Boolean behaald;
         if(bundle != null){
             code    = bundle.getString("code");
             naam    = bundle.getString("naam");
@@ -64,7 +64,8 @@ public class CijferInvoeren extends AppCompatActivity {
         opslaanbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                behaalde_cijfer[0] = Double.parseDouble(invoer_cijfer.getText().toString());
+                Log.d("Behaalde cijfer: " , Double.toString(behaalde_cijfer[0]));
                 if (behaalde_cijfer[0] >= 1 && behaalde_cijfer[0] <= 10) {
                     Log.d("type: ", finalType);
                     if (finalType != null && behaalde_cijfer[0] != 0) {

@@ -151,7 +151,7 @@ public class UserModel implements Model {
             }
         }
 
-        return ec;
+        return ec > 60 ? 60 : ec;
     }
 
     public int getBachalorPunten(Context context){
@@ -188,12 +188,12 @@ public class UserModel implements Model {
             }
         }
 
-        for (UserSpecialisatievakModel vak : specialisatievakModels1){
+        for (UserSpecialisatievakModel vak : specialisatievakModels2){
             if(vak.getBehaald()){
                 ec += Integer.parseInt(vak.getSpecialisatievakModel().getEc());
             }
         }
 
-        return ec;
+        return ec > 180 ? 180 : ec;
     }
 }

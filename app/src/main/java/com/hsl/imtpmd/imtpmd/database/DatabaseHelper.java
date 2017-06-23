@@ -19,7 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static SQLiteDatabase mSQLDB;
     private static DatabaseHelper mInstance;
     public static final String dbName = "imtpmd.db";
-    public static final int dbVersion = 44;        // Versie nr van je db.
+    public static final int dbVersion = 49;        // Versie nr van je db.
 
     public DatabaseHelper(Context ctx) {
         super(ctx, dbName, null, dbVersion);    // gebruik de super constructor.
