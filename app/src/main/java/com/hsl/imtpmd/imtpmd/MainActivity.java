@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
                     DatabaseHelper db = DatabaseHelper.getHelper(getApplicationContext());
                     Cursor mCursor = db.query(DatabaseInfo.User_VerplichtvakTables.USER_VERPLICHTVAK,new String[]{"*"},
-                            DatabaseInfo.UserColumn.ID + "=?",
+                            DatabaseInfo.User_verplichtvakColumn.USER_ID + "=?",
                             new String[]{user.getId()},null,null,null);
                     Boolean userSeeded = mCursor.moveToFirst();
 
