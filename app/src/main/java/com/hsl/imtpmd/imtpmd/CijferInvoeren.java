@@ -4,6 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.hsl.imtpmd.imtpmd.model.UserModel;
+import com.hsl.imtpmd.imtpmd.model.VerplichtvakModel;
+
 public class CijferInvoeren extends AppCompatActivity {
 
     @Override
@@ -14,6 +17,17 @@ public class CijferInvoeren extends AppCompatActivity {
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+            Bundle bundle = getIntent().getExtras();
+            String code;
+            String naam;
+            if(bundle != null){
+                code = bundle.getString("code");
+                naam = bundle.getString("naam");
+
+            }
+
+
         }
     }
 

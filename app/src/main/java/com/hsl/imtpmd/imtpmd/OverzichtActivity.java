@@ -80,7 +80,7 @@ public class OverzichtActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.Propedeuse) {
-            PropedeuzeFragment fragment = new PropedeuzeFragment();
+            PropedeuzeFragment fragment = PropedeuzeFragment.newInstance(getIntent().getExtras().getString("user"));
             // Begin the transaction
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             // Replace the contents of the container with the new fragment
