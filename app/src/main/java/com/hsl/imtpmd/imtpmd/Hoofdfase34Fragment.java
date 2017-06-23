@@ -1,12 +1,26 @@
 package com.hsl.imtpmd.imtpmd;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+
+import com.hsl.imtpmd.imtpmd.adapters.KeuzevakkenAdapter;
+import com.hsl.imtpmd.imtpmd.adapters.SpecialisatievakkenAdapter;
+import com.hsl.imtpmd.imtpmd.adapters.VerplichtevakkenAdapter;
+import com.hsl.imtpmd.imtpmd.model.UserKeuzevakModel;
+import com.hsl.imtpmd.imtpmd.model.UserModel;
+import com.hsl.imtpmd.imtpmd.model.UserSpecialisatievakModel;
+import com.hsl.imtpmd.imtpmd.model.UserVerplichtvakModel;
+
+import java.util.ArrayList;
 
 
 /**
@@ -18,16 +32,15 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class Hoofdfase34Fragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String USER = "user";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private UserModel user;
 
     private OnFragmentInteractionListener mListener;
+
+    private ListView hoofdvakkenh23;
+    private ListView KeuzeH23;
+    private ListView SpecialisatieH23;
 
     public Hoofdfase34Fragment() {
         // Required empty public constructor
@@ -37,16 +50,14 @@ public class Hoofdfase34Fragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
+     * @param user Parameter 1.
      * @return A new instance of fragment Hoofdfase34Fragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static Hoofdfase34Fragment newInstance(String param1, String param2) {
+    public static Hoofdfase34Fragment newInstance(String user) {
         Hoofdfase34Fragment fragment = new Hoofdfase34Fragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(USER, user);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,8 +66,7 @@ public class Hoofdfase34Fragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            user = UserModel.getUser(getContext(), getArguments().getString(USER));
         }
     }
 
@@ -64,7 +74,72 @@ public class Hoofdfase34Fragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.content_hoofdfase34, container, false);
+        View view = inflater.inflate(R.layout.content_hoofdfase34, container, false);
+        hoofdvakkenh23 = view.findViewById(R.id.hoofdvakkenh23);
+        final ArrayList<UserVerplichtvakModel> verplichtvakModels = UserVerplichtvakModel.hoofdfase34(this.getContext(), user);
+        ListAdapter la = new VerplichtevakkenAdapter(this.getContext(),
+                android.R.layout.simple_list_item_1,
+                verplichtvakModels);
+        hoofdvakkenh23.setAdapter(la);
+        hoofdvakkenh23.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(Hoofdfase34Fragment.this.getContext(), CijferInvoeren.class);
+                Bundle b = new Bundle();
+                UserVerplichtvakModel vak = verplichtvakModels.get(position);
+                b.putString("code", vak.getVerplichtvak().getCode());
+                b.putString("naam", vak.getVerplichtvak().getNaam());
+                b.putInt("cijfer", vak.getCijfer());
+                b.putBoolean("behaald", vak.getBehaald());
+                i.putExtras(b);
+                startActivity(i);
+            }
+        });
+        KeuzeH23 = view.findViewById(R.id.KeuzeH23);
+        final ArrayList<UserKeuzevakModel> keuzevakModels = UserKeuzevakModel.all(this.getContext(), user);
+        ListAdapter lk = new KeuzevakkenAdapter(this.getContext(),
+                android.R.layout.simple_list_item_1,
+                keuzevakModels);
+        KeuzeH23.setAdapter(lk);
+        KeuzeH23.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(Hoofdfase34Fragment.this.getContext(), CijferInvoeren.class);
+                Bundle b = new Bundle();
+                UserKeuzevakModel vak = keuzevakModels.get(position);
+                b.putString("code", vak.getKeuzevak().getCode());
+                b.putString("naam", vak.getKeuzevak().getNaam());
+                b.putInt("cijfer", vak.getCijfer());
+                b.putBoolean("behaald", vak.getBehaald());
+                i.putExtras(b);
+                startActivity(i);
+            }
+        });
+
+        SpecialisatieH23 = view.findViewById(R.id.SpecialisatieH23);
+        final ArrayList<UserSpecialisatievakModel> specialisatievakModels = UserSpecialisatievakModel.hoofdfase34(this.getContext(), user);
+        ListAdapter ls = new SpecialisatievakkenAdapter(this.getContext(),
+                android.R.layout.simple_list_item_1,
+                specialisatievakModels);
+        SpecialisatieH23.setAdapter(ls);
+        SpecialisatieH23.setOnItemClickListener(new AdapterView.OnItemClickListener(){
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(Hoofdfase34Fragment.this.getContext(), CijferInvoeren.class);
+                Bundle b = new Bundle();
+                UserSpecialisatievakModel vak = specialisatievakModels.get(position);
+                b.putString("code", vak.getSpecialisatievakModel().getCode());
+                b.putString("naam", vak.getSpecialisatievakModel().getNaam());
+                b.putInt("cijfer", vak.getCijfer());
+                b.putBoolean("behaald", vak.getBehaald());
+                i.putExtras(b);
+                startActivity(i);
+            }
+        });
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

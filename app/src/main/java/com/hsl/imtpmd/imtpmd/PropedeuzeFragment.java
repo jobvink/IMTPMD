@@ -5,21 +5,19 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.hsl.imtpmd.imtpmd.adapters.VakkenAdapter;
+import com.hsl.imtpmd.imtpmd.adapters.SpecialisatievakkenAdapter;
+import com.hsl.imtpmd.imtpmd.adapters.VerplichtevakkenAdapter;
 import com.hsl.imtpmd.imtpmd.model.UserModel;
 import com.hsl.imtpmd.imtpmd.model.UserSpecialisatievakModel;
 import com.hsl.imtpmd.imtpmd.model.UserVerplichtvakModel;
-import com.hsl.imtpmd.imtpmd.model.VerplichtvakModel;
 
 import java.util.ArrayList;
 
@@ -77,7 +75,7 @@ public class PropedeuzeFragment extends Fragment {
         View view = inflater.inflate(R.layout.content_propedeuse, container, false);
         pHoofdListview = view.findViewById(R.id.hoofdvakkenP);
         final ArrayList<UserVerplichtvakModel> verplichtvakModels = UserVerplichtvakModel.propedeuze(this.getContext(), user);
-        ListAdapter la = new VakkenAdapter(this.getContext(),
+        ListAdapter la = new VerplichtevakkenAdapter(this.getContext(),
                 android.R.layout.simple_list_item_1,
                 verplichtvakModels);
         pHoofdListview.setAdapter(la);
@@ -88,6 +86,9 @@ public class PropedeuzeFragment extends Fragment {
                 Intent i = new Intent(PropedeuzeFragment.this.getContext(), CijferInvoeren.class);
                 Bundle b = new Bundle();
                 UserVerplichtvakModel vak = verplichtvakModels.get(position);
+                b.putString("id", vak.getVerplichtvak().getId());
+                b.putString("type", "v");
+                b.putString("user", user.getGebruikersnaam());
                 b.putString("code", vak.getVerplichtvak().getCode());
                 b.putString("naam", vak.getVerplichtvak().getNaam());
                 b.putInt("cijfer", vak.getCijfer());
@@ -98,7 +99,7 @@ public class PropedeuzeFragment extends Fragment {
         });
         pSpecListView = view.findViewById(R.id.KeuzeP);
         final ArrayList<UserSpecialisatievakModel> specialisatievakModels = UserSpecialisatievakModel.propedeuze(this.getContext(), user);
-        ListAdapter ls = new ArrayAdapter<>(this.getContext(),
+        ListAdapter ls = new SpecialisatievakkenAdapter(this.getContext(),
                 android.R.layout.simple_list_item_1,
                 specialisatievakModels);
         pSpecListView.setAdapter(ls);

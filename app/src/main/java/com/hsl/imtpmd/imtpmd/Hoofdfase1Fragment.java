@@ -14,6 +14,9 @@ import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.hsl.imtpmd.imtpmd.adapters.KeuzevakkenAdapter;
+import com.hsl.imtpmd.imtpmd.adapters.SpecialisatievakkenAdapter;
+import com.hsl.imtpmd.imtpmd.adapters.VerplichtevakkenAdapter;
 import com.hsl.imtpmd.imtpmd.model.KeuzevakModel;
 import com.hsl.imtpmd.imtpmd.model.UserKeuzevakModel;
 import com.hsl.imtpmd.imtpmd.model.UserModel;
@@ -78,7 +81,7 @@ public class Hoofdfase1Fragment extends Fragment {
         View view = inflater.inflate(R.layout.content_hoofdfase1, container, false);
         hoofdvakkenh1 = view.findViewById(R.id.hoofdvakkenh1);
         final ArrayList<UserVerplichtvakModel> verplichtvakModels = UserVerplichtvakModel.hoofdfase1(this.getContext(), user);
-        ListAdapter la = new ArrayAdapter<>(this.getContext(),
+        ListAdapter la = new VerplichtevakkenAdapter(this.getContext(),
                 android.R.layout.simple_list_item_1,
                 verplichtvakModels);
         hoofdvakkenh1.setAdapter(la);
@@ -99,7 +102,7 @@ public class Hoofdfase1Fragment extends Fragment {
         });
         KeuzeH1 = view.findViewById(R.id.KeuzeH1);
         final ArrayList<UserKeuzevakModel> keuzevakModels = UserKeuzevakModel.all(this.getContext(), user);
-        ListAdapter lk = new ArrayAdapter<>(this.getContext(),
+        ListAdapter lk = new KeuzevakkenAdapter(this.getContext(),
                 android.R.layout.simple_list_item_1,
                 keuzevakModels);
         KeuzeH1.setAdapter(lk);
@@ -121,7 +124,7 @@ public class Hoofdfase1Fragment extends Fragment {
 
         SpecialisatieH1 = view.findViewById(R.id.SpecialisatieH1);
         final ArrayList<UserSpecialisatievakModel> specialisatievakModels = UserSpecialisatievakModel.hoofdfase1(this.getContext(), user);
-        ListAdapter ls = new ArrayAdapter<>(this.getContext(),
+        ListAdapter ls = new SpecialisatievakkenAdapter(this.getContext(),
                 android.R.layout.simple_list_item_1,
                 specialisatievakModels);
         SpecialisatieH1.setAdapter(ls);

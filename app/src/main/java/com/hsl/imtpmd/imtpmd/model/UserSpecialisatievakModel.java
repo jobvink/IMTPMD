@@ -80,16 +80,16 @@ public class UserSpecialisatievakModel implements Model {
         return all;
     }
 
-    public static void setBehaald(Context context, UserModel user, SpecialisatievakModel specialisatievak, boolean behaald) {
+    public static void setBehaald(Context context, UserModel user, String id, boolean behaald) {
         ContentValues cv = new ContentValues();
         cv.put(DatabaseInfo.User_specialisateivakColumn.BEHAALD, behaald ? 1 : 0);
-        mSQLDB.update(DatabaseInfo.User_specialisatievakTables.USER_SPECIALISATIEVAK, cv,"user_id=? AND " + DatabaseInfo.User_specialisateivakColumn.SPECIALISATIEVAK_ID + "=?", new String[]{user.getId(), specialisatievak.getId()});
+        mSQLDB.update(DatabaseInfo.User_specialisatievakTables.USER_SPECIALISATIEVAK, cv,"user_id=? AND " + DatabaseInfo.User_specialisateivakColumn.SPECIALISATIEVAK_ID + "=?", new String[]{user.getId(), id});
     }
 
-    public static void setCijfer(Context context, UserModel user, SpecialisatievakModel specialisatievak, int cijfer) {
+    public static void setCijfer(Context context, UserModel user, String id, int cijfer) {
         ContentValues cv = new ContentValues();
         cv.put(DatabaseInfo.User_specialisateivakColumn.CIJFER, cijfer);
-        mSQLDB.update(DatabaseInfo.User_specialisatievakTables.USER_SPECIALISATIEVAK, cv,"user_id=? AND " + DatabaseInfo.User_specialisateivakColumn.SPECIALISATIEVAK_ID + "=?", new String[]{user.getId(), specialisatievak.getId()});
+        mSQLDB.update(DatabaseInfo.User_specialisatievakTables.USER_SPECIALISATIEVAK, cv,"user_id=? AND " + DatabaseInfo.User_specialisateivakColumn.SPECIALISATIEVAK_ID + "=?", new String[]{user.getId(), id});
     }
 
     public static ArrayList<UserSpecialisatievakModel> propedeuze(Context context, UserModel user) {
@@ -115,6 +115,21 @@ public class UserSpecialisatievakModel implements Model {
 
         for (UserSpecialisatievakModel vak : verplichtvakModels) {
             if (vak.getSpecialisatievakModel().getJaar_id().equals("2")){
+                hooftfase1vakken.add(vak);
+            }
+        }
+
+        return hooftfase1vakken;
+    }
+
+    public static ArrayList<UserSpecialisatievakModel> hoofdfase34(Context context, UserModel user) {
+
+        ArrayList<UserSpecialisatievakModel> verplichtvakModels = all(context, user);
+
+        ArrayList<UserSpecialisatievakModel> hooftfase1vakken = new ArrayList<UserSpecialisatievakModel>();
+
+        for (UserSpecialisatievakModel vak : verplichtvakModels) {
+            if (vak.getSpecialisatievakModel().getJaar_id().equals("3")){
                 hooftfase1vakken.add(vak);
             }
         }

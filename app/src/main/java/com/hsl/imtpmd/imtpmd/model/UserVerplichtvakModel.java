@@ -80,10 +80,17 @@ public class UserVerplichtvakModel implements Model {
         return all;
     }
 
-    public static void setBehaald(Context context, UserModel user, VerplichtvakModel verplichtvak, boolean behaald) {
+    public static void setBehaald(Context context, UserModel user, String id, boolean behaald) {
         ContentValues cv = new ContentValues();
         cv.put(DatabaseInfo.User_verplichtvakColumn.BEHAALD, behaald ? 1 : 0);
-        mSQLDB.update(DatabaseInfo.User_VerplichtvakTables.USER_VERPLICHTVAK, cv,"user_id=? AND verplichtvak_id=?", new String[]{user.getId(), verplichtvak.getId()});
+        mSQLDB.update(DatabaseInfo.User_VerplichtvakTables.USER_VERPLICHTVAK, cv,"user_id=? AND verplichtvak_id=?", new String[]{user.getId(), id});
+    }
+
+    public static void setCijfer(Context context, UserModel user, String id, int cijfer) {
+        ContentValues cv = new ContentValues();
+        cv.put(DatabaseInfo.User_verplichtvakColumn.CIJFER, cijfer);
+        mSQLDB.update(DatabaseInfo.User_VerplichtvakTables.USER_VERPLICHTVAK, cv,"user_id=? AND verplichtvak_id=?", new String[]{user.getId(), id});
+
     }
 
     public static ArrayList<UserVerplichtvakModel> propedeuze(Context context, UserModel user) {
@@ -116,6 +123,20 @@ public class UserVerplichtvakModel implements Model {
         return hooftfase1vakken;
     }
 
+    public static ArrayList<UserVerplichtvakModel> hoofdfase34(Context context, UserModel user) {
+
+        ArrayList<UserVerplichtvakModel> verplichtvakModels = all(context, user);
+
+        ArrayList<UserVerplichtvakModel> hooftfase1vakken = new ArrayList<UserVerplichtvakModel>();
+
+        for (UserVerplichtvakModel vak : verplichtvakModels) {
+            if (vak.getVerplichtvak().getJaar_id().equals("3")){
+                hooftfase1vakken.add(vak);
+            }
+        }
+
+        return hooftfase1vakken;
+    }
     @Override
     public ContentValues createContentValues() {
         ContentValues cv = new ContentValues();

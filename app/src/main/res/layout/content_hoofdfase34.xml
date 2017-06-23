@@ -27,7 +27,7 @@
         android:id="@+id/KeuzeH23Text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Specialisatie hoofdfase 2 3"
+        android:text="Keuze hoofdfase 2 3"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="22sp" />
@@ -41,7 +41,7 @@
         android:id="@+id/SpecialisatieH23Text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Keuze hoofdfase 2 3"
+        android:text="Specialisatie hoofdfase 2 3"
         android:textAlignment="center"
         android:textColor="#000000"
         android:textSize="22sp" />

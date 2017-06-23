@@ -99,7 +99,7 @@ public class OverzichtActivity extends AppCompatActivity
             // Complete the changes added above
             ft.commit();
         } else if (id == R.id.Hoofdfase23) {
-            Hoofdfase34Fragment fragment = Hoofdfase34Fragment.newInstance("", "");
+            Hoofdfase34Fragment fragment = Hoofdfase34Fragment.newInstance(getIntent().getExtras().getString("user"));
             // Begin the transaction
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             // Replace the contents of the container with the new fragment

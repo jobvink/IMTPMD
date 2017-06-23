@@ -83,16 +83,16 @@ public class UserKeuzevakModel implements Model {
         return all;
     }
 
-    public static void setBehaald(Context context, UserModel user, KeuzevakModel keuzevak, Boolean behaald) {
+    public static void setBehaald(Context context, UserModel user, String id, Boolean behaald) {
         ContentValues cv = new ContentValues();
         cv.put(DatabaseInfo.User_keuzevakColumn.BEHAALD, behaald ? 1 : 0);
-        mSQLDB.update(DatabaseInfo.User_keuzevakTables.USER_KEUZEVAK, cv,"user_id=? AND "+DatabaseInfo.User_keuzevakColumn.KEUZEVAK_ID+"=?", new String[]{user.getId(), keuzevak.getId()});
+        mSQLDB.update(DatabaseInfo.User_keuzevakTables.USER_KEUZEVAK, cv,"user_id=? AND "+DatabaseInfo.User_keuzevakColumn.KEUZEVAK_ID+"=?", new String[]{user.getId(), id});
     }
 
-    public static void setCijfer(Context context, UserModel user, KeuzevakModel keuzevak, int cijfer){
+    public static void setCijfer(Context context, UserModel user, String id, int cijfer){
         ContentValues cv = new ContentValues();
         cv.put(DatabaseInfo.User_keuzevakColumn.CIJFER, cijfer);
-        mSQLDB.update(DatabaseInfo.User_keuzevakTables.USER_KEUZEVAK, cv,"user_id=? AND "+DatabaseInfo.User_keuzevakColumn.KEUZEVAK_ID+"=?", new String[]{user.getId(), keuzevak.getId()});
+        mSQLDB.update(DatabaseInfo.User_keuzevakTables.USER_KEUZEVAK, cv,"user_id=? AND "+DatabaseInfo.User_keuzevakColumn.KEUZEVAK_ID+"=?", new String[]{user.getId(), id});
     }
 
     @Override

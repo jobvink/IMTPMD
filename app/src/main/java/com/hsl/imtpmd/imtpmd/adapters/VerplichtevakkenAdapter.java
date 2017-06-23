@@ -23,9 +23,9 @@ import java.util.List;
  * Created by Job Vink on 23-6-2017.
  */
 
-public class VakkenAdapter extends ArrayAdapter<UserVerplichtvakModel> {
+public class VerplichtevakkenAdapter extends ArrayAdapter<UserVerplichtvakModel> {
 
-    public VakkenAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull ArrayList<UserVerplichtvakModel> objects) {
+    public VerplichtevakkenAdapter(@NonNull Context context, @LayoutRes int resource, @NonNull ArrayList<UserVerplichtvakModel> objects) {
         super(context, resource, objects);
     }
 
@@ -43,7 +43,7 @@ public class VakkenAdapter extends ArrayAdapter<UserVerplichtvakModel> {
             vh = (ViewHolder) convertView.getTag();
         }
         UserVerplichtvakModel cm = getItem(position);
-        vh.name.setText((CharSequence) cm.getVerplichtvak().getNaam());
+        vh.name.setText((CharSequence) cm.getVerplichtvak().getEc());
         vh.code.setText((CharSequence) cm.getVerplichtvak().getCode());
         return convertView;
     }
