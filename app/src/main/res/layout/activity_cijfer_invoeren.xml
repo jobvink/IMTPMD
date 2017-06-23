@@ -10,8 +10,8 @@
         android:id="@+id/textView3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="109dp"
-        android:layout_marginTop="73dp"
+        android:layout_marginLeft="106dp"
+        android:layout_marginTop="171dp"
         android:text="Voer je cijver in:"
         android:textColor="#000"
         android:textSize="25sp"
@@ -23,7 +23,7 @@
         android:layout_width="99dp"
         android:layout_height="47dp"
         android:text="Gehaald"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="18dp"
         app:layout_constraintTop_toBottomOf="@+id/textView3"
         android:layout_marginLeft="143dp"
         app:layout_constraintLeft_toLeftOf="parent" />
@@ -34,9 +34,25 @@
         android:layout_height="42dp"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:layout_marginTop="27dp"
+        android:layout_marginTop="26dp"
         app:layout_constraintTop_toBottomOf="@+id/switch1"
         android:layout_marginLeft="133dp"
         app:layout_constraintLeft_toLeftOf="parent" />
+
+    <TextView
+        android:id="@+id/invoer_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="163dp"
+        tools:layout_editor_absoluteY="36dp" />
+
+    <TextView
+        android:id="@+id/invoer_naam"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        tools:layout_editor_absoluteX="161dp"
+        tools:layout_editor_absoluteY="108dp" />
 
 </android.support.constraint.ConstraintLayout>
