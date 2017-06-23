@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import com.hsl.imtpmd.imtpmd.adapters.VakkenAdapter;
 import com.hsl.imtpmd.imtpmd.model.UserModel;
 import com.hsl.imtpmd.imtpmd.model.UserSpecialisatievakModel;
 import com.hsl.imtpmd.imtpmd.model.UserVerplichtvakModel;
@@ -76,7 +77,7 @@ public class PropedeuzeFragment extends Fragment {
         View view = inflater.inflate(R.layout.content_propedeuse, container, false);
         pHoofdListview = view.findViewById(R.id.hoofdvakkenP);
         final ArrayList<UserVerplichtvakModel> verplichtvakModels = UserVerplichtvakModel.propedeuze(this.getContext(), user);
-        ListAdapter la = new ArrayAdapter<>(this.getContext(),
+        ListAdapter la = new VakkenAdapter(this.getContext(),
                 android.R.layout.simple_list_item_1,
                 verplichtvakModels);
         pHoofdListview.setAdapter(la);
