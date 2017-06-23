@@ -21,10 +21,13 @@ public class CijferInvoeren extends AppCompatActivity {
             Bundle bundle = getIntent().getExtras();
             String code;
             String naam;
+            int cijfer;
+            Boolean behaald;
             if(bundle != null){
-                code = bundle.getString("code");
-                naam = bundle.getString("naam");
-
+                code    = bundle.getString("code");
+                naam    = bundle.getString("naam");
+                cijfer  = bundle.getInt("cijfer");
+                behaald = bundle.getBoolean("behaald");
             }
 
 
