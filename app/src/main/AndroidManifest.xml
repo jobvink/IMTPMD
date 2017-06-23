@@ -42,7 +42,8 @@
         <activity
             android:name=".OverzichtActivity"
             android:label="@string/title_activity_overzicht"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".CijferInvoeren"></activity>
     </application>
 
 </manifest>
