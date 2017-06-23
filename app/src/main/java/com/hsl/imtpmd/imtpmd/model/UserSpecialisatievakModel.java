@@ -21,11 +21,13 @@ public class UserSpecialisatievakModel implements Model {
     public UserModel user;
     public SpecialisatievakModel specialisatievakModel;
     public int behaald;
+    public int cijfer;
 
-    public UserSpecialisatievakModel(UserModel user, SpecialisatievakModel specialisatievakModel, int behaald) {
+    public UserSpecialisatievakModel(UserModel user, SpecialisatievakModel specialisatievakModel, int behaald, int cijfer) {
         this.user = user;
         this.specialisatievakModel = specialisatievakModel;
         this.behaald = behaald;
+        this.cijfer = cijfer;
     }
 
     public void store(Context context) {
@@ -59,11 +61,17 @@ public class UserSpecialisatievakModel implements Model {
             String user_id = "";
             String specialisatievak_id = "";
             int behaald = 0;
+            int cijfer = 0;
             try {
                 user_id = rs.getString(rs.getColumnIndex(DatabaseInfo.User_specialisateivakColumn.USER_ID));
                 specialisatievak_id = rs.getString(rs.getColumnIndex(DatabaseInfo.User_specialisateivakColumn.SPECIALISATIEVAK_ID));
                 behaald = rs.getInt(rs.getColumnIndex(DatabaseInfo.User_specialisateivakColumn.BEHAALD));
-                all.add(new UserSpecialisatievakModel(UserModel.getUser(context, Integer.parseInt(user_id)),SpecialisatievakModel.get(context, specialisatievak_id),behaald));
+                cijfer = rs.getInt(rs.getColumnIndex(DatabaseInfo.User_specialisateivakColumn.CIJFER));
+                all.add(new UserSpecialisatievakModel(
+                        UserModel.getUser(context, Integer.parseInt(user_id)),
+                        SpecialisatievakModel.get(context, specialisatievak_id),
+                        behaald,
+                        cijfer));
             } catch (Exception e) {
                 Log.e("VerplichtvakError: ", e.toString());
             }
@@ -75,6 +83,12 @@ public class UserSpecialisatievakModel implements Model {
     public static void setBehaald(Context context, UserModel user, SpecialisatievakModel specialisatievak, boolean behaald) {
         ContentValues cv = new ContentValues();
         cv.put(DatabaseInfo.User_specialisateivakColumn.BEHAALD, behaald ? 1 : 0);
+        mSQLDB.update(DatabaseInfo.User_specialisatievakTables.USER_SPECIALISATIEVAK, cv,"user_id=? AND " + DatabaseInfo.User_specialisateivakColumn.SPECIALISATIEVAK_ID + "=?", new String[]{user.getId(), specialisatievak.getId()});
+    }
+
+    public static void setCijfer(Context context, UserModel user, SpecialisatievakModel specialisatievak, int cijfer) {
+        ContentValues cv = new ContentValues();
+        cv.put(DatabaseInfo.User_specialisateivakColumn.CIJFER, cijfer);
         mSQLDB.update(DatabaseInfo.User_specialisatievakTables.USER_SPECIALISATIEVAK, cv,"user_id=? AND " + DatabaseInfo.User_specialisateivakColumn.SPECIALISATIEVAK_ID + "=?", new String[]{user.getId(), specialisatievak.getId()});
     }
 
@@ -122,6 +136,7 @@ public class UserSpecialisatievakModel implements Model {
         cv.put(DatabaseInfo.User_specialisateivakColumn.USER_ID, this.user.getId());
         cv.put(DatabaseInfo.User_specialisateivakColumn.SPECIALISATIEVAK_ID, this.specialisatievakModel.getId());
         cv.put(DatabaseInfo.User_specialisateivakColumn.BEHAALD, this.behaald);
+        cv.put(DatabaseInfo.User_specialisateivakColumn.CIJFER, this.cijfer);
         return cv;
     }
 
@@ -143,5 +158,9 @@ public class UserSpecialisatievakModel implements Model {
 
     public int getBehaald() {
         return behaald;
+    }
+
+    public int getCijfer() {
+        return cijfer;
     }
 }
