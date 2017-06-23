@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.hsl.imtpmd.imtpmd.adapters.SpecialisatievakkenAdapter;
 import com.hsl.imtpmd.imtpmd.adapters.VerplichtevakkenAdapter;
@@ -66,6 +67,7 @@ public class PropedeuzeFragment extends Fragment {
         if (getArguments() != null) {
             user = UserModel.getUser(getContext(), getArguments().getString(USER));
         }
+        Toast.makeText(getActivity(),"Welkom om Studievolg informatica",Toast.LENGTH_SHORT).show();
     }
 
     @Override
