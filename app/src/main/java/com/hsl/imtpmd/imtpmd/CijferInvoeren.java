@@ -64,40 +64,41 @@ public class CijferInvoeren extends AppCompatActivity {
         opslaanbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Cijfer is opgeslagen" ,Toast.LENGTH_SHORT).show();
-                String cijfer_txt = invoer_cijfer.getText().toString();
-                if (!cijfer_txt.equals("")){
-                    behaalde_cijfer[0] = Double.parseDouble(cijfer_txt);
-                }
-                Log.d("type: ", finalType);
-                if (finalType != null && behaalde_cijfer[0] != 0) {
-                    switch (finalType) {
-                        case "v":
-                            Log.d("het cijfer: ", Double.toString(behaalde_cijfer[0]));
-                            UserVerplichtvakModel.setCijfer(getApplicationContext(), user, finalId, behaalde_cijfer[0]);
-                            if (behaalde_cijfer[0] >= 5.5) {
-                                UserVerplichtvakModel.setBehaald(getApplicationContext(), user, finalId, true);
-                            } else {
-                                UserVerplichtvakModel.setBehaald(getApplicationContext(), user, finalId, false);
-                            }
-                            break;
-                        case "s":
-                            UserSpecialisatievakModel.setCijfer(getApplicationContext(), user, finalId, behaalde_cijfer[0]);
-                            if (behaalde_cijfer[0] >= 5.5) {
-                                UserSpecialisatievakModel.setBehaald(getApplicationContext(), user, finalId, true);
-                            } else {
-                                UserSpecialisatievakModel.setBehaald(getApplicationContext(), user, finalId, false);
-                            }
-                            break;
-                        default:
-                            UserKeuzevakModel.setCijfer(getApplicationContext(), user, finalId, behaalde_cijfer[0]);
-                            if (behaalde_cijfer[0] >= 5.5) {
-                                UserKeuzevakModel.setBehaald(getApplicationContext(), user, finalId, true);
-                            } else {
-                                UserKeuzevakModel.setBehaald(getApplicationContext(), user, finalId, false);
-                            }
-                            break;
+
+                if (behaalde_cijfer[0] >= 1 && behaalde_cijfer[0] <= 10) {
+                    Log.d("type: ", finalType);
+                    if (finalType != null && behaalde_cijfer[0] != 0) {
+                        switch (finalType) {
+                            case "v":
+                                Log.d("het cijfer: ", Double.toString(behaalde_cijfer[0]));
+                                UserVerplichtvakModel.setCijfer(getApplicationContext(), user, finalId, behaalde_cijfer[0]);
+                                if (behaalde_cijfer[0] >= 5.5) {
+                                    UserVerplichtvakModel.setBehaald(getApplicationContext(), user, finalId, true);
+                                } else {
+                                    UserVerplichtvakModel.setBehaald(getApplicationContext(), user, finalId, false);
+                                }
+                                break;
+                            case "s":
+                                UserSpecialisatievakModel.setCijfer(getApplicationContext(), user, finalId, behaalde_cijfer[0]);
+                                if (behaalde_cijfer[0] >= 5.5) {
+                                    UserSpecialisatievakModel.setBehaald(getApplicationContext(), user, finalId, true);
+                                } else {
+                                    UserSpecialisatievakModel.setBehaald(getApplicationContext(), user, finalId, false);
+                                }
+                                break;
+                            default:
+                                UserKeuzevakModel.setCijfer(getApplicationContext(), user, finalId, behaalde_cijfer[0]);
+                                if (behaalde_cijfer[0] >= 5.5) {
+                                    UserKeuzevakModel.setBehaald(getApplicationContext(), user, finalId, true);
+                                } else {
+                                    UserKeuzevakModel.setBehaald(getApplicationContext(), user, finalId, false);
+                                }
+                                break;
+                        }
                     }
+                    Toast.makeText(getApplicationContext(), "Cijfer is opgeslagen" ,Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Voer een geldig cijfer in" ,Toast.LENGTH_SHORT).show();
                 }
             }
         });

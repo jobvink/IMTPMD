@@ -170,17 +170,17 @@ public class OverzichtActivity extends AppCompatActivity
             case R.id.fictradiobutton:
                 if (checked)
                     // spec 1
-                    user.setSpecialisatie(getApplicationContext(), "1");
+                    user.setSpecialisatie(getApplicationContext(), "3");
                 break;
             case R.id.mtradiobutton:
                 if (checked)
                     //spec 4
-                    user.setSpecialisatie(getApplicationContext(), "4");
+                    user.setSpecialisatie(getApplicationContext(), "1");
                 break;
             case R.id.seradiobutton:
                 if (checked)
                     //spec 3
-                    user.setSpecialisatie(getApplicationContext(), "3");
+                    user.setSpecialisatie(getApplicationContext(), "4");
                 break;
         }
     }
