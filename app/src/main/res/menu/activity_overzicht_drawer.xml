@@ -3,19 +3,16 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_camera"
-            android:title="Hoofdscherm" />
-        <item
-            android:id="@+id/nav_gallery"
+            android:id="@+id/Propedeuse"
             android:title="Propedeuse" />
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/Hoofdfase1"
             android:title="Hoofdfase 1" />
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/Hoofdfase23"
             android:title="Hoofdfase 2/3" />
         <item
-            android:id="@+id/nav_puntenoverizhct"
+            android:id="@+id/Puntenoverzicht"
             android:title="Puntenoverzicht"/>
     </group>
 

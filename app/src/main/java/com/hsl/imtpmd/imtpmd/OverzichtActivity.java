@@ -78,7 +78,17 @@ public class OverzichtActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+
+        if (id == R.id.Propedeuse) {
+            PropedeuzeFragment fragment = new PropedeuzeFragment();
+            // Begin the transaction
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            // Replace the contents of the container with the new fragment
+//            ft.replace(R.id.overpichtContent, fragment);
+            ft.replace(R.id.overpichtContent, fragment);
+            // Complete the changes added above
+            ft.commit();
+        } else if (id == R.id.Hoofdfase1) {
             Hoofdfase1Fragment fragment = new Hoofdfase1Fragment();
             // Begin the transaction
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -87,7 +97,7 @@ public class OverzichtActivity extends AppCompatActivity
             ft.replace(R.id.overpichtContent, fragment);
             // Complete the changes added above
             ft.commit();
-        } else if (id == R.id.nav_gallery) {
+        } else if (id == R.id.Hoofdfase23) {
             Hoofdfase34Fragment fragment = new Hoofdfase34Fragment();
             // Begin the transaction
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -96,8 +106,8 @@ public class OverzichtActivity extends AppCompatActivity
             ft.replace(R.id.overpichtContent, fragment);
             // Complete the changes added above
             ft.commit();
-        } else if (id == R.id.nav_slideshow) {
-            OverzichtFragment fragment = new OverzichtFragment();
+        } else if (id == R.id.Puntenoverzicht) {
+            Hoofdfase34Fragment fragment = new Hoofdfase34Fragment();
             // Begin the transaction
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             // Replace the contents of the container with the new fragment
@@ -105,7 +115,7 @@ public class OverzichtActivity extends AppCompatActivity
             ft.replace(R.id.overpichtContent, fragment);
             // Complete the changes added above
             ft.commit();
-        } else if (id == R.id.nav_manage) {
+        } else if (id == R.id.Propedeuse) {
 
 
         }
