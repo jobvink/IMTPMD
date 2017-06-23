@@ -21,6 +21,7 @@ import com.hsl.imtpmd.imtpmd.model.UserSpecialisatievakModel;
 import com.hsl.imtpmd.imtpmd.model.UserVerplichtvakModel;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 /**
@@ -169,7 +170,14 @@ public class PropedeuzeFragment extends Fragment {
                 startActivity(i);
             }
         });
-        final ArrayList<UserSpecialisatievakModel> specialisatievakModels = UserSpecialisatievakModel.propedeuze(this.getContext(), user);
+        ArrayList<UserSpecialisatievakModel> temp = UserSpecialisatievakModel.propedeuze(this.getContext(), user);
+
+        if(!user.getSpecialisatie().equals("null")){
+            temp = UserSpecialisatievakModel.specialisatieFilter(temp, user.getSpecialisatie());
+        }
+
+        final ArrayList<UserSpecialisatievakModel> specialisatievakModels = temp;
+
         ListAdapter ls = new SpecialisatievakkenAdapter(this.getContext(),
                 android.R.layout.simple_list_item_1,
                 specialisatievakModels);

@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -15,13 +17,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.RadioButton;
+
+import com.hsl.imtpmd.imtpmd.model.UserModel;
 
 public class OverzichtActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         PropedeuzeFragment.OnFragmentInteractionListener,
         Hoofdfase1Fragment.OnFragmentInteractionListener,
         Hoofdfase34Fragment.OnFragmentInteractionListener,
-        OverzichtFragment.OnFragmentInteractionListener {
+        OverzichtFragment.OnFragmentInteractionListener,
+        SpecialisatieFragment.OnFragmentInteractionListener{
+
+    private UserModel user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +51,8 @@ public class OverzichtActivity extends AppCompatActivity
 
         Bundle bundle = getIntent().getExtras();
         PropedeuzeFragment fragment = PropedeuzeFragment.newInstance(bundle.getString("user"));
+
+        user = UserModel.getUser(getApplicationContext(), getIntent().getExtras().getString("user"));
 
         // Begin the transaction
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -116,6 +126,11 @@ public class OverzichtActivity extends AppCompatActivity
             ft.replace(R.id.overpichtContent, fragment);
             // Complete the changes added above
             ft.commit();
+        } else if (id == R.id.Specialisatiekeuze) {
+            SpecialisatieFragment fragment = SpecialisatieFragment.newInstance(getIntent().getExtras().getString("user"));
+
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.overpichtContent, fragment).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -138,5 +153,35 @@ public class OverzichtActivity extends AppCompatActivity
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
 
+    }
+
+    public void onRadioButtonClicked(View view) {
+        // Is the button now checked?
+        boolean checked = ((RadioButton) view).isChecked();
+
+        Log.d("Test", "Test");
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.bdamradiobutton:
+                if (checked)
+                    // spec 2
+                    user.setSpecialisatie(getApplicationContext(), "2");
+                break;
+            case R.id.fictradiobutton:
+                if (checked)
+                    // spec 1
+                    user.setSpecialisatie(getApplicationContext(), "1");
+                break;
+            case R.id.mtradiobutton:
+                if (checked)
+                    //spec 4
+                    user.setSpecialisatie(getApplicationContext(), "4");
+                break;
+            case R.id.seradiobutton:
+                if (checked)
+                    //spec 3
+                    user.setSpecialisatie(getApplicationContext(), "3");
+                break;
+        }
     }
 }
