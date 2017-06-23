@@ -43,16 +43,26 @@
         android:id="@+id/invoer_code"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="141dp"
+        android:layout_marginTop="38dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="163dp"
-        tools:layout_editor_absoluteY="36dp" />
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="25sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/invoer_naam"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="141dp"
+        android:layout_marginTop="30dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="161dp"
-        tools:layout_editor_absoluteY="108dp" />
+        android:textAlignment="center"
+        android:textColor="#000"
+        android:textSize="25sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/invoer_code" />
 
 </android.support.constraint.ConstraintLayout>
