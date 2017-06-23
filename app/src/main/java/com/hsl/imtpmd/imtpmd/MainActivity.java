@@ -78,7 +78,6 @@ public class MainActivity extends AppCompatActivity {
 
                 if(wachtwoord_veld.getText().toString().equals(wachtwoord)){
                     Intent intent = new Intent(MainActivity.this, OverzichtActivity.class);
-                    Toast.makeText(getApplicationContext(), "Inloggen succesvol", Toast.LENGTH_SHORT);
 
                     DatabaseHelper db = DatabaseHelper.getHelper(getApplicationContext());
                     Cursor mCursor = db.query(DatabaseInfo.User_VerplichtvakTables.USER_VERPLICHTVAK,new String[]{"*"},null,null,null,null,null);
