@@ -1,5 +1,6 @@
 package com.hsl.imtpmd.imtpmd;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -16,7 +17,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 public class OverzichtActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener,
+        PropedeuzeFragment.OnFragmentInteractionListener,
+        Hoofdfase1Fragment.OnFragmentInteractionListener,
+        Hoofdfase34Fragment.OnFragmentInteractionListener,
+        OverzichtFragment.OnFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +48,7 @@ public class OverzichtActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Fragment fragment = new PropedeuzeFragment();
+        PropedeuzeFragment fragment = new PropedeuzeFragment();
 
         // Begin the transaction
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -93,11 +98,32 @@ public class OverzichtActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            Hoofdfase1Fragment fragment = new Hoofdfase1Fragment();
+            // Begin the transaction
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            // Replace the contents of the container with the new fragment
+//            ft.replace(R.id.overpichtContent, fragment);
+            ft.replace(R.id.overpichtContent, fragment);
+            // Complete the changes added above
+            ft.commit();
         } else if (id == R.id.nav_gallery) {
-
+            Hoofdfase34Fragment fragment = new Hoofdfase34Fragment();
+            // Begin the transaction
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            // Replace the contents of the container with the new fragment
+//            ft.replace(R.id.overpichtContent, fragment);
+            ft.replace(R.id.overpichtContent, fragment);
+            // Complete the changes added above
+            ft.commit();
         } else if (id == R.id.nav_slideshow) {
-
+            OverzichtFragment fragment = new OverzichtFragment();
+            // Begin the transaction
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            // Replace the contents of the container with the new fragment
+//            ft.replace(R.id.overpichtContent, fragment);
+            ft.replace(R.id.overpichtContent, fragment);
+            // Complete the changes added above
+            ft.commit();
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
@@ -109,5 +135,15 @@ public class OverzichtActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }

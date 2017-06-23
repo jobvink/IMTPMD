@@ -8,26 +8,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hsl.imtpmd.imtpmd.model.UserModel;
-
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link PropedeuzeFragment.OnFragmentInteractionListener} interface
+ * {@link Hoofdfase1Fragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link PropedeuzeFragment#newInstance} factory method to
+ * Use the {@link Hoofdfase1Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class PropedeuzeFragment extends Fragment {
+public class Hoofdfase1Fragment extends Fragment {
+    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String USER = "user";
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
 
-    private UserModel user;
+    // TODO: Rename and change types of parameters
+    private String mParam1;
+    private String mParam2;
 
     private OnFragmentInteractionListener mListener;
 
-    public PropedeuzeFragment() {
+    public Hoofdfase1Fragment() {
         // Required empty public constructor
     }
 
@@ -35,13 +37,16 @@ public class PropedeuzeFragment extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param user Parameter 1.
-     * @return A new instance of fragment PropedeuzeFragment.
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment Hoofdfase1Fragment.
      */
-    public static PropedeuzeFragment newInstance(String user) {
-        PropedeuzeFragment fragment = new PropedeuzeFragment();
+    // TODO: Rename and change types and number of parameters
+    public static Hoofdfase1Fragment newInstance(String param1, String param2) {
+        Hoofdfase1Fragment fragment = new Hoofdfase1Fragment();
         Bundle args = new Bundle();
-        args.putString(USER, user);
+        args.putString(ARG_PARAM1, param1);
+        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,7 +55,8 @@ public class PropedeuzeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            user = UserModel.getUser(getContext(), USER);
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
 
@@ -58,7 +64,7 @@ public class PropedeuzeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.content_propedeuse, container, false);
+        return inflater.inflate(R.layout.content_hoofdfase1, container, false);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
