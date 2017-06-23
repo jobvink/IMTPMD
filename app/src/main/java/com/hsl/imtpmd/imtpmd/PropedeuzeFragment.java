@@ -1,14 +1,24 @@
 package com.hsl.imtpmd.imtpmd;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 
 import com.hsl.imtpmd.imtpmd.model.UserModel;
+import com.hsl.imtpmd.imtpmd.model.UserSpecialisatievakModel;
+import com.hsl.imtpmd.imtpmd.model.UserVerplichtvakModel;
+
+import java.util.ArrayList;
 
 
 /**
@@ -26,6 +36,9 @@ public class PropedeuzeFragment extends Fragment {
     private UserModel user;
 
     private OnFragmentInteractionListener mListener;
+
+    private ListView pHoofdListview;
+    private ListView pSpecListView;
 
     public PropedeuzeFragment() {
         // Required empty public constructor
@@ -50,7 +63,7 @@ public class PropedeuzeFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            user = UserModel.getUser(getContext(), USER);
+            user = UserModel.getUser(getContext(), getArguments().getString(USER));
         }
     }
 
@@ -58,7 +71,20 @@ public class PropedeuzeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.content_propedeuse, container, false);
+        View view = inflater.inflate(R.layout.content_propedeuse, container, false);
+        pHoofdListview = view.findViewById(R.id.hoofdvakkenP);
+        ArrayList<UserVerplichtvakModel> verplichtvakModels = UserVerplichtvakModel.propedeuze(this.getContext(), user);
+        ListAdapter la = new ArrayAdapter<>(this.getContext(),
+                android.R.layout.simple_list_item_1,
+                verplichtvakModels);
+        pHoofdListview.setAdapter(la);
+        pSpecListView = view.findViewById(R.id.KeuzeP);
+        ArrayList<UserSpecialisatievakModel> specialisatievakModels = UserSpecialisatievakModel.propedeuze(this.getContext(), user);
+        ListAdapter ls = new ArrayAdapter<>(this.getContext(),
+                android.R.layout.simple_list_item_1,
+                specialisatievakModels);
+        pSpecListView.setAdapter(ls);
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -77,6 +103,8 @@ public class PropedeuzeFragment extends Fragment {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
         }
+
+
     }
 
     @Override

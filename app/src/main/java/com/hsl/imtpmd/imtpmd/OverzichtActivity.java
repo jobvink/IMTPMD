@@ -48,7 +48,8 @@ public class OverzichtActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        PropedeuzeFragment fragment = new PropedeuzeFragment();
+        Bundle bundle = getIntent().getExtras();
+        PropedeuzeFragment fragment = PropedeuzeFragment.newInstance(bundle.getString("user"));
 
         // Begin the transaction
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
@@ -98,7 +99,7 @@ public class OverzichtActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            Hoofdfase1Fragment fragment = new Hoofdfase1Fragment();
+            PropedeuzeFragment fragment = new PropedeuzeFragment();
             // Begin the transaction
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             // Replace the contents of the container with the new fragment
@@ -107,7 +108,7 @@ public class OverzichtActivity extends AppCompatActivity
             // Complete the changes added above
             ft.commit();
         } else if (id == R.id.nav_gallery) {
-            Hoofdfase34Fragment fragment = new Hoofdfase34Fragment();
+            Hoofdfase1Fragment fragment = new Hoofdfase1Fragment();
             // Begin the transaction
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             // Replace the contents of the container with the new fragment
@@ -116,7 +117,7 @@ public class OverzichtActivity extends AppCompatActivity
             // Complete the changes added above
             ft.commit();
         } else if (id == R.id.nav_slideshow) {
-            OverzichtFragment fragment = new OverzichtFragment();
+            Hoofdfase34Fragment fragment = new Hoofdfase34Fragment();
             // Begin the transaction
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             // Replace the contents of the container with the new fragment
@@ -125,7 +126,14 @@ public class OverzichtActivity extends AppCompatActivity
             // Complete the changes added above
             ft.commit();
         } else if (id == R.id.nav_manage) {
-
+            OverzichtFragment fragment = new OverzichtFragment();
+            // Begin the transaction
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            // Replace the contents of the container with the new fragment
+//            ft.replace(R.id.overpichtContent, fragment);
+            ft.replace(R.id.overpichtContent, fragment);
+            // Complete the changes added above
+            ft.commit();
         } else if (id == R.id.nav_share) {
 
         } else if (id == R.id.nav_send) {
