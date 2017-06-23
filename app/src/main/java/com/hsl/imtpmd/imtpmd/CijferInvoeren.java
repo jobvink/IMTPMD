@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hsl.imtpmd.imtpmd.model.UserKeuzevakModel;
 import com.hsl.imtpmd.imtpmd.model.UserModel;
@@ -63,6 +64,7 @@ public class CijferInvoeren extends AppCompatActivity {
         opslaanbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "Cijfer is opgeslagen" ,Toast.LENGTH_SHORT).show();
                 String cijfer_txt = invoer_cijfer.getText().toString();
                 if (!cijfer_txt.equals("")){
                     behaalde_cijfer[0] = Double.parseDouble(cijfer_txt);
