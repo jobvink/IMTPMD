@@ -21,11 +21,13 @@ public class UserKeuzevakModel implements Model {
     public UserModel user;
     public KeuzevakModel keuzevak;
     public int behaald;
+    public int cijfer;
 
-    public UserKeuzevakModel(UserModel user, KeuzevakModel keuzevak, int behaald) {
+    public UserKeuzevakModel(UserModel user, KeuzevakModel keuzevak, int behaald, int cijfer) {
         this.user = user;
         this.keuzevak = keuzevak;
         this.behaald = behaald;
+        this.cijfer = cijfer;
     }
 
     public void store(Context context) {
@@ -59,11 +61,18 @@ public class UserKeuzevakModel implements Model {
             String user_id = "";
             String verplichtevak_id = "";
             int behaald = 0;
+            int cijfer = 0;
             try {
                 user_id = rs.getString(rs.getColumnIndex(DatabaseInfo.User_keuzevakColumn.USER_ID));
                 verplichtevak_id = rs.getString(rs.getColumnIndex(DatabaseInfo.User_keuzevakColumn.KEUZEVAK_ID));
                 behaald = rs.getInt(rs.getColumnIndex(DatabaseInfo.User_keuzevakColumn.BEHAALD));
-                all.add(new UserKeuzevakModel(UserModel.getUser(context, Integer.parseInt(user_id)),KeuzevakModel.get(context, verplichtevak_id),behaald));
+                cijfer = rs.getInt(rs.getColumnIndex(DatabaseInfo.User_keuzevakColumn.CIJFER));
+                all.add(new UserKeuzevakModel(
+                        UserModel.getUser(context,
+                                Integer.parseInt(user_id)),
+                        KeuzevakModel.get(context, verplichtevak_id),
+                        behaald,
+                        cijfer));
             } catch (Exception e) {
                 Log.e("VerplichtvakError: ", e.toString());
             }
@@ -75,7 +84,13 @@ public class UserKeuzevakModel implements Model {
     public static void setBehaald(Context context, UserModel user, KeuzevakModel keuzevak, Boolean behaald) {
         ContentValues cv = new ContentValues();
         cv.put(DatabaseInfo.User_keuzevakColumn.BEHAALD, behaald ? 1 : 0);
-        mSQLDB.update(DatabaseInfo.User_VerplichtvakTables.USER_VERPLICHTVAK, cv,"user_id=? AND "+DatabaseInfo.User_keuzevakColumn.KEUZEVAK_ID+"=?", new String[]{user.getId(), keuzevak.getId()});
+        mSQLDB.update(DatabaseInfo.User_keuzevakTables.USER_KEUZEVAK, cv,"user_id=? AND "+DatabaseInfo.User_keuzevakColumn.KEUZEVAK_ID+"=?", new String[]{user.getId(), keuzevak.getId()});
+    }
+
+    public static void setCijfer(Context context, UserModel user, KeuzevakModel keuzevak, int cijfer){
+        ContentValues cv = new ContentValues();
+        cv.put(DatabaseInfo.User_keuzevakColumn.CIJFER, cijfer);
+        mSQLDB.update(DatabaseInfo.User_keuzevakTables.USER_KEUZEVAK, cv,"user_id=? AND "+DatabaseInfo.User_keuzevakColumn.KEUZEVAK_ID+"=?", new String[]{user.getId(), keuzevak.getId()});
     }
 
     @Override
@@ -84,6 +99,7 @@ public class UserKeuzevakModel implements Model {
         cv.put(DatabaseInfo.User_keuzevakColumn.USER_ID, this.user.getId());
         cv.put(DatabaseInfo.User_keuzevakColumn.KEUZEVAK_ID, this.keuzevak.getId());
         cv.put(DatabaseInfo.User_keuzevakColumn.BEHAALD, this.behaald);
+        cv.put(DatabaseInfo.User_keuzevakColumn.CIJFER, this.cijfer);
         return cv;
     }
 
@@ -105,5 +121,9 @@ public class UserKeuzevakModel implements Model {
 
     public int getBehaald() {
         return behaald;
+    }
+
+    public int getCijfer() {
+        return cijfer;
     }
 }

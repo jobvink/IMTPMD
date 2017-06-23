@@ -21,11 +21,13 @@ public class UserVerplichtvakModel implements Model {
     public UserModel user;
     public VerplichtvakModel verplichtvak;
     public int behaald;
+    public int cijfer;
 
-    public UserVerplichtvakModel(UserModel user, VerplichtvakModel verplichtvak, int behaald) {
+    public UserVerplichtvakModel(UserModel user, VerplichtvakModel verplichtvak, int behaald, int cijfer) {
         this.user = user;
         this.verplichtvak = verplichtvak;
         this.behaald = behaald;
+        this.cijfer = cijfer;
     }
 
     public void store(Context context) {
@@ -59,11 +61,17 @@ public class UserVerplichtvakModel implements Model {
             String user_id = "";
             String verplichtevak_id = "";
             int behaald = 0;
+            int cijfer = 0;
             try {
                 user_id = rs.getString(rs.getColumnIndex(DatabaseInfo.User_verplichtvakColumn.USER_ID));
                 verplichtevak_id = rs.getString(rs.getColumnIndex(DatabaseInfo.User_verplichtvakColumn.VERPLICHTVAK_ID));
                 behaald = rs.getInt(rs.getColumnIndex(DatabaseInfo.User_verplichtvakColumn.BEHAALD));
-                all.add(new UserVerplichtvakModel(UserModel.getUser(context, Integer.parseInt(user_id)),VerplichtvakModel.get(context, verplichtevak_id),behaald));
+                cijfer = rs.getInt(rs.getColumnIndex(DatabaseInfo.User_verplichtvakColumn.CIJFER));
+                all.add(new UserVerplichtvakModel(
+                        UserModel.getUser(context, Integer.parseInt(user_id)),
+                        VerplichtvakModel.get(context, verplichtevak_id),
+                        behaald,
+                        cijfer));
             } catch (Exception e) {
                 Log.e("VerplichtvakError: ", e.toString());
             }
@@ -114,6 +122,7 @@ public class UserVerplichtvakModel implements Model {
         cv.put(DatabaseInfo.User_verplichtvakColumn.USER_ID, this.user.getId());
         cv.put(DatabaseInfo.User_verplichtvakColumn.VERPLICHTVAK_ID, this.verplichtvak.getId());
         cv.put(DatabaseInfo.User_verplichtvakColumn.BEHAALD, this.behaald);
+        cv.put(DatabaseInfo.User_verplichtvakColumn.CIJFER, this.cijfer);
         return cv;
     }
 
@@ -135,5 +144,9 @@ public class UserVerplichtvakModel implements Model {
 
     public int getBehaald() {
         return behaald;
+    }
+
+    public int getCijfer() {
+        return cijfer;
     }
 }

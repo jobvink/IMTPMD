@@ -133,19 +133,19 @@ public class VakkenApi {
         ArrayList<VerplichtvakModel> verplichtvakModels = VerplichtvakModel.all(context);
 
         for (VerplichtvakModel v : verplichtvakModels) {
-            new UserVerplichtvakModel(user, v, 0).store(context);
+            new UserVerplichtvakModel(user, v, 0, 0).store(context);
         }
 
         ArrayList<SpecialisatievakModel> specialisatievakModels = SpecialisatievakModel.all(context);
 
         for (SpecialisatievakModel v : specialisatievakModels) {
-            new UserSpecialisatievakModel(user, v, 0).store(context);
+            new UserSpecialisatievakModel(user, v, 0, 0).store(context);
         }
 
         ArrayList<KeuzevakModel> keuzevakModels = KeuzevakModel.all(context);
 
         for (KeuzevakModel v : keuzevakModels) {
-            new UserKeuzevakModel(user, v, 0).store(context);
+            new UserKeuzevakModel(user, v, 0, 0).store(context);
         }
 
     }

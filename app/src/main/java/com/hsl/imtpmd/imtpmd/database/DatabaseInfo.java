@@ -65,6 +65,7 @@ public class DatabaseInfo {
         public static final String USER_ID = "user_id";
         public static final String VERPLICHTVAK_ID = "verplichtvak_id";
         public static final String BEHAALD = "behaald";
+        public static final String CIJFER = "cijfer";
     }
 
     public class User_specialisatievakTables {
@@ -75,6 +76,7 @@ public class DatabaseInfo {
         public static final String USER_ID = "user_id";
         public static final String SPECIALISATIEVAK_ID = "specialisatievak_id";
         public static final String BEHAALD = "behaald";
+        public static final String CIJFER = "cijfer";
     }
 
     public class User_keuzevakTables {
@@ -85,6 +87,7 @@ public class DatabaseInfo {
         public static final String USER_ID = "user_id";
         public static final String KEUZEVAK_ID = "keuzevak_id";
         public static final String BEHAALD = "behaald";
+        public static final String CIJFER = "cijfer";
     }
 
 }
