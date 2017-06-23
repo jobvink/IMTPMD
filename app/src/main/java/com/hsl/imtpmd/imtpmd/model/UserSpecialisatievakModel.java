@@ -138,11 +138,12 @@ public class UserSpecialisatievakModel implements Model {
     }
 
     public static ArrayList<UserSpecialisatievakModel> specialisatieFilter(ArrayList<UserSpecialisatievakModel> userSpecialisatievakModels, String specialisatie_id) {
+        ArrayList<UserSpecialisatievakModel> filtered = new ArrayList<UserSpecialisatievakModel>();
         for (UserSpecialisatievakModel vak : userSpecialisatievakModels) {
             if (vak.getSpecialisatievakModel().getSpecialisatie_id().equals(specialisatie_id))
-                userSpecialisatievakModels.remove(vak);
+                filtered.add(vak);
         }
-        return userSpecialisatievakModels;
+        return filtered;
     }
 
     @Override
