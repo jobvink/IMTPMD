@@ -50,15 +50,6 @@ public class Propedeuse extends AppCompatActivity  {
 
         pHoofdListview.setAdapter(la);
 
-        Button puntenButton = (Button) findViewById(R.id.puntenButtonP);
-
-        puntenButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(Propedeuse.this, PuntenOverzicht.class));
-            }
-        });
-
         if(getSupportActionBar() != null){
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             getSupportActionBar().setDisplayShowHomeEnabled(true);

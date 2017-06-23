@@ -11,15 +11,6 @@
     android:weightSum="1">
 
 
-    <Button
-        android:id="@+id/puntenButtonP"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:backgroundTint="#3f51b5"
-        android:text="Punten overzicht"
-        android:textColor="#ffffff" />
-
     <TextView
         android:id="@+id/HoofdPText"
         android:layout_width="match_parent"
