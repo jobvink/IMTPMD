@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
             VakkenApi api = VakkenApi.getApi(getApplicationContext());
             api.requestVerplichtenVakken(getApplicationContext());
             api.requestSpecialisatievakken(getApplicationContext());
-
+            api.requestKeuzevakken(getApplicationContext());
         }
 
 

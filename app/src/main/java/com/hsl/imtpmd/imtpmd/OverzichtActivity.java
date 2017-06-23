@@ -89,7 +89,7 @@ public class OverzichtActivity extends AppCompatActivity
             // Complete the changes added above
             ft.commit();
         } else if (id == R.id.Hoofdfase1) {
-            Hoofdfase1Fragment fragment = new Hoofdfase1Fragment();
+            Hoofdfase1Fragment fragment = Hoofdfase1Fragment.newInstance(getIntent().getExtras().getString("user"));
             // Begin the transaction
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             // Replace the contents of the container with the new fragment
@@ -98,7 +98,7 @@ public class OverzichtActivity extends AppCompatActivity
             // Complete the changes added above
             ft.commit();
         } else if (id == R.id.Hoofdfase23) {
-            Hoofdfase34Fragment fragment = new Hoofdfase34Fragment();
+            Hoofdfase34Fragment fragment = Hoofdfase34Fragment.newInstance("", "");
             // Begin the transaction
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             // Replace the contents of the container with the new fragment
@@ -107,7 +107,7 @@ public class OverzichtActivity extends AppCompatActivity
             // Complete the changes added above
             ft.commit();
         } else if (id == R.id.Puntenoverzicht) {
-            OverzichtFragment fragment = new OverzichtFragment();
+            OverzichtFragment fragment = OverzichtFragment.newInstance("", "");
             // Begin the transaction
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             // Replace the contents of the container with the new fragment

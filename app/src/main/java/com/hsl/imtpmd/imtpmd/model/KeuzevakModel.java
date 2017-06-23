@@ -26,7 +26,7 @@ public class KeuzevakModel extends Vak implements Model{
         ArrayList<KeuzevakModel> all = new ArrayList<KeuzevakModel>();
 
         Cursor rs = dbHelper.query(
-                DatabaseInfo.SpecialisatievakTables.SPECIALISATIEVAK,
+                DatabaseInfo.KeuzevakTables.KEUZEVAK,
                 new String[]{"*"},
                 null, null, null, null, null
         );
@@ -44,22 +44,22 @@ public class KeuzevakModel extends Vak implements Model{
                 ec = rs.getString(rs.getColumnIndex(DatabaseInfo.KeuzevakColumn.EC));
                 all.add(new KeuzevakModel(id, code, naam, ec));
             } catch (Exception e) {
-                Log.e("Error: ", e.toString());
+                Log.e("KeuzevakkenError: ", e.toString());
             }
         } while (rs.moveToNext());
 
         return all;
     }
 
-    public static KeuzevakModel get(Context context, String specialisatievak_id){
+    public static KeuzevakModel get(Context context, String keuzevak_id){
         DatabaseHelper databaseHelper = DatabaseHelper.getHelper(context);
 
         String [] where = new String[]{
-                specialisatievak_id
+                keuzevak_id
         };
 
         Cursor rs = databaseHelper.query(
-                DatabaseInfo.SpecialisatievakTables.SPECIALISATIEVAK,
+                DatabaseInfo.KeuzevakTables.KEUZEVAK,
                 new String[]{"*"},
                 DatabaseInfo.KeuzevakColumn.ID + "=?",
                 where,
@@ -71,18 +71,18 @@ public class KeuzevakModel extends Vak implements Model{
         String code = "";
         String naam = "";
         String ec = "";
-        KeuzevakModel specialisatievakModel = null;
+        KeuzevakModel keuzevakModel = null;
         try {
             id = rs.getString(rs.getColumnIndex(DatabaseInfo.KeuzevakColumn.ID));
             code = rs.getString(rs.getColumnIndex(DatabaseInfo.KeuzevakColumn.CODE));
             naam = rs.getString(rs.getColumnIndex(DatabaseInfo.KeuzevakColumn.NAAM));
             ec = rs.getString(rs.getColumnIndex(DatabaseInfo.KeuzevakColumn.EC));
-            specialisatievakModel = new KeuzevakModel(id, code, naam, ec);
+            keuzevakModel = new KeuzevakModel(id, code, naam, ec);
         } catch (Exception e) {
             Log.e("Error: ", e.toString());
         }
 
-        return specialisatievakModel;
+        return keuzevakModel;
     }
 
 

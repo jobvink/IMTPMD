@@ -108,7 +108,7 @@ public class UserVerplichtvakModel implements Model {
         ArrayList<UserVerplichtvakModel> hooftfase1vakken = new ArrayList<UserVerplichtvakModel>();
 
         for (UserVerplichtvakModel vak : verplichtvakModels) {
-            if (vak.getVerplichtvak().getJaar_id().equals("1")){
+            if (vak.getVerplichtvak().getJaar_id().equals("2")){
                 hooftfase1vakken.add(vak);
             }
         }
@@ -148,5 +148,9 @@ public class UserVerplichtvakModel implements Model {
 
     public int getCijfer() {
         return cijfer;
+    }
+
+    public String toString(){
+        return this.verplichtvak.getCode();
     }
 }

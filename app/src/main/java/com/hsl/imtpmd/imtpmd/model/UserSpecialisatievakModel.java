@@ -114,7 +114,7 @@ public class UserSpecialisatievakModel implements Model {
         ArrayList<UserSpecialisatievakModel> hooftfase1vakken = new ArrayList<UserSpecialisatievakModel>();
 
         for (UserSpecialisatievakModel vak : verplichtvakModels) {
-            if (vak.getSpecialisatievakModel().getJaar_id().equals("1")){
+            if (vak.getSpecialisatievakModel().getJaar_id().equals("2")){
                 hooftfase1vakken.add(vak);
             }
         }
@@ -162,5 +162,9 @@ public class UserSpecialisatievakModel implements Model {
 
     public int getCijfer() {
         return cijfer;
+    }
+
+    public String toString(){
+        return this.specialisatievakModel.getCode();
     }
 }

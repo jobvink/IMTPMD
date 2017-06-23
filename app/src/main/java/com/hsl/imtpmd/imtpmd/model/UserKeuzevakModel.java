@@ -33,7 +33,7 @@ public class UserKeuzevakModel implements Model {
     public void store(Context context) {
         ContentValues cv = this.createContentValues();
         DatabaseHelper databaseHelper = DatabaseHelper.getHelper(context);
-        databaseHelper.insert(DatabaseInfo.User_VerplichtvakTables.USER_VERPLICHTVAK, null, cv);
+        databaseHelper.insert(DatabaseInfo.User_keuzevakTables.USER_KEUZEVAK, null, cv);
         Log.d("Opslaan van: ", this.keuzevak.getNaam());
     }
 
@@ -55,6 +55,8 @@ public class UserKeuzevakModel implements Model {
         );
         rs.moveToFirst();
 
+        Log.d("Ukv cursor: ", " Beter is hij gevuld");
+
         DatabaseUtils.dumpCursor(rs);
 
         do {
@@ -74,7 +76,7 @@ public class UserKeuzevakModel implements Model {
                         behaald,
                         cijfer));
             } catch (Exception e) {
-                Log.e("VerplichtvakError: ", e.toString());
+                Log.e("Keuzevakerror: ", e.toString());
             }
         } while (rs.moveToNext());
 
@@ -119,11 +121,15 @@ public class UserKeuzevakModel implements Model {
         this.keuzevak = keuzevak;
     }
 
-    public int getBehaald() {
-        return behaald;
+    public Boolean getBehaald() {
+        return this.behaald == 1;
     }
 
     public int getCijfer() {
         return cijfer;
+    }
+
+    public String toString(){
+        return this.keuzevak.getCode();
     }
 }
