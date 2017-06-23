@@ -115,8 +115,6 @@ public class OverzichtActivity extends AppCompatActivity
             ft.replace(R.id.overpichtContent, fragment);
             // Complete the changes added above
             ft.commit();
-        } else if (id == R.id.Propedeuse) {
-
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
