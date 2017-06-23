@@ -21,7 +21,7 @@
     <ListView
         android:id="@+id/hoofdvakkenh1"
         android:layout_width="match_parent"
-        android:layout_height="125dp" />
+        android:layout_height="145dp" />
 
     <TextView
         android:id="@+id/KeuzeH1Text"
@@ -35,7 +35,7 @@
     <ListView
         android:id="@+id/KeuzeH1"
         android:layout_width="match_parent"
-        android:layout_height="129dp" />
+        android:layout_height="145dp" />
 
     <TextView
         android:id="@+id/SpecialisatieH1Text"
