@@ -39,15 +39,25 @@ public class VerplichtevakkenAdapter extends ArrayAdapter<UserVerplichtvakModel>
             vh.name = (TextView) convertView.findViewById(R.id.subject_name);
             vh.code = (TextView) convertView.findViewById(R.id.subject_code);
             vh.cijfer = (TextView) convertView.findViewById(R.id.subject_cijfer);
+            vh.behaald = (TextView) convertView.findViewById(R.id.subject_behaald);
             convertView.setTag(vh);
         } else {
             vh = (ViewHolder) convertView.getTag();
         }
         UserVerplichtvakModel cm = getItem(position);
         if (cm != null) {
-            vh.name.setText((CharSequence) cm.getVerplichtvak().getEc());
+            vh.name.setText(String.format("%s%s", "EC: ", cm.getVerplichtvak().getEc()));
             vh.code.setText((CharSequence) cm.getVerplichtvak().getCode());
-            vh.cijfer.setText(String.format("%s%s", "cijfer: ", Double.toString(cm.getCijfer())));
+            if (cm.getCijfer() != 0.0)  {
+                vh.cijfer.setText(String.format("%s%s", "cijfer: ", Double.toString(cm.getCijfer())));
+            } else {
+                vh.cijfer.setText("Geen cijfer");
+            }
+            if (cm.getCijfer() >= 5.5){
+                vh.behaald.setText("behaald: ja");
+            } else {
+                vh.behaald.setText("behaald: nee");
+            }
         }
         return convertView;
     }
@@ -56,5 +66,6 @@ public class VerplichtevakkenAdapter extends ArrayAdapter<UserVerplichtvakModel>
         TextView name;
         TextView code;
         TextView cijfer;
+        TextView behaald;
     }
 }

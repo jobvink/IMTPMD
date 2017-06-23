@@ -92,6 +92,9 @@ public class Hoofdfase1Fragment extends Fragment {
                 Intent i = new Intent(Hoofdfase1Fragment.this.getContext(), CijferInvoeren.class);
                 Bundle b = new Bundle();
                 UserVerplichtvakModel vak = verplichtvakModels.get(position);
+                b.putString("id", vak.getVerplichtvak().getId());
+                b.putString("type", "v");
+                b.putString("user", user.getGebruikersnaam());
                 b.putString("code", vak.getVerplichtvak().getCode());
                 b.putString("naam", vak.getVerplichtvak().getNaam());
                 b.putDouble("cijfer", vak.getCijfer());
@@ -113,6 +116,9 @@ public class Hoofdfase1Fragment extends Fragment {
                 Intent i = new Intent(Hoofdfase1Fragment.this.getContext(), CijferInvoeren.class);
                 Bundle b = new Bundle();
                 UserKeuzevakModel vak = keuzevakModels.get(position);
+                b.putString("id", vak.getKeuzevak().getId());
+                b.putString("type", "v");
+                b.putString("user", user.getGebruikersnaam());
                 b.putString("code", vak.getKeuzevak().getCode());
                 b.putString("naam", vak.getKeuzevak().getNaam());
                 b.putDouble("cijfer", vak.getCijfer());
@@ -135,6 +141,9 @@ public class Hoofdfase1Fragment extends Fragment {
                 Intent i = new Intent(Hoofdfase1Fragment.this.getContext(), CijferInvoeren.class);
                 Bundle b = new Bundle();
                 UserSpecialisatievakModel vak = specialisatievakModels.get(position);
+                b.putString("id", vak.getSpecialisatievakModel().getId());
+                b.putString("type", "v");
+                b.putString("user", user.getGebruikersnaam());
                 b.putString("code", vak.getSpecialisatievakModel().getCode());
                 b.putString("naam", vak.getSpecialisatievakModel().getNaam());
                 b.putDouble("cijfer", vak.getCijfer());

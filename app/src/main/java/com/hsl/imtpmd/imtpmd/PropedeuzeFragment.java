@@ -179,6 +179,9 @@ public class PropedeuzeFragment extends Fragment {
                 Intent i = new Intent(PropedeuzeFragment.this.getContext(), CijferInvoeren.class);
                 Bundle b = new Bundle();
                 UserSpecialisatievakModel vak = specialisatievakModels.get(position);
+                b.putString("id", vak.getSpecialisatievakModel().getId());
+                b.putString("type", "v");
+                b.putString("user", user.getGebruikersnaam());
                 b.putString("code", vak.getSpecialisatievakModel().getCode());
                 b.putString("naam", vak.getSpecialisatievakModel().getNaam());
                 b.putDouble("cijfer", vak.getCijfer());
