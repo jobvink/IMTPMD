@@ -101,8 +101,15 @@ public class PropedeuzeFragment extends Fragment {
             }
         });
         pSpecListView = view.findViewById(R.id.KeuzeP);
-        final ArrayList<UserSpecialisatievakModel> specialisatievakModels = UserSpecialisatievakModel.propedeuze(this.getContext(), user);
-        ListAdapter ls = new SpecialisatievakkenAdapter(this.getContext(),
+        ArrayList<UserSpecialisatievakModel> temp = UserSpecialisatievakModel.propedeuze(this.getContext(), user);
+
+        if (user.getSpecialisatie() != null) {
+            if (!user.getSpecialisatie().equals("null")) {
+                temp = UserSpecialisatievakModel.specialisatieFilter(temp, user.getSpecialisatie());
+            }
+        }
+
+        final ArrayList<UserSpecialisatievakModel> specialisatievakModels = temp;        ListAdapter ls = new SpecialisatievakkenAdapter(this.getContext(),
                 android.R.layout.simple_list_item_1,
                 specialisatievakModels);
         pSpecListView.setAdapter(ls);
@@ -172,8 +179,10 @@ public class PropedeuzeFragment extends Fragment {
         });
         ArrayList<UserSpecialisatievakModel> temp = UserSpecialisatievakModel.propedeuze(this.getContext(), user);
 
-        if(!user.getSpecialisatie().equals("null")){
-            temp = UserSpecialisatievakModel.specialisatieFilter(temp, user.getSpecialisatie());
+        if (user.getSpecialisatie() != null) {
+            if (!user.getSpecialisatie().equals("null")) {
+                temp = UserSpecialisatievakModel.specialisatieFilter(temp, user.getSpecialisatie());
+            }
         }
 
         final ArrayList<UserSpecialisatievakModel> specialisatievakModels = temp;
