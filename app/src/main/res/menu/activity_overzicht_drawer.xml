@@ -14,9 +14,6 @@
         <item
             android:id="@+id/Puntenoverzicht"
             android:title="Puntenoverzicht"/>
-        <item
-            android:id="@+id/Specialisatiekeuze"
-            android:title="Specialisatiekeuze"/>
     </group>
 
 </menu>
