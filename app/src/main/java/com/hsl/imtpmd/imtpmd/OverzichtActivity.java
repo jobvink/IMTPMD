@@ -26,8 +26,7 @@ public class OverzichtActivity extends AppCompatActivity
         PropedeuzeFragment.OnFragmentInteractionListener,
         Hoofdfase1Fragment.OnFragmentInteractionListener,
         Hoofdfase34Fragment.OnFragmentInteractionListener,
-        OverzichtFragment.OnFragmentInteractionListener,
-        SpecialisatieFragment.OnFragmentInteractionListener{
+        OverzichtFragment.OnFragmentInteractionListener{
 
     private UserModel user;
 
@@ -126,11 +125,6 @@ public class OverzichtActivity extends AppCompatActivity
             ft.replace(R.id.overpichtContent, fragment);
             // Complete the changes added above
             ft.commit();
-        } else if (id == R.id.Specialisatiekeuze) {
-            SpecialisatieFragment fragment = SpecialisatieFragment.newInstance(getIntent().getExtras().getString("user"));
-
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.overpichtContent, fragment).commit();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -157,31 +151,5 @@ public class OverzichtActivity extends AppCompatActivity
 
     public void onRadioButtonClicked(View view) {
         // Is the button now checked?
-        boolean checked = ((RadioButton) view).isChecked();
-
-        Log.d("Test", "Test");
-        // Check which radio button was clicked
-        switch(view.getId()) {
-            case R.id.bdamradiobutton:
-                if (checked)
-                    // spec 2
-                    user.setSpecialisatie(getApplicationContext(), "2");
-                break;
-            case R.id.fictradiobutton:
-                if (checked)
-                    // spec 1
-                    user.setSpecialisatie(getApplicationContext(), "3");
-                break;
-            case R.id.mtradiobutton:
-                if (checked)
-                    //spec 4
-                    user.setSpecialisatie(getApplicationContext(), "1");
-                break;
-            case R.id.seradiobutton:
-                if (checked)
-                    //spec 3
-                    user.setSpecialisatie(getApplicationContext(), "4");
-                break;
-        }
     }
 }
