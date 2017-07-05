@@ -199,7 +199,7 @@ public class PropedeuzeFragment extends Fragment {
                 Bundle b = new Bundle();
                 UserSpecialisatievakModel vak = specialisatievakModels.get(position);
                 b.putString("id", vak.getSpecialisatievakModel().getId());
-                b.putString("type", "v");
+                b.putString("type", "s");
                 b.putString("user", user.getGebruikersnaam());
                 b.putString("code", vak.getSpecialisatievakModel().getCode());
                 b.putString("naam", vak.getSpecialisatievakModel().getNaam());
