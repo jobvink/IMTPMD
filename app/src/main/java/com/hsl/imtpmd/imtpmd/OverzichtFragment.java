@@ -100,8 +100,8 @@ public class OverzichtFragment extends Fragment {
         ArrayList yVals1 = new ArrayList();
         ArrayList yVals2 = new ArrayList();
 
-        int propedeuze = user.getPropedeuzePunten(this.getContext());
-        int bachalor = user.getBachalorPunten(this.getContext());
+        int propedeuze = user.getPropedeuze_ec();
+        int bachalor = user.getHoofdfase_ec();
 
         yVals1.add(new BarEntry(1, (float) 60));
         yVals2.add(new BarEntry(1, (float) propedeuze));

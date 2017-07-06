@@ -55,6 +55,8 @@ public class DatabaseInfo {
         public static final String GEBRUIKERSNAAM = "gebruikersnaam";
         public static final String WACHTWOORD = "wachtwoord";
         public static final String SPECIALISATIE = "specialisatie";
+        public static final String PROPEDEUZE_EC = "propedeuze_ed";
+        public static final String HOOFDFASE_EC = "hoofdfase_ed";
     }
 
     public class User_VerplichtvakTables {

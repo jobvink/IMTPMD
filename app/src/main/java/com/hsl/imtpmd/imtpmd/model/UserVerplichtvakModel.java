@@ -80,10 +80,23 @@ public class UserVerplichtvakModel implements Model {
         return all;
     }
 
-    public static void setBehaald(Context context, UserModel user, String id, boolean behaald) {
+    public static void setBehaald(Context context, UserModel user, VerplichtvakModel vak, boolean behaald) {
+        if(behaald){
+            if(vak.getJaar_id().equals("1")){
+                user.addPEC(Integer.parseInt(vak.getEc()), context);
+            } else {
+                user.addHEC(Integer.parseInt(vak.getEc()), context);
+            }
+        } else {
+            if(vak.getJaar_id().equals("1")){
+                user.subPEC(Integer.parseInt(vak.getEc()), context);
+            } else {
+                user.subHEC(Integer.parseInt(vak.getEc()), context);
+            }
+        }
         ContentValues cv = new ContentValues();
         cv.put(DatabaseInfo.User_verplichtvakColumn.BEHAALD, behaald ? 1 : 0);
-        mSQLDB.update(DatabaseInfo.User_VerplichtvakTables.USER_VERPLICHTVAK, cv,"user_id=? AND verplichtvak_id=?", new String[]{user.getId(), id});
+        mSQLDB.update(DatabaseInfo.User_VerplichtvakTables.USER_VERPLICHTVAK, cv,"user_id=? AND verplichtvak_id=?", new String[]{user.getId(), vak.getId()});
     }
 
     public static void setCijfer(Context context, UserModel user, String id, double cijfer) {

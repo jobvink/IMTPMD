@@ -91,6 +91,7 @@ public class PropedeuzeFragment extends Fragment {
                 UserVerplichtvakModel vak = verplichtvakModels.get(position);
                 b.putString("id", vak.getVerplichtvak().getId());
                 b.putString("type", "v");
+                b.putString("fase", "p");
                 b.putString("user", user.getGebruikersnaam());
                 b.putString("code", vak.getVerplichtvak().getCode());
                 b.putString("naam", vak.getVerplichtvak().getNaam());
@@ -168,6 +169,7 @@ public class PropedeuzeFragment extends Fragment {
                 UserVerplichtvakModel vak = verplichtvakModels.get(position);
                 b.putString("id", vak.getVerplichtvak().getId());
                 b.putString("type", "v");
+                b.putString("fase", "p");
                 b.putString("user", user.getGebruikersnaam());
                 b.putString("code", vak.getVerplichtvak().getCode());
                 b.putString("naam", vak.getVerplichtvak().getNaam());
@@ -200,6 +202,7 @@ public class PropedeuzeFragment extends Fragment {
                 UserSpecialisatievakModel vak = specialisatievakModels.get(position);
                 b.putString("id", vak.getSpecialisatievakModel().getId());
                 b.putString("type", "s");
+                b.putString("fase", "p");
                 b.putString("user", user.getGebruikersnaam());
                 b.putString("code", vak.getSpecialisatievakModel().getCode());
                 b.putString("naam", vak.getSpecialisatievakModel().getNaam());

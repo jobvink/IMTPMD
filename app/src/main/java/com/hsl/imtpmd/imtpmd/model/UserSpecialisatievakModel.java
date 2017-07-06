@@ -80,10 +80,23 @@ public class UserSpecialisatievakModel implements Model {
         return all;
     }
 
-    public static void setBehaald(Context context, UserModel user, String id, boolean behaald) {
+    public static void setBehaald(Context context, UserModel user, SpecialisatievakModel vak, boolean behaald) {
+        if(behaald){
+            if(vak.getJaar_id().equals("1")){
+                user.addPEC(Integer.parseInt(vak.getEc()), context);
+            } else {
+                user.addHEC(Integer.parseInt(vak.getEc()), context);
+            }
+        } else {
+            if(vak.getJaar_id().equals("1")){
+                user.subPEC(Integer.parseInt(vak.getEc()), context);
+            } else {
+                user.subHEC(Integer.parseInt(vak.getEc()), context);
+            }
+        }
         ContentValues cv = new ContentValues();
         cv.put(DatabaseInfo.User_specialisateivakColumn.BEHAALD, behaald ? 1 : 0);
-        mSQLDB.update(DatabaseInfo.User_specialisatievakTables.USER_SPECIALISATIEVAK, cv,"user_id=? AND " + DatabaseInfo.User_specialisateivakColumn.SPECIALISATIEVAK_ID + "=?", new String[]{user.getId(), id});
+        mSQLDB.update(DatabaseInfo.User_specialisatievakTables.USER_SPECIALISATIEVAK, cv,"user_id=? AND " + DatabaseInfo.User_specialisateivakColumn.SPECIALISATIEVAK_ID + "=?", new String[]{user.getId(), vak.getId()});
     }
 
     public static void setCijfer(Context context, UserModel user, String id, double cijfer) {

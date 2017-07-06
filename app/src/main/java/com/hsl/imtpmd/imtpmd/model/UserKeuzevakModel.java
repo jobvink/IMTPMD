@@ -83,10 +83,16 @@ public class UserKeuzevakModel implements Model {
         return all;
     }
 
-    public static void setBehaald(Context context, UserModel user, String id, Boolean behaald) {
+    public static void setBehaald(Context context, UserModel user, KeuzevakModel vak, Boolean behaald) {
+
         ContentValues cv = new ContentValues();
         cv.put(DatabaseInfo.User_keuzevakColumn.BEHAALD, behaald ? 1 : 0);
-        mSQLDB.update(DatabaseInfo.User_keuzevakTables.USER_KEUZEVAK, cv,"user_id=? AND "+DatabaseInfo.User_keuzevakColumn.KEUZEVAK_ID+"=?", new String[]{user.getId(), id});
+        if(behaald) {
+            user.addHEC(Integer.parseInt(vak.getEc()),context);
+        } else {
+            user.subHEC(Integer.parseInt(vak.getEc()),context);
+        }
+        mSQLDB.update(DatabaseInfo.User_keuzevakTables.USER_KEUZEVAK, cv,"user_id=? AND "+DatabaseInfo.User_keuzevakColumn.KEUZEVAK_ID+"=?", new String[]{user.getId(), vak.getId()});
     }
 
     public static void setCijfer(Context context, UserModel user, String id, double cijfer){

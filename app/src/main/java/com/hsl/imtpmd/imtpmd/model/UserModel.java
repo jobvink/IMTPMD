@@ -21,12 +21,16 @@ public class UserModel implements Model {
     private String gebruikersnaam;
     private String wachtwoord;
     private String specialisatie;
+    private int propedeuze_ec;
+    private int hoofdfase_ec;
 
-    public UserModel(String id, String gebruikersnaam, String wachtwoord, String specialisatie) {
+    public UserModel(String id, String gebruikersnaam, String wachtwoord, String specialisatie, int propedeuze_ec, int hoofdfase_ec) {
         this.id = id;
         this.gebruikersnaam = gebruikersnaam;
         this.wachtwoord = wachtwoord;
         this.specialisatie = specialisatie;
+        this.propedeuze_ec = propedeuze_ec;
+        this.hoofdfase_ec = hoofdfase_ec;
     }
 
     public static UserModel getUser(Context context, String gebruikersnaam) {
@@ -51,18 +55,22 @@ public class UserModel implements Model {
         String dbgebruikersnaam = "";
         String wachtwoord = "";
         String specialisatie = null;
+        int propedeuze_ec = 0;
+        int hoofdfase_ec = 0;
 
         try {
             id = rs.getString(rs.getColumnIndex(DatabaseInfo.UserColumn.ID));
             dbgebruikersnaam = rs.getString(rs.getColumnIndex(DatabaseInfo.UserColumn.GEBRUIKERSNAAM));
             wachtwoord = rs.getString(rs.getColumnIndex(DatabaseInfo.UserColumn.WACHTWOORD));
             specialisatie = rs.getString(rs.getColumnIndex(DatabaseInfo.UserColumn.SPECIALISATIE));
+            propedeuze_ec = rs.getInt(rs.getColumnIndex(DatabaseInfo.UserColumn.PROPEDEUZE_EC));
+            hoofdfase_ec = rs.getInt(rs.getColumnIndex(DatabaseInfo.UserColumn.HOOFDFASE_EC));
             if (specialisatie.equals("null")) specialisatie = null;
         } catch (Exception e) {
             Log.e("Error: ", e.toString());
         }
         rs.close();
-        return new UserModel(id, dbgebruikersnaam, wachtwoord, specialisatie);
+        return new UserModel(id, dbgebruikersnaam, wachtwoord, specialisatie, propedeuze_ec, hoofdfase_ec);
     }
     public static UserModel getUser(Context context, int user_id) {
         DatabaseHelper dbHelper = DatabaseHelper.getHelper(context);
@@ -84,18 +92,22 @@ public class UserModel implements Model {
         String dbgebruikersnaam = "";
         String wachtwoord = "";
         String specialisatie = null;
+        int propedeuze_ec = 0;
+        int hoofdfase_ec = 0;
 
         try {
             id = rs.getString(rs.getColumnIndex(DatabaseInfo.UserColumn.ID));
             dbgebruikersnaam = rs.getString(rs.getColumnIndex(DatabaseInfo.UserColumn.GEBRUIKERSNAAM));
             wachtwoord = rs.getString(rs.getColumnIndex(DatabaseInfo.UserColumn.WACHTWOORD));
             specialisatie = rs.getString(rs.getColumnIndex(DatabaseInfo.UserColumn.SPECIALISATIE));
+            propedeuze_ec = rs.getInt(rs.getColumnIndex(DatabaseInfo.UserColumn.PROPEDEUZE_EC));
+            hoofdfase_ec = rs.getInt(rs.getColumnIndex(DatabaseInfo.UserColumn.HOOFDFASE_EC));
             if (specialisatie.equals("null")) specialisatie = null;
         } catch (Exception e) {
             Log.e("Error: ", e.toString());
         }
 
-        return new UserModel(id, dbgebruikersnaam, wachtwoord, specialisatie);
+        return new UserModel(id, dbgebruikersnaam, wachtwoord, specialisatie, propedeuze_ec, hoofdfase_ec);
     }
     @Override
     public ContentValues createContentValues() {
@@ -104,6 +116,8 @@ public class UserModel implements Model {
         cv.put(DatabaseInfo.UserColumn.GEBRUIKERSNAAM, this.gebruikersnaam);
         cv.put(DatabaseInfo.UserColumn.WACHTWOORD, this.wachtwoord);
         cv.put(DatabaseInfo.UserColumn.SPECIALISATIE, this.specialisatie);
+        cv.put(DatabaseInfo.UserColumn.PROPEDEUZE_EC, this.propedeuze_ec);
+        cv.put(DatabaseInfo.UserColumn.HOOFDFASE_EC, this.hoofdfase_ec);
         return cv;
     }
 
@@ -133,67 +147,35 @@ public class UserModel implements Model {
         dbHelper.update(DatabaseInfo.UserTables.USER,createContentValues(),getId());
     }
 
-    public int getPropedeuzePunten(Context context){
-        int ec = 0;
-
-        ArrayList<UserVerplichtvakModel> userVerplichtvakModels = UserVerplichtvakModel.propedeuze(context, this);
-        ArrayList<UserSpecialisatievakModel> userSpecialisatievakModels = UserSpecialisatievakModel.propedeuze(context, this);
-
-        for (UserVerplichtvakModel vak : userVerplichtvakModels){
-            if(vak.getBehaald()){
-                ec += Integer.parseInt(vak.getVerplichtvak().getEc());
-            }
-        }
-
-        for (UserSpecialisatievakModel vak : userSpecialisatievakModels){
-            if(vak.getBehaald()){
-                ec += Integer.parseInt(vak.getSpecialisatievakModel().getEc());
-            }
-        }
-
-        return ec > 60 ? 60 : ec;
+    public void addPEC(int ec, Context context) {
+        this.propedeuze_ec += ec;
+        DatabaseHelper dbHelper = DatabaseHelper.getHelper(context);
+        dbHelper.update(DatabaseInfo.UserTables.USER,createContentValues(),getId());
     }
 
-    public int getBachalorPunten(Context context){
+    public void subPEC(int ec, Context context) {
+        this.propedeuze_ec -= ec;
+        DatabaseHelper dbHelper = DatabaseHelper.getHelper(context);
+        dbHelper.update(DatabaseInfo.UserTables.USER,createContentValues(),getId());
+    }
 
-        int ec = 0;
+    public void addHEC(int ec, Context context) {
+        this.hoofdfase_ec += ec;
+        DatabaseHelper dbHelper = DatabaseHelper.getHelper(context);
+        dbHelper.update(DatabaseInfo.UserTables.USER,createContentValues(),getId());
+    }
 
-        ArrayList<UserKeuzevakModel> keuzevakModels = UserKeuzevakModel.all(context, this);
-        ArrayList<UserVerplichtvakModel> verplichtvakModels1 = UserVerplichtvakModel.hoofdfase1(context, this);
-        ArrayList<UserVerplichtvakModel> verplichtvakModels2 = UserVerplichtvakModel.hoofdfase34(context, this);
-        ArrayList<UserSpecialisatievakModel> specialisatievakModels1 = UserSpecialisatievakModel.hoofdfase1(context, this);
-        ArrayList<UserSpecialisatievakModel> specialisatievakModels2 = UserSpecialisatievakModel.hoofdfase34(context, this);
+    public void subHEC(int ec, Context context) {
+        this.hoofdfase_ec -= ec;
+        DatabaseHelper dbHelper = DatabaseHelper.getHelper(context);
+        dbHelper.update(DatabaseInfo.UserTables.USER,createContentValues(),getId());
+    }
 
-        for (UserKeuzevakModel vak : keuzevakModels){
-            if(vak.getBehaald()){
-                ec += Integer.parseInt(vak.getKeuzevak().getEc());
-            }
-        }
+    public int getPropedeuze_ec() {
+        return propedeuze_ec;
+    }
 
-        for (UserVerplichtvakModel vak : verplichtvakModels1){
-            if(vak.getBehaald()){
-                ec += Integer.parseInt(vak.getVerplichtvak().getEc());
-            }
-        }
-
-        for (UserVerplichtvakModel vak : verplichtvakModels2){
-            if(vak.getBehaald()){
-                ec += Integer.parseInt(vak.getVerplichtvak().getEc());
-            }
-        }
-
-        for (UserSpecialisatievakModel vak : specialisatievakModels1){
-            if(vak.getBehaald()){
-                ec += Integer.parseInt(vak.getSpecialisatievakModel().getEc());
-            }
-        }
-
-        for (UserSpecialisatievakModel vak : specialisatievakModels2){
-            if(vak.getBehaald()){
-                ec += Integer.parseInt(vak.getSpecialisatievakModel().getEc());
-            }
-        }
-
-        return ec > 180 ? 180 : ec;
+    public int getHoofdfase_ec() {
+        return hoofdfase_ec;
     }
 }

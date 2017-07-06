@@ -19,7 +19,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static SQLiteDatabase mSQLDB;
     private static DatabaseHelper mInstance;
     public static final String dbName = "imtpmd.db";
-    public static final int dbVersion = 49;        // Versie nr van je db.
+    public static final int dbVersion = 53;        // Versie nr van je db.
 
     public DatabaseHelper(Context ctx) {
         super(ctx, dbName, null, dbVersion);    // gebruik de super constructor.
@@ -67,6 +67,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DatabaseInfo.UserColumn.ID + " TEXT, " +
                 DatabaseInfo.UserColumn.GEBRUIKERSNAAM + " TEXT, " +
                 DatabaseInfo.UserColumn.SPECIALISATIE + " TEXT, " +
+                DatabaseInfo.UserColumn.PROPEDEUZE_EC + " INTEGER," +
+                DatabaseInfo.UserColumn.HOOFDFASE_EC + " INTEGER," +
                 DatabaseInfo.UserColumn.WACHTWOORD + " TEXT);"
         );
         db.execSQL("CREATE TABLE " + DatabaseInfo.User_VerplichtvakTables.USER_VERPLICHTVAK + " (" +
@@ -90,11 +92,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 DatabaseInfo.User_verplichtvakColumn.CIJFER + " REAL, " +
                 DatabaseInfo.User_keuzevakColumn.BEHAALD + " INTEGER);"
         );
-        db.execSQL(String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES ('%s', '%s', '%s', '%s');", DatabaseInfo.UserTables.USER, DatabaseInfo.UserColumn.ID, DatabaseInfo.UserColumn.SPECIALISATIE, DatabaseInfo.UserColumn.GEBRUIKERSNAAM, DatabaseInfo.UserColumn.WACHTWOORD, "1", null, "test" , "test"));
-        db.execSQL(String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES ('%s', '%s', '%s', '%s');", DatabaseInfo.UserTables.USER, DatabaseInfo.UserColumn.ID, DatabaseInfo.UserColumn.SPECIALISATIE, DatabaseInfo.UserColumn.GEBRUIKERSNAAM, DatabaseInfo.UserColumn.WACHTWOORD, "2", "1", "1092717" , "test"));
-        db.execSQL(String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES ('%s', '%s', '%s', '%s');", DatabaseInfo.UserTables.USER, DatabaseInfo.UserColumn.ID, DatabaseInfo.UserColumn.SPECIALISATIE, DatabaseInfo.UserColumn.GEBRUIKERSNAAM, DatabaseInfo.UserColumn.WACHTWOORD, "3", "2", "1082741" , "test"));
-        db.execSQL(String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES ('%s', '%s', '%s', '%s');", DatabaseInfo.UserTables.USER, DatabaseInfo.UserColumn.ID, DatabaseInfo.UserColumn.SPECIALISATIE, DatabaseInfo.UserColumn.GEBRUIKERSNAAM, DatabaseInfo.UserColumn.WACHTWOORD, "4", "3", "jeroen" , "test"));
-        db.execSQL(String.format("INSERT INTO %s (%s, %s, %s, %s) VALUES ('%s', '%s', '%s', '%s');", DatabaseInfo.UserTables.USER, DatabaseInfo.UserColumn.ID, DatabaseInfo.UserColumn.SPECIALISATIE, DatabaseInfo.UserColumn.GEBRUIKERSNAAM, DatabaseInfo.UserColumn.WACHTWOORD, "5", "4", "michiel" , "test"));
+        db.execSQL(String.format("INSERT INTO %s (%s, %s, %s, %s, %s, %s) VALUES ('%s', '%s', '%s', '%s', '%s', '%s');", DatabaseInfo.UserTables.USER, DatabaseInfo.UserColumn.ID, DatabaseInfo.UserColumn.SPECIALISATIE, DatabaseInfo.UserColumn.GEBRUIKERSNAAM, DatabaseInfo.UserColumn.WACHTWOORD, DatabaseInfo.UserColumn.PROPEDEUZE_EC, DatabaseInfo.UserColumn.HOOFDFASE_EC, "1", null, "test" , "test", 0, 0));
+        db.execSQL(String.format("INSERT INTO %s (%s, %s, %s, %s, %s, %s) VALUES ('%s', '%s', '%s', '%s', '%s', '%s');", DatabaseInfo.UserTables.USER, DatabaseInfo.UserColumn.ID, DatabaseInfo.UserColumn.SPECIALISATIE, DatabaseInfo.UserColumn.GEBRUIKERSNAAM, DatabaseInfo.UserColumn.WACHTWOORD, DatabaseInfo.UserColumn.PROPEDEUZE_EC, DatabaseInfo.UserColumn.HOOFDFASE_EC, "2", "1", "1092717" , "test", 0, 0));
+        db.execSQL(String.format("INSERT INTO %s (%s, %s, %s, %s, %s, %s) VALUES ('%s', '%s', '%s', '%s', '%s', '%s');", DatabaseInfo.UserTables.USER, DatabaseInfo.UserColumn.ID, DatabaseInfo.UserColumn.SPECIALISATIE, DatabaseInfo.UserColumn.GEBRUIKERSNAAM, DatabaseInfo.UserColumn.WACHTWOORD, DatabaseInfo.UserColumn.PROPEDEUZE_EC, DatabaseInfo.UserColumn.HOOFDFASE_EC, "3", "2", "1082741" , "test", 0, 0));
+        db.execSQL(String.format("INSERT INTO %s (%s, %s, %s, %s, %s, %s) VALUES ('%s', '%s', '%s', '%s', '%s', '%s');", DatabaseInfo.UserTables.USER, DatabaseInfo.UserColumn.ID, DatabaseInfo.UserColumn.SPECIALISATIE, DatabaseInfo.UserColumn.GEBRUIKERSNAAM, DatabaseInfo.UserColumn.WACHTWOORD, DatabaseInfo.UserColumn.PROPEDEUZE_EC, DatabaseInfo.UserColumn.HOOFDFASE_EC, "4", "3", "jeroen" , "test", 0, 0));
+        db.execSQL(String.format("INSERT INTO %s (%s, %s, %s, %s, %s, %s) VALUES ('%s', '%s', '%s', '%s', '%s', '%s');", DatabaseInfo.UserTables.USER, DatabaseInfo.UserColumn.ID, DatabaseInfo.UserColumn.SPECIALISATIE, DatabaseInfo.UserColumn.GEBRUIKERSNAAM, DatabaseInfo.UserColumn.WACHTWOORD, DatabaseInfo.UserColumn.PROPEDEUZE_EC, DatabaseInfo.UserColumn.HOOFDFASE_EC, "5", "4", "michiel" , "test", 0, 0));
     }
     // CREATE TABLE course (_id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, ects TEXT, grade TEXT);
 

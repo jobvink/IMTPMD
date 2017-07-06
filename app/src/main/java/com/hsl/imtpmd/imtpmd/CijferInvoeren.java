@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.hsl.imtpmd.imtpmd.model.KeuzevakModel;
+import com.hsl.imtpmd.imtpmd.model.SpecialisatievakModel;
 import com.hsl.imtpmd.imtpmd.model.UserKeuzevakModel;
 import com.hsl.imtpmd.imtpmd.model.UserModel;
 import com.hsl.imtpmd.imtpmd.model.UserSpecialisatievakModel;
@@ -33,6 +35,7 @@ public class CijferInvoeren extends AppCompatActivity {
         String naam = null;
         String id = null;
         String type = null;
+        String fase = null;
         double cijfer;
         final Boolean behaald;
         if(bundle != null){
@@ -40,6 +43,7 @@ public class CijferInvoeren extends AppCompatActivity {
             naam    = bundle.getString("naam");
             id      = bundle.getString("id");
             type    = bundle.getString("type");
+            fase    = bundle.getString("fase");
             cijfer  = bundle.getDouble("cijfer");
             behaald = bundle.getBoolean("behaald");
         }
@@ -61,6 +65,7 @@ public class CijferInvoeren extends AppCompatActivity {
 
         final String finalType = type;
         final String finalId = id;
+        final String finalFase = fase;
         opslaanbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,25 +79,25 @@ public class CijferInvoeren extends AppCompatActivity {
                                 Log.d("het cijfer: ", Double.toString(behaalde_cijfer[0]));
                                 UserVerplichtvakModel.setCijfer(getApplicationContext(), user, finalId, behaalde_cijfer[0]);
                                 if (behaalde_cijfer[0] >= 5.5) {
-                                    UserVerplichtvakModel.setBehaald(getApplicationContext(), user, finalId, true);
+                                    UserVerplichtvakModel.setBehaald(getApplicationContext(), user, VerplichtvakModel.get(getApplicationContext(),finalId), true);
                                 } else {
-                                    UserVerplichtvakModel.setBehaald(getApplicationContext(), user, finalId, false);
+                                    UserVerplichtvakModel.setBehaald(getApplicationContext(), user, VerplichtvakModel.get(getApplicationContext(),finalId), false);
                                 }
                                 break;
                             case "s":
                                 UserSpecialisatievakModel.setCijfer(getApplicationContext(), user, finalId, behaalde_cijfer[0]);
                                 if (behaalde_cijfer[0] >= 5.5) {
-                                    UserSpecialisatievakModel.setBehaald(getApplicationContext(), user, finalId, true);
+                                    UserSpecialisatievakModel.setBehaald(getApplicationContext(), user, SpecialisatievakModel.get(getApplicationContext(),finalId), true);
                                 } else {
-                                    UserSpecialisatievakModel.setBehaald(getApplicationContext(), user, finalId, false);
+                                    UserSpecialisatievakModel.setBehaald(getApplicationContext(), user, SpecialisatievakModel.get(getApplicationContext(),finalId), false);
                                 }
                                 break;
                             default:
                                 UserKeuzevakModel.setCijfer(getApplicationContext(), user, finalId, behaalde_cijfer[0]);
                                 if (behaalde_cijfer[0] >= 5.5) {
-                                    UserKeuzevakModel.setBehaald(getApplicationContext(), user, finalId, true);
+                                    UserKeuzevakModel.setBehaald(getApplicationContext(), user, KeuzevakModel.get(getApplicationContext(),finalId), true);
                                 } else {
-                                    UserKeuzevakModel.setBehaald(getApplicationContext(), user, finalId, false);
+                                    UserKeuzevakModel.setBehaald(getApplicationContext(), user, KeuzevakModel.get(getApplicationContext(),finalId), false);
                                 }
                                 break;
                         }
