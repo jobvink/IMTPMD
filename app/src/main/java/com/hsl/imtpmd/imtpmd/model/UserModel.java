@@ -49,7 +49,7 @@ public class UserModel implements Model {
         );
         rs.moveToFirst();
 
-        DatabaseUtils.dumpCursor(rs);
+        //DatabaseUtils.dumpCursor(rs);
 
         String id = "";
         String dbgebruikersnaam = "";
@@ -67,7 +67,7 @@ public class UserModel implements Model {
             hoofdfase_ec = rs.getInt(rs.getColumnIndex(DatabaseInfo.UserColumn.HOOFDFASE_EC));
             if (specialisatie.equals("null")) specialisatie = null;
         } catch (Exception e) {
-            Log.e("Error: ", e.toString());
+            Log.e("UserModelError: ", e.toString());
         }
         rs.close();
         return new UserModel(id, dbgebruikersnaam, wachtwoord, specialisatie, propedeuze_ec, hoofdfase_ec);

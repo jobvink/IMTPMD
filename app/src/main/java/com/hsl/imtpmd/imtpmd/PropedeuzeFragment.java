@@ -146,7 +146,6 @@ public class PropedeuzeFragment extends Fragment {
                 UserVerplichtvakModel vak = verplichtvakModels.get(position);
                 b.putString("id", vak.getVerplichtvak().getId());
                 b.putString("type", "v");
-                b.putString("fase", "p");
                 b.putString("user", user.getGebruikersnaam());
                 b.putString("code", vak.getVerplichtvak().getCode());
                 b.putString("naam", vak.getVerplichtvak().getNaam());
@@ -164,7 +163,8 @@ public class PropedeuzeFragment extends Fragment {
             }
         }
 
-        final ArrayList<UserSpecialisatievakModel> specialisatievakModels = temp;        ListAdapter ls = new SpecialisatievakkenAdapter(this.getContext(),
+        final ArrayList<UserSpecialisatievakModel> specialisatievakModels = temp;
+        ListAdapter ls = new SpecialisatievakkenAdapter(this.getContext(),
                 android.R.layout.simple_list_item_1,
                 specialisatievakModels);
         pSpecListView.setAdapter(ls);
@@ -175,6 +175,9 @@ public class PropedeuzeFragment extends Fragment {
                 Intent i = new Intent(PropedeuzeFragment.this.getContext(), CijferInvoeren.class);
                 Bundle b = new Bundle();
                 UserSpecialisatievakModel vak = specialisatievakModels.get(position);
+                b.putString("id", vak.getSpecialisatievakModel().getId());
+                b.putString("type", "v");
+                b.putString("user", user.getGebruikersnaam());
                 b.putString("code", vak.getSpecialisatievakModel().getCode());
                 b.putString("naam", vak.getSpecialisatievakModel().getNaam());
                 b.putDouble("cijfer", vak.getCijfer());
