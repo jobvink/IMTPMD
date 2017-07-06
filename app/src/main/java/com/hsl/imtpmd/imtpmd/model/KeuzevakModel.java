@@ -83,6 +83,7 @@ public class KeuzevakModel extends Vak implements Model{
             Log.e("Error: ", e.toString());
         }
 
+        rs.close();
         return keuzevakModel;
     }
 

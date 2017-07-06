@@ -76,6 +76,7 @@ public class UserVerplichtvakModel implements Model {
                 Log.e("VerplichtvakError: ", e.toString());
             }
         } while (rs.moveToNext());
+
         rs.close();
         return all;
     }
