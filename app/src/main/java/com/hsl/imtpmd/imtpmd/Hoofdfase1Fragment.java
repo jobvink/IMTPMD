@@ -79,86 +79,12 @@ public class Hoofdfase1Fragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.content_hoofdfase1, container, false);
+
         hoofdvakkenh1 = view.findViewById(R.id.hoofdvakkenh1);
-        final ArrayList<UserVerplichtvakModel> verplichtvakModels = UserVerplichtvakModel.hoofdfase1(this.getContext(), user);
-        ListAdapter la = new VerplichtevakkenAdapter(this.getContext(),
-                android.R.layout.simple_list_item_1,
-                verplichtvakModels);
-        hoofdvakkenh1.setAdapter(la);
-        hoofdvakkenh1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(Hoofdfase1Fragment.this.getContext(), CijferInvoeren.class);
-                Bundle b = new Bundle();
-                UserVerplichtvakModel vak = verplichtvakModels.get(position);
-                b.putString("id", vak.getVerplichtvak().getId());
-                b.putString("type", "v");
-                b.putString("user", user.getGebruikersnaam());
-                b.putString("code", vak.getVerplichtvak().getCode());
-                b.putString("naam", vak.getVerplichtvak().getNaam());
-                b.putDouble("cijfer", vak.getCijfer());
-                b.putBoolean("behaald", vak.getBehaald());
-                i.putExtras(b);
-                startActivity(i);
-            }
-        });
         KeuzeH1 = view.findViewById(R.id.KeuzeH1);
-        final ArrayList<UserKeuzevakModel> keuzevakModels = UserKeuzevakModel.all(this.getContext(), user);
-        ListAdapter lk = new KeuzevakkenAdapter(this.getContext(),
-                android.R.layout.simple_list_item_1,
-                keuzevakModels);
-        KeuzeH1.setAdapter(lk);
-        KeuzeH1.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(Hoofdfase1Fragment.this.getContext(), CijferInvoeren.class);
-                Bundle b = new Bundle();
-                UserKeuzevakModel vak = keuzevakModels.get(position);
-                b.putString("id", vak.getKeuzevak().getId());
-                b.putString("type", "k");
-                b.putString("user", user.getGebruikersnaam());
-                b.putString("code", vak.getKeuzevak().getCode());
-                b.putString("naam", vak.getKeuzevak().getNaam());
-                b.putDouble("cijfer", vak.getCijfer());
-                b.putBoolean("behaald", vak.getBehaald());
-                i.putExtras(b);
-                startActivity(i);
-            }
-        });
-
         SpecialisatieH1 = view.findViewById(R.id.SpecialisatieH1);
-        ArrayList<UserSpecialisatievakModel> temp = UserSpecialisatievakModel.hoofdfase1(this.getContext(), user);
+        this.fillListViews();
 
-        if (user.getSpecialisatie() != null) {
-            if (!user.getSpecialisatie().equals("null")) {
-                temp = UserSpecialisatievakModel.specialisatieFilter(temp, user.getSpecialisatie());
-            }
-        }
-
-        final ArrayList<UserSpecialisatievakModel> specialisatievakModels = temp;        ListAdapter ls = new SpecialisatievakkenAdapter(this.getContext(),
-                android.R.layout.simple_list_item_1,
-                specialisatievakModels);
-        SpecialisatieH1.setAdapter(ls);
-        SpecialisatieH1.setOnItemClickListener(new AdapterView.OnItemClickListener(){
-
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(Hoofdfase1Fragment.this.getContext(), CijferInvoeren.class);
-                Bundle b = new Bundle();
-                UserSpecialisatievakModel vak = specialisatievakModels.get(position);
-                b.putString("id", vak.getSpecialisatievakModel().getId());
-                b.putString("type", "s");
-                b.putString("user", user.getGebruikersnaam());
-                b.putString("code", vak.getSpecialisatievakModel().getCode());
-                b.putString("naam", vak.getSpecialisatievakModel().getNaam());
-                b.putDouble("cijfer", vak.getCijfer());
-                b.putBoolean("behaald", vak.getBehaald());
-                i.putExtras(b);
-                startActivity(i);
-            }
-        });
         return view;
     }
 
@@ -205,6 +131,10 @@ public class Hoofdfase1Fragment extends Fragment {
     public void onResume(){
         super.onResume();
         // Inflate the layout for this fragment
+        this.fillListViews();
+    }
+
+    private void fillListViews(){
         final ArrayList<UserVerplichtvakModel> verplichtvakModels = UserVerplichtvakModel.hoofdfase1(this.getContext(), user);
         ListAdapter la = new VerplichtevakkenAdapter(this.getContext(),
                 android.R.layout.simple_list_item_1,

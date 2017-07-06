@@ -77,6 +77,61 @@ public class PropedeuzeFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.content_propedeuse, container, false);
         pHoofdListview = view.findViewById(R.id.hoofdvakkenP);
+        pSpecListView = view.findViewById(R.id.KeuzeP);
+
+        this.fillListViews();
+        return view;
+    }
+
+    // TODO: Rename method, update argument and hook method into UI event
+    public void onButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onFragmentInteraction(uri);
+        }
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnFragmentInteractionListener) {
+            mListener = (OnFragmentInteractionListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnFragmentInteractionListener");
+        }
+
+
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+        this.fillListViews();
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
+
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+    public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
+    }
+
+    private void fillListViews(){
         final ArrayList<UserVerplichtvakModel> verplichtvakModels = UserVerplichtvakModel.propedeuze(this.getContext(), user);
         ListAdapter la = new VerplichtevakkenAdapter(this.getContext(),
                 android.R.layout.simple_list_item_1,
@@ -101,7 +156,6 @@ public class PropedeuzeFragment extends Fragment {
                 startActivity(i);
             }
         });
-        pSpecListView = view.findViewById(R.id.KeuzeP);
         ArrayList<UserSpecialisatievakModel> temp = UserSpecialisatievakModel.propedeuze(this.getContext(), user);
 
         if (user.getSpecialisatie() != null) {
@@ -129,110 +183,5 @@ public class PropedeuzeFragment extends Fragment {
                 startActivity(i);
             }
         });
-        return view;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
-    }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-
-
-    }
-
-    @Override
-    public void onResume(){
-        super.onResume();
-        final ArrayList<UserVerplichtvakModel> verplichtvakModels = UserVerplichtvakModel.propedeuze(this.getContext(), user);
-        ListAdapter la = new VerplichtevakkenAdapter(this.getContext(),
-                android.R.layout.simple_list_item_1,
-                verplichtvakModels);
-        pHoofdListview.setAdapter(la);
-        pHoofdListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(PropedeuzeFragment.this.getContext(), CijferInvoeren.class);
-                Bundle b = new Bundle();
-                UserVerplichtvakModel vak = verplichtvakModels.get(position);
-                b.putString("id", vak.getVerplichtvak().getId());
-                b.putString("type", "v");
-                b.putString("fase", "p");
-                b.putString("user", user.getGebruikersnaam());
-                b.putString("code", vak.getVerplichtvak().getCode());
-                b.putString("naam", vak.getVerplichtvak().getNaam());
-                b.putDouble("cijfer", vak.getCijfer());
-                b.putBoolean("behaald", vak.getBehaald());
-                i.putExtras(b);
-                startActivity(i);
-            }
-        });
-        ArrayList<UserSpecialisatievakModel> temp = UserSpecialisatievakModel.propedeuze(this.getContext(), user);
-
-        if (user.getSpecialisatie() != null) {
-            if (!user.getSpecialisatie().equals("null")) {
-                temp = UserSpecialisatievakModel.specialisatieFilter(temp, user.getSpecialisatie());
-            }
-        }
-
-        final ArrayList<UserSpecialisatievakModel> specialisatievakModels = temp;
-
-        ListAdapter ls = new SpecialisatievakkenAdapter(this.getContext(),
-                android.R.layout.simple_list_item_1,
-                specialisatievakModels);
-        pSpecListView.setAdapter(ls);
-        pSpecListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent i = new Intent(PropedeuzeFragment.this.getContext(), CijferInvoeren.class);
-                Bundle b = new Bundle();
-                UserSpecialisatievakModel vak = specialisatievakModels.get(position);
-                b.putString("id", vak.getSpecialisatievakModel().getId());
-                b.putString("type", "s");
-                b.putString("fase", "p");
-                b.putString("user", user.getGebruikersnaam());
-                b.putString("code", vak.getSpecialisatievakModel().getCode());
-                b.putString("naam", vak.getSpecialisatievakModel().getNaam());
-                b.putDouble("cijfer", vak.getCijfer());
-                b.putBoolean("behaald", vak.getBehaald());
-                i.putExtras(b);
-                startActivity(i);
-            }
-        });
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
     }
 }
