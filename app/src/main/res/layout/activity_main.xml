@@ -11,28 +11,24 @@
         android:layout_width="240dp"
         android:layout_height="43dp"
         android:layout_marginBottom="28dp"
-        android:layout_marginLeft="85dp"
-        android:layout_marginRight="85dp"
+        android:layout_marginLeft="72dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="studentnummer"
         app:layout_constraintBottom_toTopOf="@+id/wachtwoord"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <EditText
         android:id="@+id/wachtwoord"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="85dp"
-        android:layout_marginRight="85dp"
+        android:layout_marginBottom="18dp"
+        android:layout_marginLeft="72dp"
         android:ems="10"
         android:hint="wachtwoord"
         android:inputType="textPassword"
         app:layout_constraintBottom_toTopOf="@+id/inloggen"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintLeft_toLeftOf="parent" />
 
     <Button
         android:id="@+id/inloggen"
@@ -41,13 +37,10 @@
         android:backgroundTint="#3f51b5"
         android:text="Inloggen"
         android:textColor="#ffffff"
-        android:layout_marginLeft="146dp"
+        android:layout_marginLeft="129dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="43dp"
-        android:layout_marginRight="146dp"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintHorizontal_bias="0.485" />
+        android:layout_marginBottom="42dp" />
 
     <ImageView
         android:id="@+id/imageView"
